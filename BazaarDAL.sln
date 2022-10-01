@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazaarDAL", "BazaarDAL\BazaarDAL.csproj", "{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E975E72A-732A-453D-8CE3-ED52B1034A80}
+	EndGlobalSection
+EndGlobal
