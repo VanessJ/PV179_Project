@@ -14,7 +14,6 @@ namespace BazaarDAL.Models
         [MaxLength(64)]
         public string Title { get; set; }
 
-        public DateTime TimeCreated;
 
         public string Description { get; set; }
 
@@ -39,9 +38,5 @@ namespace BazaarDAL.Models
         public virtual ICollection<Reaction> Reactions { get; set; }
 
 
-        public Ad()
-        {
-            TimeCreated = DateTime.Now;
-        }
     }
 }
