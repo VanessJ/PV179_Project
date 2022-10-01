@@ -11,6 +11,12 @@ namespace BazaarDAL.Data
         private const string ConnectionString = $"Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database={DatabaseName};Trusted_Connection=True;";
         
         public DbSet<User> User { get; set; }
+        public DbSet<Ad> Ad { get; set; }
+        public DbSet<AdTag> AdTag { get; set; }
+        public DbSet<Image> Image { get; set; }
+        public DbSet<Reaction> Reaction { get; set; }
+        public DbSet<Review> Review { get; set; }
+        public DbSet<Tag> Tag { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
