@@ -74,11 +74,31 @@ namespace BazaarDAL.Data
                 }
             );
 
+            modelBuilder.Entity<Tag>().HasData
+            (
+                new Tag
+                {
+                    TagId = 2,
+                    TagName = "Sell"
+                }
+            );
+
+
             modelBuilder.Entity<AdTag>().HasData
             (
                 new AdTag
                 {
                     TagId = 1, 
+                    AdId = 1
+                }
+            );
+
+
+            modelBuilder.Entity<AdTag>().HasData
+            (
+                new AdTag
+                {
+                    TagId = 2,
                     AdId = 1
                 }
             );
