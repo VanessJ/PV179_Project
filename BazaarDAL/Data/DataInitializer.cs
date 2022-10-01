@@ -90,9 +90,10 @@ namespace BazaarDAL.Data
                 {
                     AdId = 1,
                     UserId = 2,
+                    Accepted = true,
                     Message = "Mam zaujem o vasu prekrasnu macku"
                 }
-            );
+            ) ;
 
 
             modelBuilder.Entity<Review>().HasData

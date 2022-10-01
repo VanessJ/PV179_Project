@@ -16,5 +16,7 @@ namespace BazaarDAL.Models
         public int AdId { get; set; }
         public virtual Ad Ad { get; set; }  
 
+        public bool Accepted { get; set; }
+
     }
 }
