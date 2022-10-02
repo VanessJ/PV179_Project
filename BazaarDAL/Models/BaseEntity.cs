@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace BazaarDAL.Models
 {
-    public class Tag : BaseEntity
+    public class BaseEntity
     {
-        [MaxLength(64)]
-        public string TagName { get; set; }
-        
-        public virtual ICollection<AdTag> AdTag { get; set; }
-
+        [Key]
+        public int Id { get; set; }
     }
 }

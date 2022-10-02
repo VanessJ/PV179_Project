@@ -49,14 +49,14 @@ namespace BazaarDAL.Data
 
             //many to many
             modelBuilder.Entity<AdTag>()
-            .HasOne<Ad>(at => at.Ad)
-            .WithMany(a => a.AdTag)
-            .HasForeignKey(at => at.AdId);
+                .HasOne<Ad>(at => at.Ad)
+                .WithMany(a => a.AdTag)
+                .HasForeignKey(at => at.AdId);
 
             modelBuilder.Entity<AdTag>()
-            .HasOne<Tag>(at => at.Tag)
-            .WithMany(t => t.AdTag)
-            .HasForeignKey(at => at.TagId);
+                .HasOne<Tag>(at => at.Tag)
+                .WithMany(t => t.AdTag)
+                .HasForeignKey(at => at.TagId);
 
             modelBuilder.Entity<Reaction>()
             .HasOne<User>(r => r.User)

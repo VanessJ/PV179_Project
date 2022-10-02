@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BazaarDAL.Models
 {
-    public class Image
+    public class Image : BaseEntity
     {
-        public int ImageId { get; set; }
-
         [MaxLength(255)]
         public string Title { get; set; }
 
@@ -18,6 +17,7 @@ namespace BazaarDAL.Models
 
         public int AdId { get; set; }
 
+        [ForeignKey(nameof(AdId))]
         public virtual Ad Ad { get; set; }
 
     }

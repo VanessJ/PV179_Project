@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace BazaarDAL.Models
 {
-    public class Ad
+    public class Ad : BaseEntity
     {
-        public int AdId { get; set; }
-
         [MaxLength(255)]
         public string Title { get; set; }
 

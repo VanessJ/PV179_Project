@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace BazaarDAL.Models
 {
-    public class User 
-
+    public class User : BaseEntity
     {
-        public int UserId { get; set; }
-
         [MaxLength(64)]
         public string UserName { get; set; }
 

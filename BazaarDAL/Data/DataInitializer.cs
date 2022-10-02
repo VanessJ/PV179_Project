@@ -12,7 +12,7 @@ namespace BazaarDAL.Data
            (
                new User
                {
-                   UserId = 1,
+                   Id = 1,
                    UserName = "TestUser",
                    FirstName = "Jozko",
                    LastName = "Mrkvicka",
@@ -26,7 +26,7 @@ namespace BazaarDAL.Data
            (
                new User
                {
-                   UserId = 2,
+                   Id = 2,
                    UserName = "Feri",
                    FirstName = "Ferko",
                    LastName = "Priezviskovy",
@@ -41,7 +41,7 @@ namespace BazaarDAL.Data
             (
                 new Ad
                 {
-                    AdId = 1,
+                    Id = 1,
                     Title = "Predam macku",
                     Description = "Je velmi zlata, zbavte ma jej, prosim",
                     isOffer = true,
@@ -57,7 +57,7 @@ namespace BazaarDAL.Data
             (
                 new Image
                 {
-                    ImageId = 1,
+                    Id = 1,
                     Title = "Milovana macka",
                     PathToImg = "\\obrazokmacky.jpg",
                     AdId = 1
@@ -69,7 +69,7 @@ namespace BazaarDAL.Data
             (
                 new Tag
                 {
-                    TagId = 1,
+                    Id = 1,
                     TagName = "Animals"
                 }
             );
@@ -78,7 +78,7 @@ namespace BazaarDAL.Data
             (
                 new Tag
                 {
-                    TagId = 2,
+                    Id = 2,
                     TagName = "Sell"
                 }
             );
