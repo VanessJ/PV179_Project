@@ -11,7 +11,7 @@ namespace BazaarDAL.Models
     {
         public int ImageId { get; set; }
 
-        [MaxLength(64)]
+        [MaxLength(255)]
         public string Title { get; set; }
 
         public string PathToImg { get; set; }   

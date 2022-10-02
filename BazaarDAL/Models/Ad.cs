@@ -11,7 +11,7 @@ namespace BazaarDAL.Models
     {
         public int AdId { get; set; }
 
-        [MaxLength(64)]
+        [MaxLength(255)]
         public string Title { get; set; }
 
 
@@ -23,6 +23,7 @@ namespace BazaarDAL.Models
         // is the offer/demand still valid
         public bool IsValid { get; set; }
 
+        // ad may be offer or demand 
         public bool isOffer { get; set; }
 
         [Range(1, int.MaxValue)]

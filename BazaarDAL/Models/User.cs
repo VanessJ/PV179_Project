@@ -27,7 +27,7 @@ namespace BazaarDAL.Models
 
         public string PasswordHash { get; set; }
 
-        public virtual List<Ad> Ads { get; set; }
+        public virtual ICollection<Ad> Ads { get; set; }
 
         public virtual ICollection<Reaction> Reactions { get; set; }
 
