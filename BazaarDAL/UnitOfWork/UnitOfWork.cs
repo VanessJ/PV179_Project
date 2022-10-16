@@ -21,9 +21,9 @@ namespace Bazaar.DAL.UnitOfWork
 
         public IGenericRepository<User> UserRepository { get; }
 
-        public UnitOfWork()
+        public UnitOfWork(BazaarDBContext dbContext)
         {
-            _dbContext = new BazaarDBContext();
+            _dbContext = dbContext;
             AdRepository = new GenericRepository<Ad>(_dbContext);
             ImageRepository = new GenericRepository<Image>(_dbContext);
             ReactionRepository = new GenericRepository<Reaction>(_dbContext);
