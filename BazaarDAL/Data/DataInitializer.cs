@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BazaarDAL.Models;
+using Bazaar.DAL.Models;
 
-namespace BazaarDAL.Data
+namespace Bazaar.DAL.Data
 {
     public static class DataInitializer
     {
@@ -16,7 +16,7 @@ namespace BazaarDAL.Data
                    UserName = "TestUser",
                    FirstName = "Jozko",
                    LastName = "Mrkvicka",
-                   Email = "jozko@gmail.com",
+                   Email = "jozko@gmailol.com",
                    PhoneNumber = "0000000",
                    PasswordHash = "tajneheslo"
                }
@@ -30,7 +30,7 @@ namespace BazaarDAL.Data
                    UserName = "Feri",
                    FirstName = "Ferko",
                    LastName = "Priezviskovy",
-                   Email = "ferko@gmail.com",
+                   Email = "ferko@gmailol.com",
                    PhoneNumber = "2020040444",
                    PasswordHash = "supertajneheslo"
 
@@ -44,7 +44,7 @@ namespace BazaarDAL.Data
                     Id = 1,
                     Title = "Predam macku",
                     Description = "Je velmi zlata, zbavte ma jej, prosim",
-                    isOffer = true,
+                    IsOffer = true,
                     IsPremium = false,
                     IsValid = true,
                     Price = 50,
@@ -59,7 +59,7 @@ namespace BazaarDAL.Data
                 {
                     Id = 1,
                     Title = "Milovana macka",
-                    PathToImg = "\\obrazokmacky.jpg",
+                    Url = "\\obrazokmacky.jpg",
                     AdId = 1
 
                 }

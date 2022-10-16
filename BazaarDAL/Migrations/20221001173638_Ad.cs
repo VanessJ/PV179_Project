@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BazaarDAL.Migrations
+namespace Bazaar.DAL.Migrations
 {
     public partial class Ad : Migration
     {

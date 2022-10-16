@@ -1,15 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using BazaarDAL.Models;
-using System.Diagnostics.Contracts;
+using Bazaar.DAL.Models;
 
-namespace BazaarDAL.Data
+namespace Bazaar.DAL.Data
 {
     public class BazaarDBContext : DbContext
     {
-        private const string DatabaseName = "BazaarDB";
-        private const string ConnectionString = $"Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database={DatabaseName};Trusted_Connection=True;";
-        
         public DbSet<User> User { get; set; }
         public DbSet<Ad> Ad { get; set; }
         public DbSet<AdTag> AdTag { get; set; }
@@ -21,7 +16,7 @@ namespace BazaarDAL.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(ConnectionString)
+                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database=BazaarDB;Trusted_Connection=True;")
                 .UseLazyLoadingProxies();
         }
 
@@ -59,9 +54,7 @@ namespace BazaarDAL.Data
                 .HasForeignKey(at => at.TagId);
 
             modelBuilder.Entity<Reaction>()
-            .HasOne<User>(r => r.User)
-            .WithMany(u => u.Reactions)
-            .HasForeignKey(r => r.UserId);
+            .HasOne<User>(r => r.User);
 
             modelBuilder.Entity<Reaction>()
             .HasOne<Ad>(r => r.Ad)

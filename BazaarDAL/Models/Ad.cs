@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BazaarDAL.Models
+namespace Bazaar.DAL.Models
 {
     public class Ad : BaseEntity
     {
@@ -22,7 +17,7 @@ namespace BazaarDAL.Models
         public bool IsValid { get; set; }
 
         // ad may be offer or demand 
-        public bool isOffer { get; set; }
+        public bool IsOffer { get; set; }
 
         [Range(1, int.MaxValue)]
         public int Price { get; set; }

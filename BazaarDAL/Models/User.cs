@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BazaarDAL.Models
+namespace Bazaar.DAL.Models
 {
     public class User : BaseEntity
     {
         [MaxLength(64)]
         public string UserName { get; set; }
+
+        public int Level { get; set; }
 
         [MaxLength(64)]
         public string? FirstName { get; set; }
@@ -25,8 +22,6 @@ namespace BazaarDAL.Models
         public string PasswordHash { get; set; }
 
         public virtual ICollection<Ad> Ads { get; set; }
-
-        public virtual ICollection<Reaction> Reactions { get; set; }
 
         public virtual ICollection<Review> ReviewerIn { get; set; }
         public virtual ICollection<Review> ReviewedIn { get; set; }

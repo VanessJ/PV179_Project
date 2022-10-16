@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazaar.DAL.Migrations
 {
     [DbContext(typeof(BazaarDBContext))]
-    [Migration("20221001174315_AdSeedTest")]
-    partial class AdSeedTest
+    [Migration("20221016184851_FeedbackFixes")]
+    partial class FeedbackFixes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,17 +23,20 @@ namespace Bazaar.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BazaarDAL.Models.Ad", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
                 {
-                    b.Property<int>("AdId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOffer")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPremium")
                         .HasColumnType("bit");
@@ -46,16 +49,13 @@ namespace Bazaar.DAL.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("isOffer")
-                        .HasColumnType("bit");
-
-                    b.HasKey("AdId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -64,18 +64,18 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = 1,
+                            Id = 1,
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
+                            IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = 1,
-                            isOffer = true
+                            UserId = 1
                         });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.AdTag", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.AdTag", b =>
                 {
                     b.Property<int>("AdId")
                         .HasColumnType("int");
@@ -88,42 +88,66 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("AdTag");
+
+                    b.HasData(
+                        new
+                        {
+                            AdId = 1,
+                            TagId = 1
+                        },
+                        new
+                        {
+                            AdId = 1,
+                            TagId = 2
+                        });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Image", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Image", b =>
                 {
-                    b.Property<int>("ImageId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AdId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PathToImg")
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.HasKey("ImageId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AdId");
 
                     b.ToTable("Image");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AdId = 1,
+                            Title = "Milovana macka",
+                            Url = "\\obrazokmacky.jpg"
+                        });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Reaction", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Reaction", b =>
                 {
                     b.Property<int>("AdId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -134,9 +158,18 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reaction");
+
+                    b.HasData(
+                        new
+                        {
+                            AdId = 1,
+                            UserId = 2,
+                            Accepted = true,
+                            Message = "Mam zaujem o vasu prekrasnu macku"
+                        });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Review", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Review", b =>
                 {
                     b.Property<int>("ReviewerId")
                         .HasColumnType("int");
@@ -155,32 +188,54 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("ReviewedId");
 
                     b.ToTable("Review");
+
+                    b.HasData(
+                        new
+                        {
+                            ReviewerId = 2,
+                            ReviewedId = 1,
+                            Descritption = "Krasna macka, 10/10 spokojnost",
+                            Score = 5
+                        });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Tag", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Tag", b =>
                 {
-                    b.Property<int>("TagId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("TagName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
-                    b.HasKey("TagId");
+                    b.HasKey("Id");
 
                     b.ToTable("Tag");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TagName = "Animals"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TagName = "Sell"
+                        });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.User", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -195,6 +250,9 @@ namespace Bazaar.DAL.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -208,36 +266,38 @@ namespace Bazaar.DAL.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
-                            Email = "jozko@gmail.com",
+                            Id = 1,
+                            Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
                             LastName = "Mrkvicka",
+                            Level = 0,
                             PasswordHash = "tajneheslo",
                             PhoneNumber = "0000000",
                             UserName = "TestUser"
                         },
                         new
                         {
-                            UserId = 2,
-                            Email = "ferko@gmail.com",
+                            Id = 2,
+                            Email = "ferko@gmailol.com",
                             FirstName = "Ferko",
                             LastName = "Priezviskovy",
+                            Level = 0,
                             PasswordHash = "supertajneheslo",
                             PhoneNumber = "2020040444",
                             UserName = "Feri"
                         });
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Ad", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
                 {
-                    b.HasOne("BazaarDAL.Models.User", "Creator")
+                    b.HasOne("Bazaar.DAL.Models.User", "Creator")
                         .WithMany("Ads")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -246,15 +306,15 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.AdTag", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.AdTag", b =>
                 {
-                    b.HasOne("BazaarDAL.Models.Ad", "Ad")
+                    b.HasOne("Bazaar.DAL.Models.Ad", "Ad")
                         .WithMany("AdTag")
                         .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BazaarDAL.Models.Tag", "Tag")
+                    b.HasOne("Bazaar.DAL.Models.Tag", "Tag")
                         .WithMany("AdTag")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -265,9 +325,9 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Image", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Image", b =>
                 {
-                    b.HasOne("BazaarDAL.Models.Ad", "Ad")
+                    b.HasOne("Bazaar.DAL.Models.Ad", "Ad")
                         .WithMany("Images")
                         .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -276,16 +336,16 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("Ad");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Reaction", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Reaction", b =>
                 {
-                    b.HasOne("BazaarDAL.Models.Ad", "Ad")
+                    b.HasOne("Bazaar.DAL.Models.Ad", "Ad")
                         .WithMany("Reactions")
                         .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BazaarDAL.Models.User", "User")
-                        .WithMany("Reactions")
+                    b.HasOne("Bazaar.DAL.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -295,15 +355,15 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Review", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Review", b =>
                 {
-                    b.HasOne("BazaarDAL.Models.User", "Reviewed")
+                    b.HasOne("Bazaar.DAL.Models.User", "Reviewed")
                         .WithMany("ReviewedIn")
                         .HasForeignKey("ReviewedId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BazaarDAL.Models.User", "Reviewer")
+                    b.HasOne("Bazaar.DAL.Models.User", "Reviewer")
                         .WithMany("ReviewerIn")
                         .HasForeignKey("ReviewerId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -314,7 +374,7 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("Reviewer");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Ad", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
                 {
                     b.Navigation("AdTag");
 
@@ -323,16 +383,14 @@ namespace Bazaar.DAL.Migrations
                     b.Navigation("Reactions");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.Tag", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.Tag", b =>
                 {
                     b.Navigation("AdTag");
                 });
 
-            modelBuilder.Entity("BazaarDAL.Models.User", b =>
+            modelBuilder.Entity("Bazaar.DAL.Models.User", b =>
                 {
                     b.Navigation("Ads");
-
-                    b.Navigation("Reactions");
 
                     b.Navigation("ReviewedIn");
 
