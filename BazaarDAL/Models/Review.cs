@@ -2,7 +2,7 @@
 
 namespace Bazaar.DAL.Models
 {
-    public class Review
+    public class Review : BaseEntity
     {
         public int ReviewerId { get; set; }
 

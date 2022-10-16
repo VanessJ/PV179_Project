@@ -2,7 +2,7 @@
 
 namespace Bazaar.DAL.Models
 {
-    public class Reaction
+    public class Reaction : BaseEntity
     {
         public string Message { get; set; }
 
