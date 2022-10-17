@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bazaar.DAL\Bazaar.DAL.csproj" />
-    <ProjectReference Include="..\BazaarDAL\Bazaar.DAL.csproj" />
   </ItemGroup>
 
 </Project>
