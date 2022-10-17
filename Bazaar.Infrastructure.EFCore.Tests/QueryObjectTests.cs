@@ -155,7 +155,7 @@ namespace EFCore.Tests
         }
 
         [Fact]
-        public async Task Where_OneValidPredicateOrderedPaged_FilteredOrderedPaged()
+        public async Task Where_OneValidPredicateOrderedPaged_FilteredPagedOrdered()
         {
             using var _boardDbContext = new BazaarDBContext(_options);
             var queryObject = new EFCoreQueryObject<Ad>(_boardDbContext);
