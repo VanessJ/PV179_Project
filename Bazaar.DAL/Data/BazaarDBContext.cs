@@ -13,6 +13,9 @@ namespace Bazaar.DAL.Data
         public DbSet<Review> Review { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
+        public BazaarDBContext(DbContextOptions<BazaarDBContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
