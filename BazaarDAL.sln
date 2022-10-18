@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.DAL", "Bazaar.DAL\Bazaar.DAL.csproj", "{CC4F6EF6-9E95-45A3-9CF8-140F805CBEDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure.EFCore.Tests", "Bazaar.Infrastructure.EFCore.Tests\Bazaar.Infrastructure.EFCore.Tests.csproj", "{F3ACED5F-8897-4B02-90F6-F2AF272CA4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.DAL.Tests", "Bazaar.Infrastructure.EFCore.Tests\Bazaar.DAL.Tests.csproj", "{F3ACED5F-8897-4B02-90F6-F2AF272CA4A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
