@@ -4,12 +4,12 @@ using Bazaar.DAL.Data;
 
 namespace Bazaar.DAL.Repository
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class EFGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
         private BazaarDBContext _dbContext;
         private DbSet<TEntity> _dbSet;
 
-        public GenericRepository(BazaarDBContext dbContext)
+        public EFGenericRepository(BazaarDBContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

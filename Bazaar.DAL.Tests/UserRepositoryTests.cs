@@ -80,7 +80,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         public async Task GetById_ExistingUserId_ReturnCorrectId()
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
-            var userRepository = new GenericRepository<User>(_bazaarDbContext);
+            var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
             var user = await userRepository.GetById(testUser2Id);
             Assert.Equal(testUser2Id, user.Id);
         }
@@ -89,7 +89,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         public async Task Delete_ExistingUser_ReturnNull()
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
-            var userRepository = new GenericRepository<User>(_bazaarDbContext);
+            var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
             await userRepository.Delete(testUser2Id);
             await userRepository.Save();
             var deletedUser = await userRepository.GetById(testUser2Id);
@@ -100,7 +100,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         public async Task Create_NewUser_ReturnTheSameUser()
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
-            var userRepository = new GenericRepository<User>(_bazaarDbContext);
+            var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
             await userRepository.Insert(newUser);
             await userRepository.Save();
             var insertedUser = await userRepository.GetById(newUser.Id);
@@ -111,7 +111,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         public async Task Update_ExistingUserFistName_ReturnUpdatedName()
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
-            var userRepository = new GenericRepository<User>(_bazaarDbContext);
+            var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
             var editedUser = await userRepository.GetById(testUser2Id);
             editedUser.FirstName = "Ferdinand";
             userRepository.Update(editedUser);
