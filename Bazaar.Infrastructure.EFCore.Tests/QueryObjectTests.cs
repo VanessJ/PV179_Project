@@ -129,8 +129,8 @@ namespace EFCore.Tests
         [Fact]
         public async Task Where_OneValidPredicate_Filtered()
         {
-            using var _boardDbContext = new BazaarDBContext(_options);
-            var queryObject = new EFCoreQueryObject<User>(_boardDbContext);
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var queryObject = new EFCoreQueryObject<User>(_bazaarDbContext);
             queryObject.Filter(u => u.FirstName.Equals("Ferko"));
 
             var result = await queryObject.ExecuteAsync();
@@ -141,8 +141,8 @@ namespace EFCore.Tests
         [Fact]
         public async Task Where_OneValidPredicateOrdered_FilteredOrdered()
         {
-            using var _boardDbContext = new BazaarDBContext(_options);
-            var queryObject = new EFCoreQueryObject<Ad>(_boardDbContext);
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var queryObject = new EFCoreQueryObject<Ad>(_bazaarDbContext);
             queryObject
                 .Filter(a => !a.IsPremium)
                 .OrderBy(x => x.Title);
@@ -157,8 +157,8 @@ namespace EFCore.Tests
         [Fact]
         public async Task Where_OneValidPredicateOrderedPaged_FilteredPagedOrdered()
         {
-            using var _boardDbContext = new BazaarDBContext(_options);
-            var queryObject = new EFCoreQueryObject<Ad>(_boardDbContext);
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var queryObject = new EFCoreQueryObject<Ad>(_bazaarDbContext);
             queryObject
                 .Filter(x => x.IsValid)
                 .Page(1, 2)
