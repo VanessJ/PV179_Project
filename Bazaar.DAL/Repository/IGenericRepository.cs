@@ -6,11 +6,11 @@ namespace Bazaar.DAL.Repository
     {
         Task<IEnumerable<TEntity>> Get();
 
-        Task<TEntity> GetById(Guid id);
+        Task<TEntity> GetById(int id);
 
         Task Insert(TEntity entity);
 
-        Task Delete(Guid idToDelete);
+        Task Delete(int idToDelete);
 
         void Update(TEntity entity);
 

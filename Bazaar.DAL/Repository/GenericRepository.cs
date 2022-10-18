@@ -15,7 +15,7 @@ namespace Bazaar.DAL.Repository
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task Delete(Guid idToDelete)
+        public async Task Delete(int idToDelete)
         {
             var entityToDelete = await _dbSet.FindAsync(idToDelete);
 
@@ -32,7 +32,7 @@ namespace Bazaar.DAL.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetById(Guid id)
+        public async Task<TEntity> GetById(int id)
         {
             return await _dbSet.FindAsync(id);
         }
