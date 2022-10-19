@@ -135,7 +135,7 @@ namespace EFCore.Tests
 
             var result = await queryObject.ExecuteAsync();
 
-            Assert.True(result.Count() == 2);
+            Assert.Equal(2, result.Count());
         }
 
         [Fact]
@@ -149,9 +149,9 @@ namespace EFCore.Tests
 
             var result = await queryObject.ExecuteAsync();
 
-            Assert.True(result.First().Id == 1);
-            Assert.True(result.Count() == 3);
-            Assert.True(result.Last().Title == "Predam svoju svokru!");
+            Assert.Equal(1, result.First().Id);
+            Assert.Equal(3, result.Count());
+            Assert.Equal("Predam svoju svokru!", result.Last().Title);
         }
 
         [Fact]
@@ -166,8 +166,8 @@ namespace EFCore.Tests
 
             var result = await queryObject.ExecuteAsync();
 
-            Assert.True(result.Count() == 2);
-            Assert.True(result.First().Id == 4);
+            Assert.Equal(2, result.Count());
+            Assert.Equal(4, result.First().Id);
         }
     }
 }

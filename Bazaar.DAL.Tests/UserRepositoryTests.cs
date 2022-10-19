@@ -117,8 +117,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             userRepository.Update(editedUser);
             await userRepository.Save();
             editedUser = await userRepository.GetById(testUser2Id);
-            Assert.True(editedUser.FirstName == "Ferdinand");
-
+            Assert.Equal("Ferdinand", editedUser.FirstName);
         }
 
 
