@@ -8,6 +8,20 @@ namespace Bazaar.DAL.Infrastructure.EFCore
     {
         private BazaarDBContext _dbContext;
 
+        private EFUnitOfWork _unitOfWork;
+
+        protected EFUnitOfWork UnitOfWork
+        {
+            get
+            {
+                if (_unitOfWork != null)
+                {
+                    _unitOfWork = new(_dbContext);
+                }
+
+                return _unitOfWork;
+            }
+        }
         public EFQuery(BazaarDBContext dbContext)
         {
             _dbContext = dbContext;
