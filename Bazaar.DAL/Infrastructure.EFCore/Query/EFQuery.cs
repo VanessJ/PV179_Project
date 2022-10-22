@@ -6,26 +6,28 @@ namespace Bazaar.DAL.Infrastructure.EFCore
 {
     public class EFQuery<TEntity> : Query<TEntity> where TEntity : class, new()
     {
-        private BazaarDBContext _dbContext;
-
         private EFUnitOfWork _unitOfWork;
 
         protected EFUnitOfWork UnitOfWork
         {
             get
             {
-                if (_unitOfWork != null)
+                if (_unitOfWork == null)
                 {
-                    _unitOfWork = new(_dbContext);
+                    _unitOfWork = new();
                 }
 
                 return _unitOfWork;
             }
         }
+        public EFQuery()
+        {
+            _query = UnitOfWork.Context.Set<TEntity>().AsQueryable();
+        }
+
         public EFQuery(BazaarDBContext dbContext)
         {
-            _dbContext = dbContext;
-            _query = _dbContext.Set<TEntity>().AsQueryable();
+            _query = dbContext.Set<TEntity>().AsQueryable();
         }
 
         public override async Task<IEnumerable<TEntity>> ExecuteAsync()

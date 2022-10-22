@@ -7,7 +7,7 @@ namespace Bazaar.DAL.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private BazaarDBContext Context { get; } = new();
+        public BazaarDBContext Context { get; } = new();
 
         private IGenericRepository<Ad> adRepository;
         private IGenericRepository<Image> imageRepository;
@@ -15,6 +15,15 @@ namespace Bazaar.DAL.UnitOfWork
         private IGenericRepository<Review> reviewRepository;
         private IGenericRepository<Tag> tagRepository;
         private IGenericRepository<User> userRepository;
+
+        public EFUnitOfWork()
+        {
+        }
+
+        public EFUnitOfWork(BazaarDBContext dbContext)
+        {
+            Context = dbContext;
+        }
 
         public IGenericRepository<Ad> AdRepository
         {
@@ -86,11 +95,6 @@ namespace Bazaar.DAL.UnitOfWork
                 }
                 return userRepository;
             }
-        }
-
-        public EFUnitOfWork(BazaarDBContext dbContext)
-        {
-            Context = dbContext;
         }
 
         public async Task CommitAsync()
