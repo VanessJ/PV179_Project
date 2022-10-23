@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 
 namespace Bazaar.Infrastructure.EFCore.Tests
 {
-    public class UserRepositoryTests
+    public class RepositoryTests
     {
-        private DbContextOptions<BazaarDBContext> _options;
+        private readonly DbContextOptions<BazaarDBContext> _options;
 
         private readonly int testUser2Id = 2;
 
@@ -32,7 +32,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         };
 
 
-        public UserRepositoryTests()
+        public RepositoryTests()
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
@@ -93,7 +93,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             await userRepository.Delete(testUser2Id);
             await userRepository.Save();
             var deletedUser = await userRepository.GetById(testUser2Id);
-            Assert.True(deletedUser == null);
+            Assert.Null(deletedUser);
         }
 
         [Fact]
