@@ -1,15 +1,9 @@
 ﻿using Bazaar.DAL.Data;
-using Bazaar.DAL.Infrastructure.EFCore;
 using Bazaar.DAL.Models;
-using Bazaar.DAL.Repository;
-using Bazaar.DAL.UnitOfWork;
+using Bazaar.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bazaar.Infrastructure.EFCore.Tests
@@ -19,6 +13,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         private DbContextOptions<BazaarDBContext> _options;
 
         private readonly int testUser2Id = 2;
+        private readonly int testUser3Id = 3;
 
         private readonly User newUser = new()
         {
@@ -74,6 +69,15 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             );
             
             _bazaarDbContext.SaveChanges();
+        }
+
+        [Fact]
+        public async Task GetById_NonExistingUserId_ReturnNull()
+        {
+            using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
+            var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
+            var user = await userRepository.GetById(testUser3Id);
+            Assert.Null(user);
         }
 
         [Fact]

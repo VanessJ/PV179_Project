@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Bazaar.DAL.Data;
-using Bazaar.DAL.Infrastructure.EFCore;
 using Bazaar.DAL.Models;
+using Bazaar.Infrastructure.EFCore.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

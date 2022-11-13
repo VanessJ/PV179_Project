@@ -1,7 +1,7 @@
 ﻿using Bazaar.DAL.Models;
-using Bazaar.DAL.Repository;
+using Bazaar.Infrastructure.Repository;
 
-namespace Bazaar.DAL.UnitOfWork
+namespace Bazaar.Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork : IAsyncDisposable
     {

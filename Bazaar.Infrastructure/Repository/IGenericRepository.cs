@@ -1,6 +1,6 @@
 ﻿using Bazaar.DAL.Models;
 
-namespace Bazaar.DAL.Repository
+namespace Bazaar.Infrastructure.Repository
 {
     public interface IGenericRepository<TEntity> : IAsyncDisposable where TEntity : BaseEntity
     {

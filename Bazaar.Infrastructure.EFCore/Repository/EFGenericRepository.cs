@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Bazaar.Infrastructure.Repository;
 using Bazaar.DAL.Models;
 using Bazaar.DAL.Data;
 
-namespace Bazaar.DAL.Repository
+namespace Bazaar.Infrastructure.EFCore.Repository
 {
     public class EFGenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {

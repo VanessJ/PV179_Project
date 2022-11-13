@@ -1,9 +1,11 @@
 ﻿using Bazaar.DAL.Models;
-using Bazaar.DAL.Repository;
 using Bazaar.DAL.Data;
+using Bazaar.Infrastructure.UnitOfWork;
+using Bazaar.Infrastructure.Repository;
+using Bazaar.Infrastructure.EFCore.Repository;
 
 
-namespace Bazaar.DAL.UnitOfWork
+namespace Bazaar.Infrastructure.EFCore.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Bazaar.DAL.Infrastructure
+namespace Bazaar.Infrastructure.Query
 {
     public abstract class Query<TEntity> : IQuery<TEntity> where TEntity : class, new()
     {
