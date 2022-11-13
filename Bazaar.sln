@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.DAL", "Bazaar.DAL\Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure.EFCore.Tests", "Bazaar.DAL.Tests\Bazaar.Infrastructure.EFCore.Tests.csproj", "{F3ACED5F-8897-4B02-90F6-F2AF272CA4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Infrastructure", "Bazaar.Infrastructure\Bazaar.Infrastructure.csproj", "{5D6DD52F-A614-4EBB-BA4C-89B434243620}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure", "Bazaar.Infrastructure\Bazaar.Infrastructure.csproj", "{5D6DD52F-A614-4EBB-BA4C-89B434243620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Infrastructure.EFCore", "Bazaar.Infrastructure.EFCore\Bazaar.Infrastructure.EFCore.csproj", "{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure.EFCore", "Bazaar.Infrastructure.EFCore\Bazaar.Infrastructure.EFCore.csproj", "{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.BL", "Bazaar.BL\Bazaar.BL.csproj", "{89F89EBA-FC54-4B0D-9C71-D317CA096632}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
