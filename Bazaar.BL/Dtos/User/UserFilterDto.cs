@@ -9,6 +9,7 @@ namespace Bazaar.BL.Dtos.User
 {
     public class UserFilterDto : BaseFilterDto
     {
-        public string UserName { get; set; } = null!;
+        public string? ContainsUserName { get; set; }
+        public string? LikeUserName { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.User;
+using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos;
 using Bazaar.DAL.Data;
 using Bazaar.DAL.Models;
@@ -19,7 +20,7 @@ namespace Bazzar.Bl.Tests
     {
         private DbContextOptions<BazaarDBContext> _options;
 
-        private UserFilterDto user_filter_dto = new UserFilterDto { UserName = "Ferko" };
+        
         public QueryObjectTests()
         {
             var serviceProvider = new ServiceCollection()
@@ -53,7 +54,7 @@ namespace Bazzar.Bl.Tests
                 {
                     Id = 2,
                     UserName = "TestUser2",
-                    FirstName = "Ferko",
+                    FirstName = "AFerko",
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
                     PhoneNumber = "2020040444",
@@ -134,20 +135,40 @@ namespace Bazzar.Bl.Tests
         }
 
         [Fact]
-        public async Task QueryObjectTest()
+        public async Task GetUserNameLike_ReturnsCorrectUserDtos()
         {
             using var _bazaarDbContext = new BazaarDBContext(_options);
             var query = new EFQuery<User>(_bazaarDbContext);
 
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<IEnumerable<User>, QueryResultDto<UserListDto>>().ReverseMap();
+                cfg.CreateMap<User, UserListDto>().ReverseMap();
             });
 
             Mapper mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
+            UserFilterDto user_filter_dto = new UserFilterDto { LikeUserName = "TestUser", OderCriteria = "FirstName" };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
-            Assert.Equal(2, result.Items.Count());
+            Assert.Equal(2, result.Count());
+            Assert.Equal("AFerko", result.First().FirstName);
+        }
+
+        public async Task GetUserByExactUsername_ReturnsCorrectUserDto()
+        {
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var query = new EFQuery<User>(_bazaarDbContext);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, UserListDto>().ReverseMap();
+            });
+
+            Mapper mapper = new Mapper(config);
+            var userQueryObject = new UserQueryObject(mapper, query);
+            UserFilterDto user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1", OderCriteria = "FirstName" };
+            var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
+
+            Assert.Equal(1, result.Count());
+            Assert.Equal("TestUser1", result.First().UserName);
         }
     }
 }
