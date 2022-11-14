@@ -1,15 +1,18 @@
-﻿using Bazaar.BL.Dto.Image;
-using Bazaar.BL.Dto.Tag;
+﻿using Bazaar.BL.Dtos.Image;
+using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Dtos.Tag;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.Ad
+namespace Bazaar.BL.Dtos.Ad
 {
-    public class AdCreateDto
+    public class AdDto
     {
+        public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string? Description { get; set; }
 
@@ -20,9 +23,11 @@ namespace Bazaar.BL.Dto.Ad
         public bool IsOffer { get; set; }
 
         public int Price { get; set; }
-        public UserDto Creator { get; set; } = null!;
+        public  UserDto Creator { get; set; } = null!;
 
-        public  ICollection<ImageDto> Images { get; set; }
+        public ICollection<ImageDto> Images { get; set; }
+
         public ICollection<TagDto> Tags { get; set; }
+        public ICollection<ReactionDto> Reactions { get; set; }
     }
 }

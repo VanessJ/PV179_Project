@@ -1,11 +1,11 @@
-﻿using Bazaar.BL.Dto.Ad;
+﻿using Bazaar.BL.Dtos.Ad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.Tag
+namespace Bazaar.BL.Dtos.Tag
 {
     public class TagDto
     {

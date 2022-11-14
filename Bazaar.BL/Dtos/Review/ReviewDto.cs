@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.Review
+namespace Bazaar.BL.Dtos.Review
 {
     public class ReviewDto
     {

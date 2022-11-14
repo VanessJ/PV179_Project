@@ -1,16 +1,14 @@
-﻿using Bazaar.BL.Dto.Ad;
+﻿using Bazaar.BL.Dtos.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.User
+namespace Bazaar.BL.Dtos.User
 {
-    public class UserListDto
+    public class UserFilterDto : BaseFilterDto
     {
-        public int Id { get; set; }
         public string UserName { get; set; } = null!;
-        public ICollection<AdDto> Ads { get; set; }
     }
 }

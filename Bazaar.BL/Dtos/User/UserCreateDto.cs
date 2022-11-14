@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto
+namespace Bazaar.BL.Dtos
 {
     public class UserCreateDto
     {

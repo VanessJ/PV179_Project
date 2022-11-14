@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.User
+namespace Bazaar.BL.Dtos.User
 {
     public class UserEditDto
     {

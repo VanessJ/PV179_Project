@@ -76,7 +76,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-            var user = await userRepository.GetById(testUser3Id);
+            var user = await userRepository.GetByIdAsync(testUser3Id);
             Assert.Null(user);
         }
 
@@ -85,7 +85,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-            var user = await userRepository.GetById(testUser2Id);
+            var user = await userRepository.GetByIdAsync(testUser2Id);
             Assert.Equal(testUser2Id, user.Id);
         }
 
@@ -94,9 +94,9 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-            await userRepository.Delete(testUser2Id);
-            await userRepository.Save();
-            var deletedUser = await userRepository.GetById(testUser2Id);
+            await userRepository.DeleteAsync(testUser2Id);
+            await userRepository.SaveAsync();
+            var deletedUser = await userRepository.GetByIdAsync(testUser2Id);
             Assert.Null(deletedUser);
         }
 
@@ -105,9 +105,9 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-            await userRepository.Insert(newUser);
-            await userRepository.Save();
-            var insertedUser = await userRepository.GetById(newUser.Id);
+            await userRepository.InsertAsync(newUser);
+            await userRepository.SaveAsync();
+            var insertedUser = await userRepository.GetByIdAsync(newUser.Id);
             Assert.Equal(newUser, insertedUser);
         }
 
@@ -116,11 +116,11 @@ namespace Bazaar.Infrastructure.EFCore.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-            var editedUser = await userRepository.GetById(testUser2Id);
+            var editedUser = await userRepository.GetByIdAsync(testUser2Id);
             editedUser.FirstName = "Ferdinand";
             userRepository.Update(editedUser);
-            await userRepository.Save();
-            editedUser = await userRepository.GetById(testUser2Id);
+            await userRepository.SaveAsync();
+            editedUser = await userRepository.GetByIdAsync(testUser2Id);
             Assert.Equal("Ferdinand", editedUser.FirstName);
         }
 

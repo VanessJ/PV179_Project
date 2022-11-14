@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Infrastructure.EFCore", "Bazaar.Infrastructure.EFCore\Bazaar.Infrastructure.EFCore.csproj", "{20BD5B09-8E9E-48E6-94B4-DC118B0EB1D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.BL", "Bazaar.BL\Bazaar.BL.csproj", "{89F89EBA-FC54-4B0D-9C71-D317CA096632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.BL", "Bazaar.BL\Bazaar.BL.csproj", "{89F89EBA-FC54-4B0D-9C71-D317CA096632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazzar.Bl.Tests", "Bazzar.Bl.Tests\Bazzar.Bl.Tests.csproj", "{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89F89EBA-FC54-4B0D-9C71-D317CA096632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

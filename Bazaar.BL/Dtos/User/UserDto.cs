@@ -1,12 +1,12 @@
-﻿using Bazaar.BL.Dto.Ad;
-using Bazaar.BL.Dto.Review;
+﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Review;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto
+namespace Bazaar.BL.Dtos
 {
     public class UserDto
     {

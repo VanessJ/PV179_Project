@@ -11,4 +11,8 @@
     <PackageReference Include="AutoMapper" Version="12.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Bazaar.Infrastructure\Bazaar.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

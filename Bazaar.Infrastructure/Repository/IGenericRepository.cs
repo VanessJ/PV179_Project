@@ -4,16 +4,16 @@ namespace Bazaar.Infrastructure.Repository
 {
     public interface IGenericRepository<TEntity> : IAsyncDisposable where TEntity : BaseEntity
     {
-        Task<IEnumerable<TEntity>> Get();
+        Task<IEnumerable<TEntity>> GetAsync();
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetByIdAsync(int id, params string[] includes);
 
-        Task Insert(TEntity entity);
+        Task InsertAsync(TEntity entity);
 
-        Task Delete(int idToDelete);
+        Task DeleteAsync(int idToDelete);
 
         void Update(TEntity entity);
 
-        Task Save();
+        Task SaveAsync();
     }
 }

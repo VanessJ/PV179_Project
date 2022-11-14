@@ -1,13 +1,13 @@
-﻿using Bazaar.BL.Dto.Image;
-using Bazaar.BL.Dto.Reaction;
-using Bazaar.BL.Dto.Tag;
+﻿using Bazaar.BL.Dtos.Image;
+using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Dtos.Tag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dto.Ad
+namespace Bazaar.BL.Dtos.Ad
 {
     public class AdEditDto
     {

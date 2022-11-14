@@ -2,6 +2,8 @@
 using Bazaar.Infrastructure.Repository;
 using Bazaar.DAL.Models;
 using Bazaar.DAL.Data;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Bazaar.Infrastructure.EFCore.Repository
 {
@@ -16,7 +18,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task Delete(int idToDelete)
+        public async Task DeleteAsync(int idToDelete)
         {
             var entityToDelete = await _dbSet.FindAsync(idToDelete);
 
@@ -28,17 +30,25 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             _dbSet.Remove(entityToDelete);
         }
 
-        public async Task<IEnumerable<TEntity>> Get()
+        public async Task<IEnumerable<TEntity>> GetAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetByIdAsync(int id, params string[] includes)
         {
-            return await _dbSet.FindAsync(id);
+            var queryable = _dbContext.Set<TEntity>().AsQueryable();
+            if (!includes.IsNullOrEmpty())
+            {
+                foreach (var include in includes)
+                {
+                    queryable = queryable.Include($"{include}");
+                }
+            }
+            return await queryable.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task Insert(TEntity entity)
+        public async Task InsertAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
         }
@@ -49,7 +59,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _dbContext.SaveChangesAsync();
         }
