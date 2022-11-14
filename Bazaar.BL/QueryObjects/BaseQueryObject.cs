@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bazaar.BL.Dtos.Base;
 using Bazaar.Infrastructure.Query;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +28,13 @@ namespace Bazaar.BL.QueryObjects
         }
         protected abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filter_dto);
 
-        public async Task<QueryResultDto<TDto>> ExecuteQueryAsync(TFilter filter_dto)
+        public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filter_dto)
         {
             var query = FilterByWhere(_query, filter_dto);
 
             if (!string.IsNullOrWhiteSpace(filter_dto.OderCriteria))
             {
-                var propertyInfo = typeof(TEntity).GetProperty(filter_dto.OderCriteria);
-                query.OrderBy(x => propertyInfo.GetValue(x, null));
+                query.OrderBy(x => EF.Property<object>(x, filter_dto.OderCriteria));
             }
 
             if (filter_dto.RequestedPageNumber.HasValue)
@@ -44,7 +44,7 @@ namespace Bazaar.BL.QueryObjects
 
             var result_query = await query.ExecuteAsync();
 
-            return _mapper.Map<QueryResultDto<TDto>>(result_query);
+            return _mapper.Map<IEnumerable<TDto>>(result_query);
 
         }
     }

@@ -11,6 +11,7 @@ namespace Bazaar.BL.Dtos.User
     {
         public int Id { get; set; }
         public string UserName { get; set; } = null!;
-        public ICollection<AdDto> Ads { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
     }
 }
