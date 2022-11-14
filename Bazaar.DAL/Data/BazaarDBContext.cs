@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using Bazaar.DAL.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Bazaar.DAL.Data
 {
@@ -23,9 +25,16 @@ namespace Bazaar.DAL.Data
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database=BazaarDB;Trusted_Connection=True;")
-                .UseLazyLoadingProxies();
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfiguration config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+                var settings = config.GetRequiredSection(Settings.SectionName).Get<Settings>();
+
+                optionsBuilder.UseSqlServer(settings.ConnectionString);
+                base.OnConfiguring(optionsBuilder);
+            }
         }
 
         // https://docs.microsoft.com/en-us/ef/core/modeling/
