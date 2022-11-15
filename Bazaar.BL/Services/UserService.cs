@@ -1,18 +1,14 @@
 ﻿using AutoMapper;
+using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services
 {
-    public class UserService : BaseService
+    public class UserService : CRUDService<User>
     {
         public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
-   
+
         }
     }
 }
