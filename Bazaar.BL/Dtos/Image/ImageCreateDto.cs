@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Dtos.Image
 {
-    public class ImageCreate
+    public class ImageCreateDto
     {
         public string Title { get; set; } = null!;
         public string Url { get; set; } = null!;

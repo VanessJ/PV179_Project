@@ -4,7 +4,7 @@ using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Services
 {
-    public class TagService : CRUDService<Tag>
+    public class TagService : CRUDService<Tag>, ITagService
     {
         public TagService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {

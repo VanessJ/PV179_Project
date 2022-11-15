@@ -19,7 +19,7 @@ namespace Bazaar.BL.Config
             config.CreateMap<Ad, AdEditDto>().ReverseMap();
             //config.CreateMap<Ad, AdListDto>().ReverseMap();
 
-            config.CreateMap<Image, ImageCreate>().ReverseMap();
+            config.CreateMap<Image, ImageCreateDto>().ReverseMap();
             config.CreateMap<Image, ImageDto>().ReverseMap();
 
             config.CreateMap<Reaction, ReactionCreateDto>().ReverseMap();
