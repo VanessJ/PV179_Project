@@ -4,7 +4,7 @@ using Bazaar.DAL.Models;
 
 namespace Bazaar.BL.Services.Ads
 {
-    public interface IAdService
+    public interface IAdService : ICRUDService
     {
         public Task<IEnumerable<AdListDto>> GetAdsByName(string userName);
         public

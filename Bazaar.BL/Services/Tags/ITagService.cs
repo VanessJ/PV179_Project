@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Tags
 {
-    public interface ITagService
+    public interface ITagService : ICRUDService
     {
 
         public Task<IEnumerable<TagListDto>> GetTagsByName(string tagName);

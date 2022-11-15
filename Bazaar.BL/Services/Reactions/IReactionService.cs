@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Reactions
 {
-    public interface IReactionService
+    public interface IReactionService : ICRUDService
     {
     }
 }

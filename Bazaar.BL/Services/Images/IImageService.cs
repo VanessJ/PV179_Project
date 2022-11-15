@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Images
 {
-    public interface IImageService
+    public interface IImageService : ICRUDService
     {
     }
 }

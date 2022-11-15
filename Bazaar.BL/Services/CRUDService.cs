@@ -5,7 +5,8 @@ using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Services
 {
-    public abstract class CRUDService<TEntity> where TEntity : BaseEntity
+    public abstract class CRUDService<TEntity> : ICRUDService
+        where TEntity : BaseEntity
     {
         protected readonly IMapper _mapper;
         protected readonly IUnitOfWork _unitOfWork;

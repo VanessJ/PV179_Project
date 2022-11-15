@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Users
 {
-    public interface IUserService
+    public interface IUserService : ICRUDService
     {
         public Task<IEnumerable<UserListDto>> GetUserByNameAsync(string userName);
         public Task<IEnumerable<AdDto>> GetAdsOfUser(Guid id);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Reviews
 {
-    public interface IReviewService
+    public interface IReviewService : ICRUDService
     {
     }
 }

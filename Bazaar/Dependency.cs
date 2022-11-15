@@ -1,10 +1,14 @@
 ﻿using Bazaar.BL.Facade;
-using Bazaar.BL.Services;
 using Bazaar.Infrastructure.UnitOfWork;
 using Bazaar.Infrastructure.EFCore;
 using Bazaar.Infrastructure.EFCore.Repository;
 using Bazaar.Infrastructure.EFCore.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
+using Bazaar.BL.Services.Users;
+using Bazaar.BL.Services.Tags;
+using Bazaar.BL.Services.Images;
+using Bazaar.BL.Services.Users;
+using Bazaar.BL.Services;
 
 namespace Bazaar
 {
@@ -25,7 +29,7 @@ namespace Bazaar
         {
             var services = new ServiceCollection();
 
-            services.AddScoped<IAdFacade,AdFacade>();
+            services.AddScoped<IBazaarFacade,BazaarFacade>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<IImageService, ImageService>();
