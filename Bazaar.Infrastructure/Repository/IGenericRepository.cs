@@ -4,7 +4,7 @@ namespace Bazaar.Infrastructure.Repository
 {
     public interface IGenericRepository<TEntity> : IAsyncDisposable where TEntity : BaseEntity
     {
-        Task<IEnumerable<TEntity>> GetAsync();
+        Task<IEnumerable<TEntity>> GetAsync(params string[] includes);
 
         Task<TEntity> GetByIdAsync(Guid id, params string[] includes);
 

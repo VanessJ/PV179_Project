@@ -30,9 +30,18 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             _dbSet.Remove(entityToDelete);
         }
 
-        public async Task<IEnumerable<TEntity>> GetAsync()
+        public async Task<IEnumerable<TEntity>> GetAsync(params string[] includes)
         {
-            return await _dbSet.ToListAsync();
+            var queryable = _dbContext.Set<TEntity>().AsQueryable();
+            if (!includes.IsNullOrEmpty())
+            {
+                foreach (var include in includes)
+                {
+                    queryable = queryable.Include($"{include}");
+                }
+            }
+
+            return await queryable.ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id, params string[] includes)
