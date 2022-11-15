@@ -15,15 +15,15 @@ namespace Bazaar.BL.QueryObjects
     {
         public TagQueryObject(IMapper mapper, IQuery<Tag> query) : base(mapper, query) { }
 
-        protected override IQuery<Tag> FilterByWhere(IQuery<Tag> query, TagFilterDto filter_dto)
+        protected override IQuery<Tag> FilterByWhere(IQuery<Tag> query, TagFilterDto filterDto)
         {
-            if (!string.IsNullOrWhiteSpace(filter_dto.ContainsTagName))
+            if (!string.IsNullOrWhiteSpace(filterDto.ContainsTagName))
             {
-                return query.Filter(t => t.TagName.Equals(filter_dto.ContainsTagName));
+                return query.Filter(t => t.TagName.Equals(filterDto.ContainsTagName));
             }
-            if (!string.IsNullOrWhiteSpace(filter_dto.LikeTagName))
+            if (!string.IsNullOrWhiteSpace(filterDto.LikeTagName))
             {
-                return query.Filter(t => t.TagName.Contains(filter_dto.LikeTagName));
+                return query.Filter(t => t.TagName.Contains(filterDto.LikeTagName));
             }
 
             return query;

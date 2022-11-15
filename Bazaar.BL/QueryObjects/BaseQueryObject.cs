@@ -26,25 +26,25 @@ namespace Bazaar.BL.QueryObjects
             this._mapper = mapper;
             this._query = query;
         }
-        protected abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filter_dto);
+        protected abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filterDto);
 
-        public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filter_dto)
+        public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filterDto)
         {
-            var query = FilterByWhere(_query, filter_dto);
+            var query = FilterByWhere(_query, filterDto);
 
-            if (!string.IsNullOrWhiteSpace(filter_dto.OderCriteria))
+            if (!string.IsNullOrWhiteSpace(filterDto.OderCriteria))
             {
-                query.OrderBy(x => EF.Property<object>(x, filter_dto.OderCriteria));
+                query.OrderBy(x => EF.Property<object>(x, filterDto.OderCriteria));
             }
 
-            if (filter_dto.RequestedPageNumber.HasValue)
+            if (filterDto.RequestedPageNumber.HasValue)
             {
-                query = query.Page(filter_dto.RequestedPageNumber.Value, filter_dto.PageSize);
+                query = query.Page(filterDto.RequestedPageNumber.Value, filterDto.PageSize);
             }
 
-            var result_query = await query.ExecuteAsync();
+            var resultQuery = await query.ExecuteAsync();
 
-            return _mapper.Map<IEnumerable<TDto>>(result_query);
+            return _mapper.Map<IEnumerable<TDto>>(resultQuery);
 
         }
     }

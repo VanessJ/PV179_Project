@@ -159,7 +159,7 @@ namespace Bazzar.Bl.Tests
             Assert.Equal(2, result.Count());
             Assert.Equal("AFerko", result.First().FirstName);
         }
-
+        [Fact]
         public async Task GetUserByExactUsername_ReturnsCorrectUserDto()
         {
             using var _bazaarDbContext = new BazaarDBContext(_options);
@@ -174,7 +174,7 @@ namespace Bazzar.Bl.Tests
             UserFilterDto user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1", OderCriteria = "FirstName" };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
-            Assert.Equal(1, result.Count());
+            Assert.Single(result);
             Assert.Equal("TestUser1", result.First().UserName);
         }
     }
