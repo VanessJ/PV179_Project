@@ -2,25 +2,21 @@
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace Bazaar.BL.Services
 {
-    public abstract class CRUDService<TEntity> where TEntity : BaseEntity
+    public abstract class CRUDService<T> where T : BaseEntity
     {
         protected readonly IMapper _mapper;
         protected readonly IUnitOfWork _unitOfWork;
-        private readonly IGenericRepository<TEntity> _repository;
+        protected readonly IGenericRepository<T> _repository;
 
         public CRUDService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
 
-            var entityName = typeof(TEntity).Name;
+            var entityName = typeof(T).Name;
 
             var repositoryInfo = typeof(IUnitOfWork).GetProperty($"{entityName}Repository");
 
@@ -29,7 +25,7 @@ namespace Bazaar.BL.Services
                 throw new ArgumentException();
             }
 
-            var repository = (IGenericRepository<TEntity>?)repositoryInfo.GetValue(_unitOfWork, null);
+            var repository = (IGenericRepository<T>?)repositoryInfo.GetValue(_unitOfWork, null);
 
             if (repository == null)
             {
@@ -41,32 +37,38 @@ namespace Bazaar.BL.Services
 
         public async Task<Tdto?> GetByIdAsync<Tdto>(Guid id, params string[] includes)
         {
-            var entity = await _repository.GetByIdAsync(id, includes);
+            T? entity = await _repository.GetByIdAsync(id, includes);
 
             return _mapper.Map<Tdto?>(entity);
         }
 
-        public async Task<Tdto?> GetAsync<Tdto>(params string[] includes)
+        public async Task<IEnumerable<Tdto>> GetAllAsync<Tdto>()
         {
-            var entity = await _repository.GetAsync(includes);
+            IEnumerable<T> entity = await _repository.GetAsync();
 
-            return _mapper.Map<Tdto?>(entity);
+            return _mapper.Map<IEnumerable<Tdto>>(entity);
         }
-        public async Task InsertAsync(TEntity entity)
+
+        public async Task CreateAsync<Tdto>(Tdto dto)
         {
+            T entity = _mapper.Map<T>(dto);
+
             await _repository.InsertAsync(entity);
-            await _repository.SaveAsync();
+            await _unitOfWork.CommitAsync();
         }
 
-        public async Task DeleteAsync(Guid idToDelete)
+        public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)
         {
-            await _repository.DeleteAsync(idToDelete);
-            await _repository.SaveAsync();
+            T updatedEntity = _mapper.Map<T>(dto);
+            
+            _repository.Update(updatedEntity);
+            await _unitOfWork.CommitAsync();
         }
-        public async Task Update(TEntity entity)
+
+        public async Task DeleteAsync<Tdto>(Guid id)
         {
-            _repository.Update(entity);
-            await _repository.SaveAsync();
+            await _repository.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
         }
 
     }
