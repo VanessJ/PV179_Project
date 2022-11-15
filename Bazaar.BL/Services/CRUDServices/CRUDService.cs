@@ -3,7 +3,7 @@ using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
 
-namespace Bazaar.BL.Services
+namespace Bazaar.BL.Services.CRUDServices
 {
     public abstract class CRUDService<TEntity> : ICRUDService
         where TEntity : BaseEntity
@@ -61,7 +61,7 @@ namespace Bazaar.BL.Services
         public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)
         {
             TEntity updatedEntity = _mapper.Map<TEntity>(dto);
-            
+
             _repository.Update(updatedEntity);
             await _unitOfWork.CommitAsync();
         }

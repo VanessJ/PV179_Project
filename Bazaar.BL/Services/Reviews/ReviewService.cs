@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bazaar.BL.Services.CRUDServices;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 

@@ -1,5 +1,6 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Services.CRUDServices;
 using Bazaar.DAL.Models;
 
 namespace Bazaar.BL.Services.Ads

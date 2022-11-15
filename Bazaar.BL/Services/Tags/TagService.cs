@@ -4,6 +4,7 @@ using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.QueryObjects;
+using Bazaar.BL.Services.CRUDServices;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 
