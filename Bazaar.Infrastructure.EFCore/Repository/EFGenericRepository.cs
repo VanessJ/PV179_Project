@@ -44,7 +44,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             return await queryable.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(Guid id, params string[] includes)
+        public async Task<TEntity?> GetByIdAsync(Guid id, params string[] includes)
         {
             var queryable = _dbContext.Set<TEntity>().AsQueryable();
             if (!includes.IsNullOrEmpty())

@@ -6,7 +6,7 @@ namespace Bazaar.Infrastructure.Repository
     {
         Task<IEnumerable<TEntity>> GetAsync(params string[] includes);
 
-        Task<TEntity> GetByIdAsync(Guid id, params string[] includes);
+        Task<TEntity?> GetByIdAsync(Guid id, params string[] includes);
 
         Task InsertAsync(TEntity entity);
 
