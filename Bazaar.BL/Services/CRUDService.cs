@@ -5,18 +5,18 @@ using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Services
 {
-    public abstract class CRUDService<T> where T : BaseEntity
+    public abstract class CRUDService<TEntity> where TEntity : BaseEntity
     {
         protected readonly IMapper _mapper;
         protected readonly IUnitOfWork _unitOfWork;
-        protected readonly IGenericRepository<T> _repository;
+        protected readonly IGenericRepository<TEntity> _repository;
 
         public CRUDService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
 
-            var entityName = typeof(T).Name;
+            var entityName = typeof(TEntity).Name;
 
             var repositoryInfo = typeof(IUnitOfWork).GetProperty($"{entityName}Repository");
 
@@ -25,7 +25,7 @@ namespace Bazaar.BL.Services
                 throw new ArgumentException();
             }
 
-            var repository = (IGenericRepository<T>?)repositoryInfo.GetValue(_unitOfWork, null);
+            var repository = (IGenericRepository<TEntity>?)repositoryInfo.GetValue(_unitOfWork, null);
 
             if (repository == null)
             {
@@ -37,21 +37,21 @@ namespace Bazaar.BL.Services
 
         public async Task<Tdto?> GetByIdAsync<Tdto>(Guid id, params string[] includes)
         {
-            T? entity = await _repository.GetByIdAsync(id, includes);
+            TEntity? entity = await _repository.GetByIdAsync(id, includes);
 
             return _mapper.Map<Tdto?>(entity);
         }
 
         public async Task<IEnumerable<Tdto>> GetAllAsync<Tdto>()
         {
-            IEnumerable<T> entity = await _repository.GetAsync();
+            IEnumerable<TEntity> entity = await _repository.GetAsync();
 
             return _mapper.Map<IEnumerable<Tdto>>(entity);
         }
 
         public async Task CreateAsync<Tdto>(Tdto dto)
         {
-            T entity = _mapper.Map<T>(dto);
+            TEntity entity = _mapper.Map<TEntity>(dto);
 
             await _repository.InsertAsync(entity);
             await _unitOfWork.CommitAsync();
@@ -59,7 +59,7 @@ namespace Bazaar.BL.Services
 
         public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)
         {
-            T updatedEntity = _mapper.Map<T>(dto);
+            TEntity updatedEntity = _mapper.Map<TEntity>(dto);
             
             _repository.Update(updatedEntity);
             await _unitOfWork.CommitAsync();
