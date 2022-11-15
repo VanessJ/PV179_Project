@@ -1,11 +1,5 @@
 ﻿using Bazaar.Infrastructure.Query;
 using Bazaar.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Dtos.User;
 using AutoMapper;
 
@@ -21,14 +15,12 @@ namespace Bazaar.BL.QueryObjects
             {
                 return query.Filter(u => u.UserName.Equals(filter_dto.ContainsUserName));
             }
-            else if (!string.IsNullOrWhiteSpace(filter_dto.LikeUserName))
+            if (!string.IsNullOrWhiteSpace(filter_dto.LikeUserName))
             {
                 return query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName));
             }
 
             return query;
-            
         }
-
     }
 }
