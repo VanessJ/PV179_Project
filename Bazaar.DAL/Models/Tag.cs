@@ -7,7 +7,7 @@ namespace Bazaar.DAL.Models
         [MaxLength(64)]
         public string TagName { get; set; }
         
-        public virtual ICollection<AdTag> AdTag { get; set; }
+        public virtual ICollection<Ad> Ads { get; set; }
 
     }
 }

@@ -22,6 +22,21 @@ namespace Bazaar.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AdTag", b =>
+                {
+                    b.Property<Guid>("AdsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AdsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("AdTag");
+                });
+
             modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
                 {
                     b.Property<Guid>("Id")
@@ -61,41 +76,14 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("72f4b73e-eee4-4ee3-a4f0-39b86fb5b2f1"),
+                            Id = new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"),
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
                             IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = new Guid("200c6e54-315a-411c-82b0-e07eb1c9e882")
-                        });
-                });
-
-            modelBuilder.Entity("Bazaar.DAL.Models.AdTag", b =>
-                {
-                    b.Property<Guid>("AdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("AdId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("AdTag");
-
-                    b.HasData(
-                        new
-                        {
-                            AdId = new Guid("72f4b73e-eee4-4ee3-a4f0-39b86fb5b2f1"),
-                            TagId = new Guid("49308eff-3c59-483a-95e5-105c454dd97f")
-                        },
-                        new
-                        {
-                            AdId = new Guid("72f4b73e-eee4-4ee3-a4f0-39b86fb5b2f1"),
-                            TagId = new Guid("3c86f388-50a3-4ae8-9c5d-93b07e1b003a")
+                            UserId = new Guid("038ee4a5-2c93-4373-b275-489057e6932b")
                         });
                 });
 
@@ -126,8 +114,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b14f093f-0711-4dd6-a0f8-4f8b0772d5a2"),
-                            AdId = new Guid("72f4b73e-eee4-4ee3-a4f0-39b86fb5b2f1"),
+                            Id = new Guid("ddc73cb3-7b82-4398-8dc9-f554bdb9e462"),
+                            AdId = new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"),
                             Title = "Milovana macka",
                             Url = "\\obrazokmacky.jpg"
                         });
@@ -160,8 +148,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = new Guid("72f4b73e-eee4-4ee3-a4f0-39b86fb5b2f1"),
-                            UserId = new Guid("fd810cdf-49bc-4a3e-8d0e-145f2e6379ff"),
+                            AdId = new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"),
+                            UserId = new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"),
                             Accepted = true,
                             Id = new Guid("00000000-0000-0000-0000-000000000000"),
                             Message = "Mam zaujem o vasu prekrasnu macku"
@@ -194,10 +182,10 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ReviewerId = new Guid("fd810cdf-49bc-4a3e-8d0e-145f2e6379ff"),
-                            ReviewedId = new Guid("200c6e54-315a-411c-82b0-e07eb1c9e882"),
+                            ReviewerId = new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"),
+                            ReviewedId = new Guid("038ee4a5-2c93-4373-b275-489057e6932b"),
                             Descritption = "Krasna macka, 10/10 spokojnost",
-                            Id = new Guid("a17c8189-f949-40be-87b7-15e4df1c4eeb"),
+                            Id = new Guid("a58e961a-e4a8-43c9-b0d4-89360c2594a3"),
                             Score = 5
                         });
                 });
@@ -220,12 +208,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("49308eff-3c59-483a-95e5-105c454dd97f"),
+                            Id = new Guid("8852f5af-2f9c-42b5-ada3-b290cadfaf5d"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("3c86f388-50a3-4ae8-9c5d-93b07e1b003a"),
+                            Id = new Guid("b6adf270-55b5-4501-8a58-8306eb92c935"),
                             TagName = "Sell"
                         });
                 });
@@ -272,7 +260,7 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("200c6e54-315a-411c-82b0-e07eb1c9e882"),
+                            Id = new Guid("038ee4a5-2c93-4373-b275-489057e6932b"),
                             Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
                             LastName = "Mrkvicka",
@@ -283,7 +271,7 @@ namespace Bazaar.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd810cdf-49bc-4a3e-8d0e-145f2e6379ff"),
+                            Id = new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"),
                             Email = "ferko@gmailol.com",
                             FirstName = "Ferko",
                             LastName = "Priezviskovy",
@@ -292,6 +280,21 @@ namespace Bazaar.DAL.Migrations
                             PhoneNumber = "2020040444",
                             UserName = "Feri"
                         });
+                });
+
+            modelBuilder.Entity("AdTag", b =>
+                {
+                    b.HasOne("Bazaar.DAL.Models.Ad", null)
+                        .WithMany()
+                        .HasForeignKey("AdsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bazaar.DAL.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
@@ -303,25 +306,6 @@ namespace Bazaar.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("Bazaar.DAL.Models.AdTag", b =>
-                {
-                    b.HasOne("Bazaar.DAL.Models.Ad", "Ad")
-                        .WithMany("AdTag")
-                        .HasForeignKey("AdId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Bazaar.DAL.Models.Tag", "Tag")
-                        .WithMany("AdTag")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Ad");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Image", b =>
@@ -375,16 +359,9 @@ namespace Bazaar.DAL.Migrations
 
             modelBuilder.Entity("Bazaar.DAL.Models.Ad", b =>
                 {
-                    b.Navigation("AdTag");
-
                     b.Navigation("Images");
 
                     b.Navigation("Reactions");
-                });
-
-            modelBuilder.Entity("Bazaar.DAL.Models.Tag", b =>
-                {
-                    b.Navigation("AdTag");
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.User", b =>

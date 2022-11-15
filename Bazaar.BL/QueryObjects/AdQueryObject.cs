@@ -27,7 +27,7 @@ namespace Bazaar.BL.QueryObjects
 
             if (!(!filterDto.TagNames.Any() || filterDto.TagNames == null))
             {
-                return query.Filter(a => a.AdTag.Any(at => filterDto.TagNames.Contains(at.Tag.TagName)));
+                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
             }
 
             return query;

@@ -28,7 +28,7 @@ namespace Bazaar.DAL.Models
 
         public virtual ICollection<Image> Images { get; set; }
 
-        public virtual ICollection<AdTag> AdTag { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Reaction> Reactions { get; set; }
 
 

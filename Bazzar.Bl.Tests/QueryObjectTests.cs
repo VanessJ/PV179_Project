@@ -1,15 +1,9 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos;
 using Bazaar.DAL.Data;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
-using Bazaar.Infrastructure.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Bazaar.BL.QueryObjects;
@@ -136,20 +130,9 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
-                    AdTag = new List<AdTag>()
+                    Tags = new List<Tag>()
                     {
-                        new AdTag
-                        {
-                            Tag = pesTag
-                        },
-                        new AdTag
-                        {
-                            Tag = zvieraTag
-                        },
-                        new AdTag
-                        {
-                            Tag = ostatneTag
-                        }
+                        pesTag, zvieraTag, ostatneTag
                     }
                 }
             );
@@ -165,12 +148,9 @@ namespace Bazzar.Bl.Tests
                     IsValid = false,
                     Price = 100,
                     UserId = userId1,
-                    AdTag = new List<AdTag>()
+                    Tags = new List<Tag>()
                     {
-                        new AdTag
-                        {
-                            Tag = zvieraTag
-                        }
+                        zvieraTag
                     }
                 }
             );
@@ -186,12 +166,9 @@ namespace Bazzar.Bl.Tests
                     IsValid = false,
                     Price = 900,
                     UserId = userId1,
-                    AdTag = new List<AdTag>()
+                    Tags = new List<Tag>()
                     {
-                        new AdTag
-                        {
-                            Tag = ostatneTag
-                        }
+                        ostatneTag
                     }
                 }
             );
@@ -207,12 +184,9 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 111,
                     UserId = userId2,
-                    AdTag = new List<AdTag>()
+                    Tags = new List<Tag>()
                     {
-                        new AdTag
-                        {
-                            Tag = ostatneTag
-                        }
+                        ostatneTag
                     }
                 }
             );
@@ -228,12 +202,9 @@ namespace Bazzar.Bl.Tests
                     IsValid = false,
                     Price = 0,
                     UserId = userId2,
-                    AdTag = new List<AdTag>()
+                    Tags = new List<Tag>()
                     {
-                        new AdTag
-                        {
-                            Tag = svorkaTag
-                        }
+                        svorkaTag
                     }
                 }
             );

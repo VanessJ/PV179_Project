@@ -91,26 +91,6 @@ namespace Bazaar.DAL.Data
             );
 
 
-            modelBuilder.Entity<AdTag>().HasData
-            (
-                new AdTag
-                {
-                    TagId = tagId1, 
-                    AdId = adId
-                }
-            );
-
-
-            modelBuilder.Entity<AdTag>().HasData
-            (
-                new AdTag
-                {
-                    TagId = tagId2,
-                    AdId = adId
-                }
-            );
-
-
             modelBuilder.Entity<Reaction>().HasData
             (
                 new Reaction
