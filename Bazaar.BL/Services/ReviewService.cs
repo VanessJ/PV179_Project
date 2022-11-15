@@ -4,9 +4,9 @@ using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Services
 {
-    public class UserService : CRUDService<User>
+    public class ReviewService : CRUDService<Review>
     {
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
+        public ReviewService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
 
         }
