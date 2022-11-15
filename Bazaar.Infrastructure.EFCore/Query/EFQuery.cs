@@ -1,10 +1,11 @@
 ﻿using Bazaar.DAL.Data;
+using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Query;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bazaar.Infrastructure.EFCore.Query
 {
-    public class EFQuery<TEntity> : Query<TEntity> where TEntity : class, new()
+    public class EFQuery<TEntity> : Query<TEntity> where TEntity : BaseEntity, new()
     {
         public EFQuery(BazaarDBContext dbContext)
         {

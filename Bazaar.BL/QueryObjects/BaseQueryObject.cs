@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bazaar.BL.Dtos.Base;
+using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Query;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,13 +14,14 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace Bazaar.BL.QueryObjects
 {
     public abstract class BaseQueryObject<TDto, TFilter, TEntity, TQuery>
-        where TEntity : class, new()
+        where TEntity : BaseEntity, new()
         where TFilter : BaseFilterDto
         where TQuery : IQuery<TEntity>
         
     {
         protected readonly IMapper _mapper;
         protected readonly IQuery<TEntity> _query;
+ 
 
         protected BaseQueryObject(IMapper mapper, TQuery query)
         {

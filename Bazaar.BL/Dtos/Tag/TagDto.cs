@@ -12,6 +12,6 @@ namespace Bazaar.BL.Dtos.Tag
         public Guid Id { get; set; }
         public string TagName { get; set; } = null!;
 
-        public AdDto Ad { get; set; } = null!;
+        public IEnumerable<AdDto> Ad { get; set; } = null!;
     }
 }
