@@ -6,12 +6,12 @@ namespace Bazaar.DAL.Models
     {
         public string Message { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; } 
 
-        public int AdId { get; set; }
+        public Guid AdId { get; set; }
 
         [ForeignKey(nameof(AdId))]
         public virtual Ad Ad { get; set; }  

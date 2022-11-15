@@ -20,7 +20,7 @@ namespace Bazaar.BL.Services
             _mapper = mapper;
         }
 
-        public async Task<Tdto?> GetByIdAsync<Tdto>(int id, params string[] includes)
+        public async Task<Tdto?> GetByIdAsync<Tdto>(Guid id, params string[] includes)
         {
             string entityName = typeof(T).Name;
 

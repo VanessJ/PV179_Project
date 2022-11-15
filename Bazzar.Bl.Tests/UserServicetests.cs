@@ -18,7 +18,8 @@ namespace Bazzar.Bl.Tests
     public class UserServiceTests
     {
         private DbContextOptions<BazaarDBContext> _options;
-
+        private readonly Guid userId1 = Guid.NewGuid();
+        private readonly Guid userId2 = Guid.NewGuid();
 
         public UserServiceTests()
         {
@@ -28,7 +29,7 @@ namespace Bazzar.Bl.Tests
                 .BuildServiceProvider();
 
             _options = new DbContextOptionsBuilder<BazaarDBContext>()
-                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid}")
+                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid()}")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
 
@@ -38,7 +39,7 @@ namespace Bazzar.Bl.Tests
             (
                 new User
                 {
-                    Id = 1,
+                    Id = userId1,
                     UserName = "TestUser1",
                     FirstName = "Ferko",
                     LastName = "Mrkvicka",
@@ -51,7 +52,7 @@ namespace Bazzar.Bl.Tests
             (
                 new User
                 {
-                    Id = 2,
+                    Id = userId2,
                     UserName = "TestUser2",
                     FirstName = "AFerko",
                     LastName = "Priezviskovy",
@@ -78,9 +79,9 @@ namespace Bazzar.Bl.Tests
 
 
             var userService = new UserService(uow, mapper);
-            var result = await userService.GetByIdAsync<UserDto>(1);
+            var result = await userService.GetByIdAsync<UserDto>(userId1);
 
-            Assert.Equal(1, result.Id);
+            Assert.Equal(userId1, result.Id);
             Assert.Equal("TestUser1", result.UserName);
         }
     }

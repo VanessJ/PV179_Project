@@ -18,7 +18,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task DeleteAsync(int idToDelete)
+        public async Task DeleteAsync(Guid idToDelete)
         {
             var entityToDelete = await _dbSet.FindAsync(idToDelete);
 
@@ -35,7 +35,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdAsync(int id, params string[] includes)
+        public async Task<TEntity> GetByIdAsync(Guid id, params string[] includes)
         {
             var queryable = _dbContext.Set<TEntity>().AsQueryable();
             if (!includes.IsNullOrEmpty())

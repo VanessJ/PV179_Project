@@ -12,12 +12,12 @@ namespace Bazaar.Infrastructure.EFCore.Tests
     {
         private readonly DbContextOptions<BazaarDBContext> _options;
 
-        private readonly int testUser2Id = 2;
-        private readonly int testUser3Id = 3;
+        private readonly Guid testUser2Id = Guid.NewGuid();
+        private static readonly Guid testUser3Id = Guid.NewGuid();
 
         private readonly User newUser = new()
         {
-            Id = 3,
+            Id = testUser3Id,
             UserName = "TestUser3",
             FirstName = "Anicka",
             LastName = "Mrkvicka",
@@ -35,7 +35,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
                 .BuildServiceProvider();
 
             _options = new DbContextOptionsBuilder<BazaarDBContext>()
-                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid}")
+                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid()}")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
 
@@ -45,7 +45,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             (
                 new User
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     UserName = "TestUser1",
                     FirstName = "Ferko",
                     LastName = "Mrkvicka",
@@ -58,7 +58,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             (
                 new User
                 {
-                    Id = 2,
+                    Id = testUser2Id,
                     UserName = "TestUser2",
                     FirstName = "Ferko",
                     LastName = "Priezviskovy",

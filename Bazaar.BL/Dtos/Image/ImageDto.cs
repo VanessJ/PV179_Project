@@ -10,7 +10,7 @@ namespace Bazaar.BL.Dtos.Image
 {
     public class ImageDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Title { get; set; } = null!;
 
         public string Url { get; set; } = null!;

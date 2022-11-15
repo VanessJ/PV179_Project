@@ -9,7 +9,7 @@ namespace Bazaar.BL.Dtos.Review
 {
     public class ReviewDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public UserDto Reviewer { get; set; }
         
         public UserDto Reviewed { get; set; }

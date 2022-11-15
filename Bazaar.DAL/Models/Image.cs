@@ -10,7 +10,7 @@ namespace Bazaar.DAL.Models
 
         public string Url { get; set; }   
 
-        public int AdId { get; set; }
+        public Guid AdId { get; set; }
 
         [ForeignKey(nameof(AdId))]
         public virtual Ad Ad { get; set; }

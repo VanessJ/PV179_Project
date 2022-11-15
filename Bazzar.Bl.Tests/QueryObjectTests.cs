@@ -29,17 +29,24 @@ namespace Bazzar.Bl.Tests
                 .BuildServiceProvider();
 
             _options = new DbContextOptionsBuilder<BazaarDBContext>()
-                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid}")
+                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid()}")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
 
             using var _bazaarDbContext = new BazaarDBContext(_options);
 
+            var userId1 = Guid.NewGuid();
+            var userId2 = Guid.NewGuid();
+            var adId1 = Guid.NewGuid();
+            var adId2 = Guid.NewGuid();
+            var adId3 = Guid.NewGuid();
+            var adId4 = Guid.NewGuid();
+            var adId5 = Guid.NewGuid();
             _bazaarDbContext.User.Add
             (
                 new User
                 {
-                    Id = 1,
+                    Id = userId1,
                     UserName = "TestUser1",
                     FirstName = "Ferko",
                     LastName = "Mrkvicka",
@@ -52,7 +59,7 @@ namespace Bazzar.Bl.Tests
             (
                 new User
                 {
-                    Id = 2,
+                    Id = userId2,
                     UserName = "TestUser2",
                     FirstName = "AFerko",
                     LastName = "Priezviskovy",
@@ -65,70 +72,70 @@ namespace Bazzar.Bl.Tests
             (
                 new Ad
                 {
-                    Id = 1,
+                    Id = adId1,
                     Title = "Predam psa",
                     Description = "Je velmi zlata, zbavte ma jej, prosim",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = true,
                     Price = 100,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 2,
+                    Id = adId2,
                     Title = "Predam macku",
                     Description = "Je velmi zlata, mam ich moc vela, dalsiu nechcem!",
                     IsOffer = true,
                     IsPremium = true,
                     IsValid = false,
                     Price = 100,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 3,
+                    Id = adId3,
                     Title = "Predam strom",
                     Description = "je to velmi pekny strom!",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = false,
                     Price = 900,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 4,
+                    Id = adId4,
                     Title = "HRABLE NA PREDAJ, VOLAJ IHNED!!!",
                     Description = "Multifunkcne hrable na solarny pohon!",
                     IsOffer = true,
                     IsPremium = true,
                     IsValid = true,
                     Price = 111,
-                    UserId = 2
+                    UserId = userId2
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 5,
+                    Id = adId5,
                     Title = "Predam svoju svokru!",
                     Description = "Kto chce mat doma svokru..",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = false,
                     Price = 0,
-                    UserId = 2
+                    UserId = userId2
                 }
             );
             _bazaarDbContext.SaveChanges();

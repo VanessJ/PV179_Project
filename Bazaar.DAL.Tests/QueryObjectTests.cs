@@ -12,7 +12,13 @@ namespace EFCore.Tests
     public class QueryObjectTests
     {
         private DbContextOptions<BazaarDBContext> _options;
-
+        private readonly Guid userId1 = Guid.NewGuid();
+        private readonly Guid userId2 = Guid.NewGuid();
+        private readonly Guid adId1 = Guid.NewGuid();
+        private readonly Guid adId2 = Guid.NewGuid();
+        private readonly Guid adId3 = Guid.NewGuid();
+        private readonly Guid adId4 = Guid.NewGuid();
+        private readonly Guid adId5 = Guid.NewGuid();
         public QueryObjectTests()
         {
             var serviceProvider = new ServiceCollection()
@@ -21,17 +27,18 @@ namespace EFCore.Tests
                 .BuildServiceProvider();
 
             _options = new DbContextOptionsBuilder<BazaarDBContext>()
-                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid}")
+                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid()}")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
             
             using var _bazaarDbContext = new BazaarDBContext(_options);
 
+
             _bazaarDbContext.User.Add
             (
                 new User 
                 {
-                    Id = 1,
+                    Id = userId1,
                     UserName = "TestUser1",
                     FirstName = "Ferko",
                     LastName = "Mrkvicka",
@@ -44,7 +51,7 @@ namespace EFCore.Tests
             (
                 new User
                 {
-                    Id = 2,
+                    Id = userId2,
                     UserName = "TestUser2",
                     FirstName = "Ferko",
                     LastName = "Priezviskovy",
@@ -57,70 +64,70 @@ namespace EFCore.Tests
             (
                 new Ad
                 {
-                    Id = 1,
+                    Id = adId1,
                     Title = "Predam psa",
                     Description = "Je velmi zlata, zbavte ma jej, prosim",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = true,
                     Price = 100,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 2,
+                    Id = adId2,
                     Title = "Predam macku",
                     Description = "Je velmi zlata, mam ich moc vela, dalsiu nechcem!",
                     IsOffer = true,
                     IsPremium = true,
                     IsValid = false,
                     Price = 100,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 3,
+                    Id = adId3,
                     Title = "Predam strom",
                     Description = "je to velmi pekny strom!",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = false,
                     Price = 900,
-                    UserId = 1
+                    UserId = userId1
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 4,
+                    Id = adId4,
                     Title = "HRABLE NA PREDAJ, VOLAJ IHNED!!!",
                     Description = "Multifunkcne hrable na solarny pohon!",
                     IsOffer = true,
                     IsPremium = true,
                     IsValid = true,
                     Price = 111,
-                    UserId = 2
+                    UserId = userId2
                 }
             );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
                 {
-                    Id = 5,
+                    Id = adId5,
                     Title = "Predam svoju svokru!",
                     Description = "Kto chce mat doma svokru..",
                     IsOffer = true,
                     IsPremium = false,
                     IsValid = false,
                     Price = 0,
-                    UserId = 2
+                    UserId = userId2
                 }
             );
             _bazaarDbContext.SaveChanges();
@@ -149,7 +156,7 @@ namespace EFCore.Tests
 
             var result = await queryObject.ExecuteAsync();
 
-            Assert.Equal(1, result.First().Id);
+            Assert.Equal(adId1, result.First().Id);
             Assert.Equal(3, result.Count());
             Assert.Equal("Predam svoju svokru!", result.Last().Title);
         }
@@ -167,7 +174,7 @@ namespace EFCore.Tests
             var result = await queryObject.ExecuteAsync();
 
             Assert.Equal(2, result.Count());
-            Assert.Equal(4, result.First().Id);
+            Assert.Equal(adId4, result.First().Id);
         }
     }
 }

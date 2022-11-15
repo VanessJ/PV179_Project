@@ -4,11 +4,11 @@ namespace Bazaar.DAL.Models
 {
     public class Review : BaseEntity
     {
-        public int ReviewerId { get; set; }
+        public Guid ReviewerId { get; set; }
 
         public virtual User Reviewer { get; set; }
 
-        public int ReviewedId { get; set; }
+        public Guid ReviewedId { get; set; }
 
         public virtual User Reviewed {get; set;}
 

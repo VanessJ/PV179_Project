@@ -11,7 +11,7 @@ namespace Bazaar.DAL.Tests
     public class UnitOfWorkTests
     {
         private readonly DbContextOptions<BazaarDBContext> _options;
-        private readonly int userId = 1;
+        private readonly Guid userId = Guid.NewGuid();
 
         public UnitOfWorkTests()
         {
@@ -22,7 +22,7 @@ namespace Bazaar.DAL.Tests
                 .BuildServiceProvider();
 
             _options = new DbContextOptionsBuilder<BazaarDBContext>()
-                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid}")
+                .UseInMemoryDatabase(databaseName: $"test_db_{Guid.NewGuid()}")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
 
@@ -32,7 +32,7 @@ namespace Bazaar.DAL.Tests
            (
                new User
                {
-                   Id = 1,
+                   Id = userId,
                    UserName = "TestUser1",
                    FirstName = "Ferko",
                    LastName = "Mrkvicka",
@@ -51,7 +51,7 @@ namespace Bazaar.DAL.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var unitOfWork = new EFUnitOfWork(_bazaarDbContext);
-            var user = await unitOfWork.UserRepository.GetByIdAsync(1);
+            var user = await unitOfWork.UserRepository.GetByIdAsync(userId);
             Assert.Equal(userId, user.Id);
         }
     }

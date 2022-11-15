@@ -8,7 +8,7 @@ namespace Bazaar.BL.Dtos.User
 {
     public class UserEditDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string Email { get; set; } = null!;

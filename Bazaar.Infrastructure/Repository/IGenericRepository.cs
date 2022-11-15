@@ -6,11 +6,11 @@ namespace Bazaar.Infrastructure.Repository
     {
         Task<IEnumerable<TEntity>> GetAsync();
 
-        Task<TEntity> GetByIdAsync(int id, params string[] includes);
+        Task<TEntity> GetByIdAsync(Guid id, params string[] includes);
 
         Task InsertAsync(TEntity entity);
 
-        Task DeleteAsync(int idToDelete);
+        Task DeleteAsync(Guid idToDelete);
 
         void Update(TEntity entity);
 

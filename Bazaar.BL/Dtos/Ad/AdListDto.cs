@@ -9,7 +9,7 @@ namespace Bazaar.BL.Dtos.Ad
 {
     public class AdListDto
     {
-        public int Id { get; set; }
+        public int Guid { get; set; }
         public string Title { get; set; } = null!;
 
         public bool IsPremium { get; set; }

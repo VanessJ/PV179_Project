@@ -22,7 +22,7 @@ namespace Bazaar.DAL.Models
         [Range(1, int.MaxValue)]
         public int Price { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual User Creator { get; set; }
 
