@@ -20,12 +20,12 @@ namespace Bazaar.BL.QueryObjects
             {
                 return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
             }
-            if (!(filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
+            if (!(!filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
             {
                 return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
             }
 
-            if (!(filterDto.TagNames.Any() || filterDto.TagNames == null))
+            if (!(!filterDto.TagNames.Any() || filterDto.TagNames == null))
             {
                 return query.Filter(a => a.AdTag.Any(at => filterDto.TagNames.Contains(at.Tag.TagName)));
             }

@@ -42,6 +42,11 @@ namespace Bazzar.Bl.Tests
             var adId3 = Guid.NewGuid();
             var adId4 = Guid.NewGuid();
             var adId5 = Guid.NewGuid();
+            var tagId1 = Guid.NewGuid();
+            var tagId2 = Guid.NewGuid();
+            var tagId3 = Guid.NewGuid();
+            var tagId4 = Guid.NewGuid();
+            var tagId5 = Guid.NewGuid();
             _bazaarDbContext.User.Add
             (
                 new User
@@ -68,6 +73,57 @@ namespace Bazzar.Bl.Tests
                     PasswordHash = "supertajneheslo"
                 }
             );
+
+            var nepotrebneTag = new Tag
+            {
+                Id = tagId1,
+                TagName = "Nepotrebne"
+            };
+
+            var pesTag = new Tag
+            {
+                Id = tagId2,
+                TagName = "Pes"
+            };
+
+            var zvieraTag = new Tag
+            {
+                Id = tagId3,
+                TagName = "Zviera"
+            };
+
+            var ostatneTag = new Tag
+            {
+                Id = tagId4,
+                TagName = "Ostatne"
+            };
+
+
+            var svorkaTag = new Tag
+            {
+                Id = tagId5,
+                TagName = "Svokra"
+            };
+
+            _bazaarDbContext.Tag.Add
+            (
+                ostatneTag
+            );
+
+            _bazaarDbContext.Tag.Add
+            (
+                pesTag
+            );
+
+            _bazaarDbContext.Tag.Add
+            (
+                nepotrebneTag
+            );
+
+            _bazaarDbContext.Tag.Add
+            (
+                zvieraTag
+            );
             _bazaarDbContext.Ad.Add
             (
                 new Ad
@@ -79,7 +135,22 @@ namespace Bazzar.Bl.Tests
                     IsPremium = false,
                     IsValid = true,
                     Price = 100,
-                    UserId = userId1
+                    UserId = userId1,
+                    AdTag = new List<AdTag>()
+                    {
+                        new AdTag
+                        {
+                            Tag = pesTag
+                        },
+                        new AdTag
+                        {
+                            Tag = zvieraTag
+                        },
+                        new AdTag
+                        {
+                            Tag = ostatneTag
+                        }
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -93,7 +164,14 @@ namespace Bazzar.Bl.Tests
                     IsPremium = true,
                     IsValid = false,
                     Price = 100,
-                    UserId = userId1
+                    UserId = userId1,
+                    AdTag = new List<AdTag>()
+                    {
+                        new AdTag
+                        {
+                            Tag = zvieraTag
+                        }
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -107,7 +185,14 @@ namespace Bazzar.Bl.Tests
                     IsPremium = false,
                     IsValid = false,
                     Price = 900,
-                    UserId = userId1
+                    UserId = userId1,
+                    AdTag = new List<AdTag>()
+                    {
+                        new AdTag
+                        {
+                            Tag = ostatneTag
+                        }
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -121,7 +206,14 @@ namespace Bazzar.Bl.Tests
                     IsPremium = true,
                     IsValid = true,
                     Price = 111,
-                    UserId = userId2
+                    UserId = userId2,
+                    AdTag = new List<AdTag>()
+                    {
+                        new AdTag
+                        {
+                            Tag = ostatneTag
+                        }
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -135,7 +227,14 @@ namespace Bazzar.Bl.Tests
                     IsPremium = false,
                     IsValid = false,
                     Price = 0,
-                    UserId = userId2
+                    UserId = userId2,
+                    AdTag = new List<AdTag>()
+                    {
+                        new AdTag
+                        {
+                            Tag = svorkaTag
+                        }
+                    }
                 }
             );
             _bazaarDbContext.SaveChanges();
@@ -151,14 +250,15 @@ namespace Bazzar.Bl.Tests
                 cfg.CreateMap<User, UserListDto>().ReverseMap();
             });
 
-            Mapper mapper = new Mapper(config);
+            var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            UserFilterDto user_filter_dto = new UserFilterDto { LikeUserName = "TestUser", OderCriteria = "FirstName" };
+            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser", OderCriteria = "FirstName" };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(2, result.Count());
             Assert.Equal("AFerko", result.First().FirstName);
         }
+
         [Fact]
         public async Task GetUserByExactUsername_ReturnsCorrectUserDto()
         {
@@ -169,13 +269,52 @@ namespace Bazzar.Bl.Tests
                 cfg.CreateMap<User, UserListDto>().ReverseMap();
             });
 
-            Mapper mapper = new Mapper(config);
+            var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            UserFilterDto user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1", OderCriteria = "FirstName" };
+            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1", OderCriteria = "FirstName" };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
-            Assert.Single(result);
+            Assert.Equal(1, result.Count());
             Assert.Equal("TestUser1", result.First().UserName);
+        }
+
+        [Fact]
+        public async Task GetAdByExactTitle_ReturnsCorrectAdDto()
+        {
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var query = new EFQuery<Ad>(_bazaarDbContext);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Ad, AdListDto>().ReverseMap();
+            });
+
+            var mapper = new Mapper(config);
+            var adQueryObject = new AdQueryObject(mapper, query);
+            var ad_filter_dto = new AdFilterDto() { ContainsTitleName = "Predam svoju svokru!"};
+            var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
+
+            Assert.Equal(1, result.Count());
+            Assert.Equal("Predam svoju svokru!", result.First().Title);
+        }
+
+        [Fact]
+        public async Task GetAdsByTags_ReturnsCorrectAdDtos()
+        {
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var query = new EFQuery<Ad>(_bazaarDbContext);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Ad, AdListDto>().ReverseMap();
+            });
+
+            var mapper = new Mapper(config);
+            var adQueryObject = new AdQueryObject(mapper, query);
+            var tagNames = new List<string>() {"Pes", "Zviera", "Svokra"};
+            var ad_filter_dto = new AdFilterDto() { TagNames = tagNames, OderCriteria = "Title" };
+            var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
+
+            Assert.Equal(3, result.Count());
+            Assert.Equal("Predam macku", result.First().Title);
         }
     }
 }
