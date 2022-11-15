@@ -7,7 +7,7 @@ using Bazaar.BL.QueryObjects;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 
-namespace Bazaar.BL.Services
+namespace Bazaar.BL.Services.Tags
 {
     public class TagService : CRUDService<Tag>, ITagService
     {

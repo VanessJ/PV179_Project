@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Services;
+using Bazaar.BL.Services.Ads;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bazaar.BL.Facade

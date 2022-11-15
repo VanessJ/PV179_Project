@@ -7,6 +7,7 @@ using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 using Bazaar.BL.Dtos;
 using System.Numerics;
+using Bazaar.BL.Services.Users;
 
 namespace Bazaar.BL.Services
 {

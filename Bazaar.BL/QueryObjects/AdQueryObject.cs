@@ -20,6 +20,11 @@ namespace Bazaar.BL.QueryObjects
             {
                 return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
             }
+
+            if (!string.IsNullOrWhiteSpace(filterDto.ContainsInDescription))
+            {
+                return query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription));
+            }
             if (!(!filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
             {
                 return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));

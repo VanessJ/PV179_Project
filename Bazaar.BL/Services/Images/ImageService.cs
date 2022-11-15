@@ -2,7 +2,7 @@
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 
-namespace Bazaar.BL.Services
+namespace Bazaar.BL.Services.Images
 {
     public class ImageService : CRUDService<Image>, IImageService
     {

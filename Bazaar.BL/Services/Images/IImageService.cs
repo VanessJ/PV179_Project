@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Services
+namespace Bazaar.BL.Services.Images
 {
-    public interface IReviewService
+    public interface IImageService
     {
     }
 }

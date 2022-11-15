@@ -2,7 +2,7 @@
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 
-namespace Bazaar.BL.Services
+namespace Bazaar.BL.Services.Reactions
 {
     public class ReactionService : CRUDService<Reaction>, IReactionService
     {
