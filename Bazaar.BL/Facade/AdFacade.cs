@@ -19,8 +19,11 @@ namespace Bazaar.BL.Facade
         }
         public Task AddNew(Guid userId, IEnumerable<Guid> imageIds, IEnumerable<Guid> tagIds, AdCreateDto adCreateDto)
         {
-            var userDto = _serviceProvider.GetService<IUserService>();
-            throw new NotImplementedException();
+            var userService = _serviceProvider.GetService<IUserService>();
+            var imageService = _serviceProvider.GetService<IImageService>();
+            var tagService = _serviceProvider.GetService<ITagService>();
+            var adService = _serviceProvider.GetService<IAdService>();
+
         }
 
         public Task Browse()

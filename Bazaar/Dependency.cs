@@ -1,5 +1,9 @@
 ﻿using Bazaar.BL.Facade;
 using Bazaar.BL.Services;
+using Bazaar.Infrastructure.UnitOfWork;
+using Bazaar.Infrastructure.EFCore;
+using Bazaar.Infrastructure.EFCore.Repository;
+using Bazaar.Infrastructure.EFCore.UnitOfWork;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bazaar
@@ -23,6 +27,9 @@ namespace Bazaar
 
             services.AddScoped<IAdFacade,AdFacade>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
 
             return services.BuildServiceProvider();
         }

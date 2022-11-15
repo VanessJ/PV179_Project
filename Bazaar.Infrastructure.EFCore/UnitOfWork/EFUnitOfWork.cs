@@ -18,10 +18,6 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
         private IGenericRepository<Tag> tagRepository;
         private IGenericRepository<User> userRepository;
 
-        public EFUnitOfWork()
-        {
-        }
-
         public EFUnitOfWork(BazaarDBContext dbContext)
         {
             Context = dbContext;
