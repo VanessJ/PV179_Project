@@ -9,9 +9,9 @@ using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.BL.Facade
 {
-    public interface IBazaarFacade
+    public interface IAdFacade
     {
-        Task AddNewAdd(IEnumerable<ImageCreateDto> imageDtos, IEnumerable<TagCreateDto> tagDtos, AdCreateDto adCreateDto);
+        Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto);
         Task Browse();
     } 
 }

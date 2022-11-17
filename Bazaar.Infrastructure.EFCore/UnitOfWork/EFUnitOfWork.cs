@@ -9,7 +9,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        public BazaarDBContext Context { get; } = new();
+        public BazaarDBContext _bazaarDbContext;
 
         private IGenericRepository<Ad> adRepository;
         private IGenericRepository<Image> imageRepository;
@@ -18,9 +18,9 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
         private IGenericRepository<Tag> tagRepository;
         private IGenericRepository<User> userRepository;
 
-        public EFUnitOfWork(BazaarDBContext dbContext)
+        public EFUnitOfWork(BazaarDBContext bazaarDbContext)
         {
-            Context = dbContext;
+            _bazaarDbContext = bazaarDbContext;
         }
 
         public IGenericRepository<Ad> AdRepository
@@ -29,7 +29,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.adRepository == null)
                 {
-                    this.adRepository = new EFGenericRepository<Ad>(Context);
+                    this.adRepository = new EFGenericRepository<Ad>(_bazaarDbContext);
                 }
                 return adRepository;
             }
@@ -41,7 +41,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.imageRepository == null)
                 {
-                    this.imageRepository = new EFGenericRepository<Image>(Context);
+                    this.imageRepository = new EFGenericRepository<Image>(_bazaarDbContext);
                 }
                 return imageRepository;
             }
@@ -53,7 +53,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.reactionRepository == null)
                 {
-                    this.reactionRepository = new EFGenericRepository<Reaction>(Context);
+                    this.reactionRepository = new EFGenericRepository<Reaction>(_bazaarDbContext);
                 }
                 return reactionRepository;
             }
@@ -65,7 +65,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.reviewRepository == null)
                 {
-                    this.reviewRepository = new EFGenericRepository<Review>(Context);
+                    this.reviewRepository = new EFGenericRepository<Review>(_bazaarDbContext);
                 }
                 return reviewRepository;
             }
@@ -77,7 +77,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.tagRepository == null)
                 {
-                    this.tagRepository = new EFGenericRepository<Tag>(Context);
+                    this.tagRepository = new EFGenericRepository<Tag>(_bazaarDbContext);
                 }
                 return tagRepository;
             }
@@ -89,7 +89,7 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
             {
                 if (this.userRepository == null)
                 {
-                    this.userRepository = new EFGenericRepository<User>(Context);
+                    this.userRepository = new EFGenericRepository<User>(_bazaarDbContext);
                 }
                 return userRepository;
             }
@@ -97,12 +97,12 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
 
         public async Task CommitAsync()
         {
-            await Context.SaveChangesAsync();
+            await _bazaarDbContext.SaveChangesAsync();
         }
 
         public async ValueTask DisposeAsync()
         {
-            await Context.DisposeAsync();
+            await _bazaarDbContext.DisposeAsync();
         }
     }
 }

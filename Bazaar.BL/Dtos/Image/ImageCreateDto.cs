@@ -11,6 +11,5 @@ namespace Bazaar.BL.Dtos.Image
     {
         public string Title { get; set; } = null!;
         public string Url { get; set; } = null!;
-        public AdDto Ad { get; set; } = null!;
     }
 }

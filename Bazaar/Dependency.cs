@@ -9,6 +9,9 @@ using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Images;
 using Bazaar.BL.Services.Users;
 using Bazaar.BL.Services;
+using Bazaar.DAL.Data;
+using Bazaar.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bazaar
 {
@@ -29,11 +32,17 @@ namespace Bazaar
         {
             var services = new ServiceCollection();
 
-            services.AddScoped<IBazaarFacade,BazaarFacade>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITagService, TagService>();
-            services.AddScoped<IImageService, ImageService>();
-            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+            services.AddSingleton<Func<BazaarDBContext>>(() => new BazaarDBContext(new DbContextOptions<BazaarDBContext>()));
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(EFGenericRepository<>)); 
+            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+           
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITagService, TagService>();
+            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IImageService, ImageService>();
+
+            services.AddTransient<IAdFacade, AdFacade>();
 
             return services.BuildServiceProvider();
         }

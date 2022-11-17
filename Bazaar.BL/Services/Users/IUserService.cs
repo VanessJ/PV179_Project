@@ -15,7 +15,6 @@ namespace Bazaar.BL.Services.Users
     public interface IUserService : ICRUDService
     {
         public Task<IEnumerable<UserListDto>> GetUserByNameAsync(string userName);
-        public Task<IEnumerable<AdDto>> GetAdsOfUser(Guid id);
 
         public Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto);
     }

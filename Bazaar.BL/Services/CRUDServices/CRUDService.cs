@@ -55,7 +55,6 @@ namespace Bazaar.BL.Services.CRUDServices
             TEntity entity = _mapper.Map<TEntity>(dto);
 
             await _repository.InsertAsync(entity);
-            await _unitOfWork.CommitAsync();
         }
 
         public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)
@@ -63,13 +62,11 @@ namespace Bazaar.BL.Services.CRUDServices
             TEntity updatedEntity = _mapper.Map<TEntity>(dto);
 
             _repository.Update(updatedEntity);
-            await _unitOfWork.CommitAsync();
         }
 
         public async Task DeleteAsync<Tdto>(Guid id)
         {
             await _repository.DeleteAsync(id);
-            await _unitOfWork.CommitAsync();
         }
 
     }

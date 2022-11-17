@@ -25,12 +25,6 @@ namespace Bazaar.BL.Services
             return await _userQueryObject.ExecuteQueryAsync(new UserFilterDto { ContainsUserName = userName });
         }
 
-        public async Task<IEnumerable<AdDto>> GetAdsOfUser(Guid id)
-        {
-            var user = await GetByIdAsync<UserDto>(id, nameof(User.Ads));
-            return user.Ads;
-        }
-
         public async Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto)
         {
             return await _userQueryObject.ExecuteQueryAsync(filterDto);
