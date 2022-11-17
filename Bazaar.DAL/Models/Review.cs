@@ -17,6 +17,8 @@ namespace Bazaar.DAL.Models
 
         public string? Descritption { get; set; } 
 
+        public DateTime Created { get; set; }
+
 
 
 

@@ -9,6 +9,8 @@ namespace Bazaar.DAL.Models
 
         public int Level { get; set; }
 
+        public bool Banned { get; set; }
+
         [MaxLength(64)]
         public string? FirstName { get; set; }
 

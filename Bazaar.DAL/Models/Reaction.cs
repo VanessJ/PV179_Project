@@ -18,5 +18,7 @@ namespace Bazaar.DAL.Models
 
         public bool Accepted { get; set; }
 
+        public DateTime Created { get; set; }
+
     }
 }
