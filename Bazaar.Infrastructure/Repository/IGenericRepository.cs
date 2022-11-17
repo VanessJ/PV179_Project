@@ -8,7 +8,7 @@ namespace Bazaar.Infrastructure.Repository
 
         Task<TEntity?> GetByIdAsync(Guid id, params string[] includes);
 
-        Task InsertAsync(TEntity entity);
+        Task<Guid> InsertAsync(TEntity entity);
 
         Task DeleteAsync(Guid idToDelete);
 

@@ -50,11 +50,12 @@ namespace Bazaar.BL.Services.CRUDServices
             return _mapper.Map<IEnumerable<Tdto>>(entity);
         }
 
-        public async Task CreateAsync<Tdto>(Tdto dto)
+        public async Task<Guid> CreateAsync<Tdto>(Tdto dto)
         {
             TEntity entity = _mapper.Map<TEntity>(dto);
 
-            await _repository.InsertAsync(entity);
+            var id = await _repository.InsertAsync(entity);
+            return id;
         }
 
         public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)

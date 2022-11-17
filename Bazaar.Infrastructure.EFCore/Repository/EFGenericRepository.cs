@@ -57,9 +57,11 @@ namespace Bazaar.Infrastructure.EFCore.Repository
             return await queryable.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task InsertAsync(TEntity entity)
+        public async Task<Guid> InsertAsync(TEntity entity)
         {
+            entity.Id = Guid.NewGuid();
             await _dbSet.AddAsync(entity);
+            return entity.Id;
         }
 
         public void Update(TEntity entity)

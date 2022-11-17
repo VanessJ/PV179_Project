@@ -13,7 +13,7 @@ namespace Bazaar.BL.Services.CRUDServices
 
         public Task<IEnumerable<Tdto>> GetAllAsync<Tdto>();
 
-        public Task CreateAsync<Tdto>(Tdto dto);
+        public Task<Guid> CreateAsync<Tdto>(Tdto dto);
         public Task UpdateAsync<Tdto>(Guid id, Tdto dto);
         public Task DeleteAsync<Tdto>(Guid id);
     }
