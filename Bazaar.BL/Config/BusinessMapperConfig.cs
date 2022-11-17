@@ -17,7 +17,7 @@ namespace Bazaar.BL.Config
             config.CreateMap<Ad, AdCreateDto>().ReverseMap();
             config.CreateMap<Ad, AdDto>().ReverseMap();
             config.CreateMap<Ad, AdEditDto>().ReverseMap();
-            //config.CreateMap<Ad, AdListDto>().ReverseMap();
+            config.CreateMap<Ad, AdListDto>().ReverseMap();
 
             config.CreateMap<Image, ImageCreateDto>().ReverseMap();
             config.CreateMap<Image, ImageDto>().ReverseMap();
@@ -30,12 +30,12 @@ namespace Bazaar.BL.Config
 
             config.CreateMap<Tag, TagCreateDto>().ReverseMap();
             config.CreateMap<Tag, TagDto>().ReverseMap();
-            //config.CreateMap<Tag, TagListDto>().ReverseMap();
+            config.CreateMap<Tag, TagListDto>().ReverseMap();
 
             config.CreateMap<User, UserCreateDto>().ReverseMap();
             config.CreateMap<User, UserDto>().ReverseMap();
             config.CreateMap<User, UserEditDto>().ReverseMap();
-            //config.CreateMap<User, UserListDto>().ReverseMap();
+            config.CreateMap<User, UserListDto>().ReverseMap();
         }
     }
 }
