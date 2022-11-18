@@ -14,19 +14,22 @@ namespace Bazaar.BL.Facade
     {
         Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto);
 
+        Task<IEnumerable<AdListDto>> FilterAds(AdFilterDto filterDto);
+
         Task<AdDetailDto> AdDetail(Guid id);
+
+        Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 
         Task<AdOwnerDetailDto> AdDetailForOwner(Guid id);
 
-        Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
+        Task SetAsInvalid(Guid id);
 
         Task AcceptAdReaction(Guid reactionId, Guid adId);
 
         Task DeleteAd(Guid id);
 
         Task EditAd(AdEditDto dto);
-
-        Task<IEnumerable<AdListDto>> FilterAds(AdFilterDto filterDto);
+            
         Task Browse();
     } 
 }

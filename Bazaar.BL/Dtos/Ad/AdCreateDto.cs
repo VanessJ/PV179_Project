@@ -21,7 +21,7 @@ namespace Bazaar.BL.Dtos.Ad
 
         public int Price { get; set; }
 
-        public Guid userId;
+        public Guid UserId { get; set; }
 
         public  ICollection<ImageCreateDto> Images { get; set; }
         public ICollection<TagDto> Tags { get; set; }

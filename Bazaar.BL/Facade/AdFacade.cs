@@ -20,16 +20,13 @@ namespace Bazaar.BL.Facade
 {
     public class AdFacade : IAdFacade
     {
-        private readonly IUserService _userService;
         private readonly IAdService _adService;
         private readonly ITagService _tagService;
         private readonly IImageService _imageService;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IReactionService _reactionService;
-        public AdFacade(IUserService userService, IAdService adService, ITagService tagService, IImageService imageService,IReactionService reactionService,
-                        IUnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        public AdFacade(IAdService adService, ITagService tagService, IImageService imageService,IReactionService reactionService, IUnitOfWork unitOfWork)
         {
-            _userService = userService;
             _adService = adService;
             _tagService = tagService;
             _imageService = imageService;
@@ -39,7 +36,7 @@ namespace Bazaar.BL.Facade
 
         public async Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto)
         {
-            adCreateDto.userId = userId;
+            adCreateDto.UserId = userId;
 
             if (adCreateDto.Tags == null && tagIdS.Count() != 0)
             {
@@ -67,7 +64,7 @@ namespace Bazaar.BL.Facade
                 adCreateDto.Images.Add(imageCreateDto);
             }
             
-             await _adService.CreateAsync<AdCreateDto>(adCreateDto);
+            await _adService.CreateAsync<AdCreateDto>(adCreateDto);
             await _unitOfWork.CommitAsync();
         }
 
