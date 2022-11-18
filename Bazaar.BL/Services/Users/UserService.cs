@@ -20,10 +20,7 @@ namespace Bazaar.BL.Services
             _userQueryObject = userQueryObject;
         }
 
-        public async Task<IEnumerable<UserListDto>> GetUserByNameAsync(string userName)
-        {
-            return await _userQueryObject.ExecuteQueryAsync(new UserFilterDto { ContainsUserName = userName });
-        }
+
 
         public async Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto)
         {

@@ -13,11 +13,21 @@ namespace Bazaar.BL.QueryObjects
         {
             if (!string.IsNullOrWhiteSpace(filter_dto.ContainsUserName))
             {
-                return query.Filter(u => u.UserName.Equals(filter_dto.ContainsUserName));
+                query.Filter(u => u.UserName.Equals(filter_dto.ContainsUserName));
             }
             if (!string.IsNullOrWhiteSpace(filter_dto.LikeUserName))
             {
-                return query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName));
+                query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName));
+            }
+
+            if (filter_dto.Banned)
+            {
+                query.Filter(u => u.Banned);
+            }
+
+            else
+            {
+                query.Filter(u => u.Banned!);
             }
 
             return query;

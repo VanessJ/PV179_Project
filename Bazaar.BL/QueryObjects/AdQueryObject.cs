@@ -14,26 +14,51 @@ namespace Bazaar.BL.QueryObjects
         {
             if (!string.IsNullOrWhiteSpace(filterDto.ContainsTitleName))
             {
-                return query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName));
+                query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName));
             }
             if (!string.IsNullOrWhiteSpace(filterDto.LikeTitleName))
             {
-                return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
+                query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
             }
 
             if (!string.IsNullOrWhiteSpace(filterDto.ContainsInDescription))
             {
-                return query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription));
+                query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription));
             }
             if (!(!filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
             {
-                return query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
+                query.Filter(a => a.UserId == filterDto.UserId);
             }
 
             if (!(!filterDto.TagNames.Any() || filterDto.TagNames == null))
             {
-                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
+                query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
             }
+
+            if (filterDto.MaxPrice > 0)
+            {
+                query.Filter(a => a.Price < filterDto.MaxPrice);
+            }
+
+            if (filterDto.MinPrice < 0)
+            {
+                query.Filter(a => a.Price > filterDto.MinPrice);
+            }
+
+            if (filterDto.IsValid)
+            {
+                query.Filter((a => a.IsValid));
+            }
+            
+            if (filterDto.IsOffer)
+            {
+                query.Filter((a => a.IsOffer));
+            }
+            else
+            {
+                query.Filter(a => a.IsOffer!);
+            }
+            
 
             return query;
         }

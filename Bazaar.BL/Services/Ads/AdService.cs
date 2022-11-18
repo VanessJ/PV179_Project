@@ -17,19 +17,25 @@ namespace Bazaar.BL.Services.Ads
             _adQueryObject = adQueryObject;
         }
 
-        public async Task<IEnumerable<AdListDto>> GetAdsByName(string userName)
+        public async Task SetAdAsInvalid(Guid id)
         {
-            return await _adQueryObject.ExecuteQueryAsync(new AdFilterDto { ContainsTitleName = userName });
+            var ad = await GetByIdAsync<AdEditDto>(id);
+            if (ad == null)
+            {
+                throw new ArgumentException();
+            }
+            ad.IsValid = false;
+            await UpdateAsync<AdEditDto>(ad);
         }
 
-        public async Task<IEnumerable<AdListDto>> AdsContainDesctiption(string description)
-        {
-            return await _adQueryObject.ExecuteQueryAsync(new AdFilterDto { ContainsInDescription = description });
-        }
 
         public async Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id)
         {
             var ad = await GetByIdAsync<AdDto>(id, nameof(Ad.Reactions));
+            if (ad == null)
+            {
+                throw new ArgumentException();
+            }
             return ad.Reactions;
         }
 

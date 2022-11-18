@@ -11,5 +11,8 @@ namespace Bazaar.BL.Dtos.User
     {
         public string? ContainsUserName { get; set; }
         public string? LikeUserName { get; set; }
+
+        public bool Banned { get; set; }
+
     }
 }
