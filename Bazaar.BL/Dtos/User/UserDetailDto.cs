@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar.BL.Dtos
+namespace Bazaar.BL.Dtos.User
 {
-    public class UserDto
+    public class UserDetailDto
     {
         public Guid Id { get; set; }
         public string UserName { get; set; } = null!;
 
-        public ICollection<AdDto> Ads { get; set; }
+        public ICollection<AdListDto> Ads { get; set; }
 
         public IEnumerable<ReviewDto> ReviewerIn { get; set; }
         public IEnumerable<ReviewDto> ReviewedIn { get; set; }

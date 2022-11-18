@@ -12,9 +12,9 @@ namespace Bazaar.BL.Dtos.Reaction
     {
         public string? Message { get; set; }
 
-        public UserDto User { get; set; } = null!;
+        public Guid UserId { get; set; }
 
-        public AdDto Ad { get; set; } = null!;
+        public Guid AdId { get; set; } 
 
     }
 }

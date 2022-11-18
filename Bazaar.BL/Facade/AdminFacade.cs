@@ -52,12 +52,6 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task DeleteAd(Guid id)
-        {
-            await _adService.DeleteAsync(id);
-            await _unitOfWork.CommitAsync();
-        }
-
         public async Task DeleteTag(Guid id)
         {
             await _tagService.DeleteAsync(id);

@@ -26,5 +26,26 @@ namespace Bazaar.BL.Services
         {
             return await _userQueryObject.ExecuteQueryAsync(filterDto);
         }
+
+        public async Task<IEnumerable<ReviewDto>> GetReviewsOfUser(Guid id)
+        {
+            var user = await GetByIdAsync<UserDto>(id);
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+            return user.ReviewedIn;
+        }
+
+        public async Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id)
+        {
+            var user = await GetByIdAsync<UserDto>(id);
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+            return user.ReviewerIn;
+        }
+
     }
 }

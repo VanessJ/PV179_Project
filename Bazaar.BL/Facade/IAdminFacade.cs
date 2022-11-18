@@ -16,8 +16,6 @@ namespace Bazaar.BL.Facade
 
         Task DeleteTag(Guid id);
 
-        Task DeleteAd(Guid id);
-
         Task BanUserById(Guid id);
 
         Task BanUserByUserName(string userName);

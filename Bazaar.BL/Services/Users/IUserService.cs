@@ -9,11 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar.BL.Services.CRUDServices;
+using Bazaar.BL.Dtos.Review;
 
 namespace Bazaar.BL.Services.Users
 {
     public interface IUserService : ICRUDService
     {
-        public Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto);
+        Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto);
+
+        Task<IEnumerable<ReviewDto>> GetReviewsOfUser(Guid id);
+
+        Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id);
+
     }
 }

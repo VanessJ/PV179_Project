@@ -122,6 +122,7 @@ namespace Bazaar.BL.Facade
         public async Task EditAd(AdEditDto dto)
         {
             await _adService.UpdateAsync<AdEditDto>(dto);
+            await _unitOfWork.CommitAsync();
         }
 
         public Task Browse()
