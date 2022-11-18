@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bazaar.DAL.Models
 {
@@ -22,9 +23,10 @@ namespace Bazaar.DAL.Models
         [Range(1, int.MaxValue)]
         public int Price { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
-        public virtual User Creator { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual User Creator { get; set; } = null!;
 
         public virtual ICollection<Image> Images { get; set; }
 

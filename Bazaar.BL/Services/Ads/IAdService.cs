@@ -8,8 +8,7 @@ namespace Bazaar.BL.Services.Ads
     public interface IAdService : ICRUDService
     {
         public Task<IEnumerable<AdListDto>> GetAdsByName(string userName);
-        public
-            Task<IEnumerable<AdListDto>> AdsContainDesctiption(string description);
+        public Task<IEnumerable<AdListDto>> AdsContainDesctiption(string description);
 
         public Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 

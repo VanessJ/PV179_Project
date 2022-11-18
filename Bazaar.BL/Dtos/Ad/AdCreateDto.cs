@@ -20,7 +20,8 @@ namespace Bazaar.BL.Dtos.Ad
         public bool IsOffer { get; set; }
 
         public int Price { get; set; }
-        public UserDto Creator { get; set; } = null!;
+
+        public Guid userId;
 
         public  ICollection<ImageCreateDto> Images { get; set; }
         public ICollection<TagDto> Tags { get; set; }

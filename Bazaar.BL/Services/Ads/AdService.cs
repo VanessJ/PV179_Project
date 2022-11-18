@@ -33,26 +33,6 @@ namespace Bazaar.BL.Services.Ads
             return ad.Reactions;
         }
 
-        public async Task AddTagToAdAsync(Guid adId, Guid tagId)
-        {
-
-            var ad = await _repository.GetByIdAsync(adId);
-            var tag = await _unitOfWork.TagRepository.GetByIdAsync(tagId);
-            ad.Tags.Add(tag);
-            _repository.Update(ad);
-            await _unitOfWork.CommitAsync();
-        }
-
-        public async Task AddImageToAdAsync(Guid adId, Guid ImageId)
-        {
-
-            var ad = await _repository.GetByIdAsync(adId);
-            var image = await _unitOfWork.ImageRepository.GetByIdAsync(ImageId);
-            ad.Images.Add(image);
-            _repository.Update(ad);
-            await _unitOfWork.CommitAsync();
-        }
-
         public async Task<IEnumerable<AdListDto>> ExecuteQueryAsync(AdFilterDto filterDto)
         {
             return await _adQueryObject.ExecuteQueryAsync(filterDto);

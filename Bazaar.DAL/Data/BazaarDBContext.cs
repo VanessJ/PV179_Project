@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Bazaar.DAL.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -14,6 +13,7 @@ namespace Bazaar.DAL.Data
         public DbSet<Review> Review { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
+        public BazaarDBContext(){}
         public BazaarDBContext(DbContextOptions<BazaarDBContext> options) : base(options)
         {
         }

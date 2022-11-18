@@ -34,7 +34,12 @@ namespace Bazaar.BL.Facade
 
         public async Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto)
         {
-            adCreateDto.Creator = await _userService.GetByIdAsync<UserDto>(userId);
+            adCreateDto.userId = userId;
+
+            if (adCreateDto.Tags == null && tagIdS.Count() != 0)
+            {
+                adCreateDto.Tags = new List<TagDto>();
+            }
 
             foreach (var tagId in tagIdS)
             {
@@ -42,12 +47,17 @@ namespace Bazaar.BL.Facade
                 adCreateDto.Tags.Add(tagDto);
             }
 
+            if (adCreateDto.Images == null && imageCreateDtos.Count() != 0)
+            {
+                adCreateDto.Images = new List<ImageCreateDto>();
+            }
+
             foreach (var imageCreateDto in imageCreateDtos)
             {
                 adCreateDto.Images.Add(imageCreateDto);
             }
-
-            await _adService.CreateAsync<AdCreateDto>(adCreateDto);
+            
+             await _adService.CreateAsync<AdCreateDto>(adCreateDto);
             await _unitOfWork.CommitAsync();
         }
 
