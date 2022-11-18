@@ -19,11 +19,11 @@ namespace Bazaar.BL.QueryObjects
         {
             if (!string.IsNullOrWhiteSpace(filterDto.ContainsTagName))
             {
-                return query.Filter(t => t.TagName.Equals(filterDto.ContainsTagName));
+                query.Filter(t => t.TagName.Equals(filterDto.ContainsTagName));
             }
             if (!string.IsNullOrWhiteSpace(filterDto.LikeTagName))
             {
-                return query.Filter(t => t.TagName.Contains(filterDto.LikeTagName));
+                query.Filter(t => t.TagName.Contains(filterDto.LikeTagName));
             }
 
             return query;

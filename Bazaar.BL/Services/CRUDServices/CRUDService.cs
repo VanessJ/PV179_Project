@@ -58,14 +58,14 @@ namespace Bazaar.BL.Services.CRUDServices
             return id;
         }
 
-        public async Task UpdateAsync<Tdto>(Guid id, Tdto dto)
+        public async Task UpdateAsync<Tdto>(Tdto dto)
         {
             TEntity updatedEntity = _mapper.Map<TEntity>(dto);
 
             _repository.Update(updatedEntity);
         }
 
-        public async Task DeleteAsync<Tdto>(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             await _repository.DeleteAsync(id);
         }

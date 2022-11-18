@@ -47,7 +47,7 @@ namespace Bazaar.BL.QueryObjects
             var resultQuery = await query.ExecuteAsync();
 
             return _mapper.Map<IEnumerable<TDto>>(resultQuery);
-
+        
         }
     }
 }
