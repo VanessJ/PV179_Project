@@ -14,7 +14,7 @@ namespace Bazaar.BL.QueryObjects
         {
             if (!string.IsNullOrWhiteSpace(filterDto.ContainsTitleName))
             {
-                query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName));
+                query = query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName));
             }
             if (!string.IsNullOrWhiteSpace(filterDto.LikeTitleName))
             {
@@ -25,14 +25,15 @@ namespace Bazaar.BL.QueryObjects
             {
                 query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription));
             }
+
             if (!(!filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
             {
                 query.Filter(a => a.UserId == filterDto.UserId);
             }
 
-            if (!(!filterDto.TagNames.Any() || filterDto.TagNames == null))
+            if (filterDto.TagNames != null)
             {
-                query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
+                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
             }
 
             if (filterDto.MaxPrice > 0)
@@ -40,26 +41,25 @@ namespace Bazaar.BL.QueryObjects
                 query.Filter(a => a.Price < filterDto.MaxPrice);
             }
 
-            if (filterDto.MinPrice < 0)
+            if (filterDto.MinPrice > 0)
             {
                 query.Filter(a => a.Price > filterDto.MinPrice);
             }
 
-            if (filterDto.IsValid)
+            if (filterDto.OnlyValid)
             {
                 query.Filter((a => a.IsValid));
             }
             
-            if (filterDto.IsOffer)
+            if (filterDto.OnlyOffer)
             {
                 query.Filter((a => a.IsOffer));
             }
-            else
+            if (filterDto.OnlyDemand)
             {
-                query.Filter(a => a.IsOffer!);
+                query.Filter(a => !a.IsOffer);
             }
             
-
             return query;
         }
     }

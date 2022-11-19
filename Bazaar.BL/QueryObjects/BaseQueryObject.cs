@@ -36,12 +36,12 @@ namespace Bazaar.BL.QueryObjects
 
             if (!string.IsNullOrWhiteSpace(filterDto.OderCriteria))
             {
-                query.OrderBy(x => EF.Property<object>(x, filterDto.OderCriteria));
+                query.OrderBy(filterDto.OderCriteria);
             }
 
             if (filterDto.RequestedPageNumber.HasValue)
             {
-                query = query.Page(filterDto.RequestedPageNumber.Value, filterDto.PageSize);
+                query.Page(filterDto.RequestedPageNumber.Value, filterDto.PageSize);
             }
 
             var resultQuery = await query.ExecuteAsync();

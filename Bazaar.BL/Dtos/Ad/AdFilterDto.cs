@@ -18,9 +18,11 @@ namespace Bazaar.BL.Dtos.Ad
         public int MinPrice { get; set; } = -1;
         public int MaxPrice { get; set; } = -1;
 
-        public bool IsValid { get; set; }
+        public bool OnlyValid { get; set; } = false; 
 
-        public bool IsOffer { get; set; }
+        public bool OnlyOffer { get; set; } = false;
+
+        public bool OnlyDemand { get; set; } = false;
 
         public string? ContainsInDescription { get; set; }
         public Guid? UserId { get; set; }

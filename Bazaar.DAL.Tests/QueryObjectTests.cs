@@ -152,7 +152,7 @@ namespace EFCore.Tests
             var queryObject = new EFQuery<Ad>(_bazaarDbContext);
             queryObject
                 .Filter(a => !a.IsPremium)
-                .OrderBy(x => x.Title);
+                .OrderBy("Title");
 
             var result = await queryObject.ExecuteAsync();
 
@@ -169,7 +169,7 @@ namespace EFCore.Tests
             queryObject
                 .Filter(x => x.IsValid)
                 .Page(1, 2)
-                .OrderBy(x => x.Description, false);
+                .OrderBy("Description", false);
 
             var result = await queryObject.ExecuteAsync();
 

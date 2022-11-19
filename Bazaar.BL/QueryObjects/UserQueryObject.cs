@@ -20,14 +20,14 @@ namespace Bazaar.BL.QueryObjects
                 query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName));
             }
 
-            if (filter_dto.Banned)
+            if (filter_dto.OnlyBanned)
             {
                 query.Filter(u => u.Banned);
             }
 
-            else
+            if (!filter_dto.OnlyNotBanned)
             {
-                query.Filter(u => u.Banned!);
+                query.Filter(u => !u.Banned);
             }
 
             return query;
