@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar.BL.Dtos;
+using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Tags;
@@ -55,6 +56,14 @@ namespace Bazaar.BL.Facade
         public async Task DeleteTag(Guid id)
         {
             await _tagService.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task DeleteAd(Guid id)
+        {
+            var adDeleteDto = await _adService.GetByIdAsync<AdDeleteDto>(id);
+            adDeleteDto.IsValid = false;
+            await _adService.UpdateAsync(adDeleteDto);
             await _unitOfWork.CommitAsync();
         }
 
