@@ -1,10 +1,12 @@
 ﻿using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
 
 namespace Bazaar.Infrastructure.Query
 {
     public abstract class Query<TEntity> : IQuery<TEntity> where TEntity : class, new()
     {
         protected IQueryable<TEntity> _query;
+
 
         public Query<TEntity> Filter(Expression<Func<TEntity, bool>> predicate)
         {
@@ -18,12 +20,12 @@ namespace Bazaar.Infrastructure.Query
             return this;
         }
 
-        public Query<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> selector, bool ascending = true)
+        public Query<TEntity> OrderBy(string selector, bool ascending = true)
         {
             _query = ascending switch
             {
-                true => _query.OrderBy(selector),
-                false => _query.OrderByDescending(selector)
+                true => _query.OrderBy($"{selector} ASC"),
+                false => _query.OrderBy($"{selector} DESC"),
             };
             return this;
         }
@@ -31,3 +33,4 @@ namespace Bazaar.Infrastructure.Query
         public abstract Task<IEnumerable<TEntity>> ExecuteAsync();
     }
 }
+

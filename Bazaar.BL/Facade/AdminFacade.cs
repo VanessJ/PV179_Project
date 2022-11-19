@@ -84,7 +84,7 @@ namespace Bazaar.BL.Facade
 
         public async Task<IEnumerable<UserListDto>> GetBannedUsers()
         {
-           return await _userService.ExecuteQueryAsync(new UserFilterDto() { Banned = true });
+           return await _userService.ExecuteQueryAsync(new UserFilterDto() { OnlyBanned = true });
         }
     }
 }

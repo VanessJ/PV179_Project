@@ -6,7 +6,7 @@ namespace Bazaar.Infrastructure.Query
     {
         Task<IEnumerable<TEntity>> ExecuteAsync();
         Query<TEntity> Filter(Expression<Func<TEntity, bool>> predicate);
-        Query<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> selector, bool ascending = true);
+        Query<TEntity> OrderBy(string selector, bool ascending = true);
         Query<TEntity> Page(int page, int pageSize);
     }
 }

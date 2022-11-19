@@ -109,6 +109,7 @@ namespace Bazzar.Bl.Tests
             var userService = new UserService(uow, mapper, userQueryObject);
             
             var result = await userService.GetByIdAsync<UserDto>(userId1);
+            var d = await userService.ExecuteQueryAsync(new UserFilterDto() { LikeUserName = "Test"});
 
             Assert.Equal(userId1, result.Id);
             Assert.Equal("TestUser1", result.UserName);
