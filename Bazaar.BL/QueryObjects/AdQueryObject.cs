@@ -2,6 +2,7 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.Ad;
 using AutoMapper;
+using Optional.Unsafe;
 
 
 namespace Bazaar.BL.QueryObjects
@@ -12,28 +13,28 @@ namespace Bazaar.BL.QueryObjects
 
         protected override IQuery<Ad> FilterByWhere(IQuery<Ad> query, AdFilterDto filterDto)
         {
-            if (!string.IsNullOrWhiteSpace(filterDto.ContainsTitleName))
+            if (filterDto.ContainsTitleName.HasValue)
             {
-                query = query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName));
+                query = query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName.ValueOrDefault()));
             }
-            if (!string.IsNullOrWhiteSpace(filterDto.LikeTitleName))
+            if (filterDto.LikeTitleName.HasValue)
             {
-                query.Filter(a => a.Title.Contains(filterDto.LikeTitleName));
-            }
-
-            if (!string.IsNullOrWhiteSpace(filterDto.ContainsInDescription))
-            {
-                query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription));
+                query.Filter(a => a.Title.Contains(filterDto.LikeTitleName.ValueOrDefault()));
             }
 
-            if (!(!filterDto.UserId.HasValue || filterDto.UserId.Value == Guid.Empty))
+            if (filterDto.ContainsInDescription.HasValue)
             {
-                query.Filter(a => a.UserId == filterDto.UserId);
+                query.Filter(a => a.Description.Contains(filterDto.ContainsInDescription.ValueOrDefault()));
             }
 
-            if (filterDto.TagNames != null)
+            if (filterDto.UserId.HasValue)
             {
-                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.Contains(tag.TagName)));
+                query.Filter(a => a.UserId == filterDto.UserId.ValueOrDefault());
+            }
+
+            if (filterDto.TagNames.HasValue)
+            {
+                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
             }
 
             if (filterDto.MaxPrice > 0)

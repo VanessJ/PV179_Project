@@ -11,6 +11,7 @@ using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
+using Optional;
 
 namespace Bazaar.BL.Facade
 {
@@ -47,7 +48,7 @@ namespace Bazaar.BL.Facade
 
         public async Task BanUserByUserName(string userName)
         {
-            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() {ContainsUserName = userName});
+            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() {ContainsUserName = userName.Some()});
             userBanDto.First().Banned = true;
             await _userService.UpdateAsync(userBanDto.First());
             await _unitOfWork.CommitAsync();
@@ -85,7 +86,7 @@ namespace Bazaar.BL.Facade
         }
         public async Task UnBanUserByUserName(string userName)
         {
-            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() { ContainsUserName = userName });
+            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() { ContainsUserName = userName.Some() });
             userBanDto.First().Banned = false;
             await _userService.UpdateAsync(userBanDto.First());
             await _unitOfWork.CommitAsync();

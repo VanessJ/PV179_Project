@@ -7,6 +7,7 @@ using Bazaar.BL.QueryObjects;
 using Bazaar.BL.Services.CRUDServices;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
+using Optional;
 
 namespace Bazaar.BL.Services.Tags
 {
@@ -20,7 +21,7 @@ namespace Bazaar.BL.Services.Tags
         }
         public async Task<IEnumerable<TagListDto>> GetTagsByName(string tagName)
         {
-            return await _tagQueryObject.ExecuteQueryAsync(new TagFilterDto { ContainsTagName = tagName });
+            return await _tagQueryObject.ExecuteQueryAsync(new TagFilterDto { ContainsTagName = tagName.Some() });
         }
 
         public async Task<IEnumerable<TagListDto>> ExecuteQueryAsync(TagFilterDto filterDto)

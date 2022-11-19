@@ -8,6 +8,7 @@ using Bazaar.BL.Dtos.Tag;
 
 using Bazaar.Infrastructure.Query;
 using Bazaar.DAL.Models;
+using Optional.Unsafe;
 
 namespace Bazaar.BL.QueryObjects
 {
@@ -17,13 +18,13 @@ namespace Bazaar.BL.QueryObjects
 
         protected override IQuery<Tag> FilterByWhere(IQuery<Tag> query, TagFilterDto filterDto)
         {
-            if (!string.IsNullOrWhiteSpace(filterDto.ContainsTagName))
+            if (filterDto.ContainsTagName.HasValue)
             {
-                query.Filter(t => t.TagName.Equals(filterDto.ContainsTagName));
+                query.Filter(t => t.TagName.Equals(filterDto.ContainsTagName.ValueOrDefault()));
             }
-            if (!string.IsNullOrWhiteSpace(filterDto.LikeTagName))
+            if (filterDto.LikeTagName.HasValue)
             {
-                query.Filter(t => t.TagName.Contains(filterDto.LikeTagName));
+                query.Filter(t => t.TagName.Contains(filterDto.LikeTagName.ValueOrDefault()));
             }
 
             return query;

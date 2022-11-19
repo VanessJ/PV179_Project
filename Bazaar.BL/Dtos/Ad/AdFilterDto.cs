@@ -12,8 +12,8 @@ namespace Bazaar.BL.Dtos.Ad
 {
     public class AdFilterDto : BaseFilterDto
     {
-        public string? ContainsTitleName { get; set; }
-        public string? LikeTitleName { get; set; }
+        public Option<string> ContainsTitleName { get; set; }
+        public Option<string> LikeTitleName { get; set; }
 
         public int MinPrice { get; set; } = -1;
         public int MaxPrice { get; set; } = -1;
@@ -24,8 +24,8 @@ namespace Bazaar.BL.Dtos.Ad
 
         public bool OnlyDemand { get; set; } = false;
 
-        public string? ContainsInDescription { get; set; }
-        public Guid? UserId { get; set; }
-        public IEnumerable<string> TagNames { get; set; }
+        public Option<string> ContainsInDescription { get; set; }
+        public Option<Guid> UserId { get; set; }
+        public Option<List<string>> TagNames { get; set; }
     }
 }

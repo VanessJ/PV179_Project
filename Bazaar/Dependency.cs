@@ -9,6 +9,9 @@ using Bazaar.BL.Services.Users;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Images;
 using Bazaar.BL.Services;
+using Bazaar.BL.Services.Ads;
+using Bazaar.BL.Services.Reactions;
+using Bazaar.BL.Services.Reviews;
 using Bazaar.DAL.Data;
 using Bazaar.Infrastructure.EFCore.Query;
 using Bazaar.Infrastructure.Query;
@@ -42,13 +45,17 @@ namespace Bazaar
             services.AddTransient(typeof(IQuery<>), typeof(EFQuery<>));
 
             services.AddSingleton<Func<IMapper>>(() => new Mapper(new MapperConfiguration(BusinessMapperConfig.ConfigureMapping)));
-            
+
+            services.AddTransient<IAdService, AdService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITagService, TagService>();
-            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IReactionService, ReactionService>();
+            services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IImageService, ImageService>();
 
             services.AddTransient<IAdFacade, AdFacade>();
+            services.AddTransient<IAdminFacade, AdminFacade>();
+            services.AddTransient<IUserFacade, UserFacade>();
 
             return services.BuildServiceProvider();
         }

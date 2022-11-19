@@ -18,6 +18,7 @@ using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
+using Optional;
 
 namespace Bazzar.Bl.Tests
 {
@@ -109,7 +110,7 @@ namespace Bazzar.Bl.Tests
             var userService = new UserService(uow, mapper, userQueryObject);
             
             var result = await userService.GetByIdAsync<UserDto>(userId1);
-            var d = await userService.ExecuteQueryAsync(new UserFilterDto() { LikeUserName = "Test"});
+            var d = await userService.ExecuteQueryAsync(new UserFilterDto() { LikeUserName = "Test".Some()});
 
             Assert.Equal(userId1, result.Id);
             Assert.Equal("TestUser1", result.UserName);

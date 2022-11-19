@@ -2,6 +2,7 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.User;
 using AutoMapper;
+using Optional.Unsafe;
 
 namespace Bazaar.BL.QueryObjects
 {
@@ -11,13 +12,13 @@ namespace Bazaar.BL.QueryObjects
 
         protected override IQuery<User> FilterByWhere(IQuery<User> query, UserFilterDto filter_dto)
         {
-            if (!string.IsNullOrWhiteSpace(filter_dto.ContainsUserName))
+            if (filter_dto.ContainsUserName.HasValue)
             {
-                query.Filter(u => u.UserName.Equals(filter_dto.ContainsUserName));
+                query.Filter(u => u.UserName.Equals(filter_dto.ContainsUserName.ValueOrDefault()));
             }
-            if (!string.IsNullOrWhiteSpace(filter_dto.LikeUserName))
+            if (filter_dto.LikeUserName.HasValue)
             {
-                query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName));
+                query.Filter(u => u.UserName.Contains(filter_dto.LikeUserName.ValueOrDefault()));
             }
 
             if (filter_dto.OnlyBanned)

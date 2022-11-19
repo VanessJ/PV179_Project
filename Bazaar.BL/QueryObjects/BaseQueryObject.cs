@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Optional.Unsafe;
 
 namespace Bazaar.BL.QueryObjects
 {
@@ -34,14 +34,14 @@ namespace Bazaar.BL.QueryObjects
         {
             var query = FilterByWhere(_query, filterDto);
 
-            if (!string.IsNullOrWhiteSpace(filterDto.OderCriteria))
+            if (filterDto.OderCriteria.HasValue)
             {
-                query.OrderBy(filterDto.OderCriteria);
+                query.OrderBy(filterDto.OderCriteria.ValueOrDefault(), filterDto.OrderAscending.ValueOr(true));
             }
 
-            if (filterDto.RequestedPageNumber.HasValue)
+            if (filterDto.RequestedPageNumber.HasValue && filterDto.PageSize.HasValue)
             {
-                query.Page(filterDto.RequestedPageNumber.Value, filterDto.PageSize);
+                query.Page(filterDto.RequestedPageNumber.ValueOrDefault(), filterDto.PageSize.ValueOrDefault());
             }
 
             var resultQuery = await query.ExecuteAsync();
