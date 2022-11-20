@@ -11,24 +11,24 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace Bazaar.BL.QueryObjects
+namespace Bazaar.BL.QueryObjects.Base
 {
-    public abstract class BaseQueryObject<TDto, TFilter, TEntity, TQuery>
+    public abstract class BaseQueryObject<TDto, TFilter, TEntity, TQuery> : IBaseQueryObject<TDto, TFilter, TEntity, TQuery>
         where TEntity : BaseEntity, new()
         where TFilter : BaseFilterDto
         where TQuery : IQuery<TEntity>
-        
+
     {
         protected readonly IMapper _mapper;
         protected readonly IQuery<TEntity> _query;
- 
+
 
         protected BaseQueryObject(IMapper mapper, TQuery query)
         {
-            this._mapper = mapper;
-            this._query = query;
+            _mapper = mapper;
+            _query = query;
         }
-        protected abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filterDto);
+        public abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filterDto);
 
         public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filterDto)
         {
@@ -47,7 +47,7 @@ namespace Bazaar.BL.QueryObjects
             var resultQuery = await query.ExecuteAsync();
 
             return _mapper.Map<IEnumerable<TDto>>(resultQuery);
-        
+
         }
     }
 }

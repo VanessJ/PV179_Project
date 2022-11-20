@@ -2,15 +2,15 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.Ad;
 using AutoMapper;
+using Bazaar.BL.QueryObjects.Base;
 
-
-namespace Bazaar.BL.QueryObjects
+namespace Bazaar.BL.QueryObjects.Ads
 {
-    public class AdQueryObject : BaseQueryObject<AdListDto, AdFilterDto, Ad, IQuery<Ad>>
+    public class AdQueryObject : BaseQueryObject<AdListDto, AdFilterDto, Ad, IQuery<Ad>>, IAdQueryObject
     {
         public AdQueryObject(IMapper mapper, IQuery<Ad> query) : base(mapper, query) { }
 
-        protected override IQuery<Ad> FilterByWhere(IQuery<Ad> query, AdFilterDto filterDto)
+        public override IQuery<Ad> FilterByWhere(IQuery<Ad> query, AdFilterDto filterDto)
         {
             if (!string.IsNullOrWhiteSpace(filterDto.ContainsTitleName))
             {
@@ -48,18 +48,18 @@ namespace Bazaar.BL.QueryObjects
 
             if (filterDto.OnlyValid)
             {
-                query.Filter((a => a.IsValid));
+                query.Filter(a => a.IsValid);
             }
-            
+
             if (filterDto.OnlyOffer)
             {
-                query.Filter((a => a.IsOffer));
+                query.Filter(a => a.IsOffer);
             }
             if (filterDto.OnlyDemand)
             {
                 query.Filter(a => !a.IsOffer);
             }
-            
+
             return query;
         }
     }

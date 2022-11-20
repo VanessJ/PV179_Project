@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Bazaar.DAL\Bazaar.DAL.csproj" />
     <ProjectReference Include="..\Bazaar.Infrastructure.EFCore\Bazaar.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\Bazaar.Infrastructure\Bazaar.Infrastructure.csproj" />
+    <ProjectReference Include="..\Bazaar\Bazaar.csproj" />
   </ItemGroup>
 
 </Project>

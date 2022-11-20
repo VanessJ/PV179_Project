@@ -6,7 +6,8 @@ using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Bazaar.BL.QueryObjects;
+using Bazaar.BL.QueryObjects.Ads;
+using Bazaar.BL.QueryObjects.Users;
 
 namespace Bazzar.Bl.Tests
 {
@@ -269,7 +270,7 @@ namespace Bazzar.Bl.Tests
             var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
             Assert.Equal(1, result.Count());
-            //Assert.Equal("Predam svoju svokru!", result.First().Title);
+            Assert.Equal("Predam svoju svokru!", result.First().Title);
         }
 
         [Fact]

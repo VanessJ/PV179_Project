@@ -6,7 +6,6 @@ using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
-using Bazaar.BL.QueryObjects;
 using Bazaar.BL.Services;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.DAL.Data;
@@ -18,6 +17,9 @@ using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
+using BazaarDI;
+using System;
+using Bazaar.BL.QueryObjects.Users;
 
 namespace Bazzar.Bl.Tests
 {
@@ -125,7 +127,7 @@ namespace Bazzar.Bl.Tests
             IQuery<User> query = new EFQuery<User>(context);
 
             Mapper mapper = new Mapper(config);
-            UserQueryObject userQueryObject = new UserQueryObject(mapper, query);
+            IUserQueryObject userQueryObject = new UserQueryObject(mapper, query);
             var reviewService = new ReviewService(uow, mapper);
 
             var dto = new ReviewCreateDto() { Descritption = "Super muz", ReviewedId = userId1, ReviewerId = userId2, Score = 5};
@@ -135,6 +137,13 @@ namespace Bazzar.Bl.Tests
             var dto_test = await reviewService.GetByIdAsync<ReviewDto>(review_id, nameof(Review.Reviewer), nameof(Review.Reviewed));
 
             Assert.Equal(dto_test.Reviewed.UserName, "TestUser1");
+        }
+
+        [Fact]
+        public async Task Test3()
+        {
+            
+
 
 
         }

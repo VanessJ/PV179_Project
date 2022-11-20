@@ -2,20 +2,20 @@
 using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.QueryObjects;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 using Bazaar.BL.Dtos;
 using System.Numerics;
 using Bazaar.BL.Services.Users;
 using Bazaar.BL.Services.CRUDServices;
+using Bazaar.BL.QueryObjects.Users;
 
 namespace Bazaar.BL.Services
 {
     public class UserService : CRUDService<User>, IUserService
     {
-        private readonly UserQueryObject _userQueryObject;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, UserQueryObject userQueryObject) : base(unitOfWork, mapper)
+        private readonly IUserQueryObject _userQueryObject;
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, IUserQueryObject userQueryObject) : base(unitOfWork, mapper)
         {
             _userQueryObject = userQueryObject;
         }

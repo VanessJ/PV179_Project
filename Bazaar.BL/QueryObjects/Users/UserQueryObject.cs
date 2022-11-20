@@ -2,14 +2,15 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.User;
 using AutoMapper;
+using Bazaar.BL.QueryObjects.Base;
 
-namespace Bazaar.BL.QueryObjects
+namespace Bazaar.BL.QueryObjects.Users
 {
-    public class UserQueryObject : BaseQueryObject<UserListDto, UserFilterDto, User, IQuery<User>>
+    public class UserQueryObject : BaseQueryObject<UserListDto, UserFilterDto, User, IQuery<User>>, IUserQueryObject
     {
         public UserQueryObject(IMapper mapper, IQuery<User> query) : base(mapper, query) { }
 
-        protected override IQuery<User> FilterByWhere(IQuery<User> query, UserFilterDto filter_dto)
+        public override IQuery<User> FilterByWhere(IQuery<User> query, UserFilterDto filter_dto)
         {
             if (!string.IsNullOrWhiteSpace(filter_dto.ContainsUserName))
             {

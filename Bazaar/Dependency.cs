@@ -14,8 +14,16 @@ using Bazaar.Infrastructure.EFCore.Query;
 using Bazaar.Infrastructure.Query;
 using Bazaar.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Bazaar.BL.Services.Reactions;
+using Bazaar.BL.Services.Reviews;
+using Bazaar.BL.Services.Ads;
+using Bazaar.BL.Dtos.Tag;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Bazaar.BL.QueryObjects.Ads;
+using Bazaar.BL.QueryObjects.Tags;
+using Bazaar.BL.QueryObjects.Users;
 
-namespace Bazaar
+namespace BazaarDI
 {
     public class Dependencies : IDisposable
     {
@@ -41,12 +49,21 @@ namespace Bazaar
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient(typeof(IQuery<>), typeof(EFQuery<>));
 
-            services.AddSingleton<Func<IMapper>>(() => new Mapper(new MapperConfiguration(BusinessMapperConfig.ConfigureMapping)));
-            
+            services.AddAutoMapper(BusinessMapperConfig.ConfigureMapping);
+            //services.AddSingleton<Func<IMapper>>(() => new Mapper(new MapperConfiguration(BusinessMapperConfig.ConfigureMapping)));
+
+
+            services.AddTransient<IUserQueryObject, UserQueryObject>();
+            services.AddTransient<ITagQueryObject, TagQueryObject>();
+            services.AddTransient<IAdQueryObject, AdQueryObject>();
+
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITagService, TagService>();
+            services.AddTransient<IReactionService, ReactionService>();
             services.AddTransient<IImageService, ImageService>();
-            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IReviewService, ReviewService>();
+            services.AddTransient<IAdService, AdService>();
+
 
             services.AddTransient<IAdFacade, AdFacade>();
 
