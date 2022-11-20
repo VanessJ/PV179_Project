@@ -37,7 +37,7 @@ var tagId = Guid.NewGuid();
 
 
 
-unitOfWork.UserRepository.InsertAsync(new User
+await unitOfWork.UserRepository.InsertAsync(new User
 {
     Id = userId,
     UserName = "MISKO",
@@ -48,10 +48,12 @@ unitOfWork.UserRepository.InsertAsync(new User
     PasswordHash = "tajneheslo"
 });
 
-unitOfWork.TagRepository.InsertAsync(new Tag()
+await unitOfWork.TagRepository.InsertAsync(new Tag()
 {
     Id = tagId,
     TagName = "MISKOTAG"
 });
+
+await unitOfWork.CommitAsync();
 
 await facade.AddNewAdAsync(userId, new List<ImageCreateDto>() {new ImageCreateDto() {Title = "HALO", Url = "path"}}, new List<Guid>(){ tagId }, new AdCreateDto() {Title = "Moj novy inzerat"});
