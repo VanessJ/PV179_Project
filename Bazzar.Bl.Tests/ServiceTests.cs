@@ -27,6 +27,9 @@ using System;
 using Bazaar.BL.QueryObjects.Users;
 using Bazaar.BL.Services.Ads;
 using Bazaar.BL.QueryObjects.Ads;
+using Bazaar.BL.Services.Reactions;
+using Bazaar.BL.QueryObjects.Tags;
+using Bazaar.BL.Services.Tags;
 
 namespace Bazzar.Bl.Tests
 {
@@ -36,6 +39,10 @@ namespace Bazzar.Bl.Tests
         private readonly Guid userId1 = Guid.NewGuid();
         private readonly Guid userId2 = Guid.NewGuid();
         private readonly Guid adId1 = Guid.NewGuid();
+        private readonly Guid adId2 = Guid.NewGuid();
+        private readonly Guid tagId1 = Guid.NewGuid();
+        private readonly Guid tagId2 = Guid.NewGuid();
+        private readonly Guid reactionId = Guid.NewGuid();
         private readonly IMapper mapper = new Mapper(new MapperConfiguration(Bazaar.BL.Config.BusinessMapperConfig.ConfigureMapping));
 
         public ServiceTests()
@@ -79,6 +86,29 @@ namespace Bazzar.Bl.Tests
                 }
             );
 
+            var nepotrebneTag = new Tag
+            {
+                Id = tagId1,
+                TagName = "Nepotrebne"
+            };
+
+            var pesTag = new Tag
+            {
+                Id = tagId2,
+                TagName = "Pes"
+            };
+
+            _bazaarDbContext.Tag.Add
+           (
+               pesTag
+           );
+
+            _bazaarDbContext.Tag.Add
+            (
+                nepotrebneTag
+            );
+
+
             _bazaarDbContext.Ad.Add
            (
                new Ad
@@ -91,8 +121,45 @@ namespace Bazzar.Bl.Tests
                    IsValid = true,
                    Price = 100,
                    UserId = userId1,
+                   Tags = new List<Tag>()
+
+                    {
+                        pesTag, nepotrebneTag
+                   }
                }
            );
+
+            _bazaarDbContext.Ad.Add
+(
+           new Ad
+           {
+               Id = adId2,
+               Title = "Bla bla",
+               Description = "Bli bli bli",
+               IsOffer = true,
+               IsPremium = false,
+               IsValid = true,
+               Price = 100,
+               UserId = userId1,
+               Tags = new List<Tag>()
+
+                    {
+                        pesTag
+                   }
+           }
+        );
+
+            _bazaarDbContext.Reaction.Add
+            (
+               new Reaction
+               {
+                   Id = reactionId,
+                   AdId = adId1,
+                   Message = "Chcem tohoto super psa",
+                   Accepted = false,
+                   UserId = userId1
+               }
+            );
 
             _bazaarDbContext.SaveChanges();
         }
@@ -117,7 +184,7 @@ namespace Bazzar.Bl.Tests
 
 
         [Fact]
-        public async Task ReviewCreatedWithCorrectUsernameOfCreator()
+        public async Task ReviewCreatedCreatorCorrectlyMapped()
         {
             var context = new BazaarDBContext(_options);
             IUnitOfWork uow = new EFUnitOfWork(context);
@@ -148,6 +215,43 @@ namespace Bazzar.Bl.Tests
 
             Assert.False(ad.IsValid);
         }
+
+        [Fact]
+        public async Task GetByIdAfterDeleteAdReturnsNull()
+        {
+            var context = new BazaarDBContext(_options);
+            IUnitOfWork uow = new EFUnitOfWork(context);
+            IQuery<Ad> query = new EFQuery<Ad>(context);
+            IAdQueryObject adQueryObject = new AdQueryObject(mapper, query);
+            var ad_service = new AdService(uow, mapper, adQueryObject);
+
+            await ad_service.DeleteAsync(adId1);
+            await uow.CommitAsync();
+            var ad = await ad_service.GetByIdAsync<AdDto>(adId1);
+
+            Assert.Null(ad);
+        }
+
+        [Fact]
+        public async Task ServiceExecutesQueryGetsCorrectResult()
+        {
+            var context = new BazaarDBContext(_options);
+            IUnitOfWork uow = new EFUnitOfWork(context);
+            IQuery<User> query = new EFQuery<User>(context);
+            IUserQueryObject userQueryObject= new UserQueryObject(mapper, query);
+            var tagService = new UserService(uow, mapper, userQueryObject);
+
+            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "FirstName".Some() };
+            var ads = await tagService.ExecuteQueryAsync(user_filter_dto);
+
+
+            Assert.Equal(2, ads.Count());
+            Assert.Equal("AFerko", ads.First().FirstName);
+        }
+
+
+
+
 
 
     }

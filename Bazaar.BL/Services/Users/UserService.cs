@@ -29,7 +29,7 @@ namespace Bazaar.BL.Services
 
         public async Task<IEnumerable<ReviewDto>> GetReviewsOfUser(Guid id)
         {
-            var user = await GetByIdAsync<UserDto>(id);
+            var user = await GetByIdAsync<UserDto>(id, nameof(User.ReviewedIn));
             if (user == null)
             {
                 throw new ArgumentException();
@@ -39,7 +39,7 @@ namespace Bazaar.BL.Services
 
         public async Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id)
         {
-            var user = await GetByIdAsync<UserDto>(id);
+            var user = await GetByIdAsync<UserDto>(id, nameof(User.ReviewerIn));
             if (user == null)
             {
                 throw new ArgumentException();

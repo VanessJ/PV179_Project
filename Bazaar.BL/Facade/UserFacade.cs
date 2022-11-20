@@ -21,15 +21,13 @@ namespace Bazaar.BL.Facade
     public class UserFacade : IUserFacade
     {
         private readonly IUserService _userService;
-        private readonly IReactionService _reactionService;
         private readonly IReviewService _reviewService;
         private readonly IUnitOfWork _unitOfWork;
 
 
-        UserFacade(IUserService userUserService, IReactionService reactionService, IReviewService reviewService, IUnitOfWork unitOfWork)
+        UserFacade(IUserService userUserService, IReviewService reviewService, IUnitOfWork unitOfWork)
         {
             _userService = userUserService;
-            _reactionService = reactionService;
             _reviewService = reviewService;
             _unitOfWork = unitOfWork;
         }
