@@ -108,7 +108,7 @@ namespace Bazzar.Bl.Tests
         [Fact]
         public async Task AdFacadeReturnsCorrectResultOfQeuery()
         {
-            var ImageServiceMockInstance = new Mock<IImageService>(MockBehavior.Loose).Object;
+            var imageServiceMockInstance = new Mock<IImageService>(MockBehavior.Loose).Object;
             var tagServiceMockInstance = new Mock<ITagService>(MockBehavior.Loose).Object;
             var reactionServiceMockInstance = new Mock<IReactionService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
@@ -117,23 +117,23 @@ namespace Bazzar.Bl.Tests
             adServiceMock.Setup(x => x.ExecuteQueryAsync(It.IsAny<AdFilterDto>())).ReturnsAsync(adList);
             var adServiceMockInstance = adServiceMock.Object;
 
-            IAdFacade adFacade = new AdFacade(adServiceMockInstance, tagServiceMockInstance, ImageServiceMockInstance, reactionServiceMockInstance, unitOfWorkInstance);
-            var filtered_ads = await adFacade.FilterAds(new AdFilterDto() { OnlyOffer = true });
-            Assert.Equal(3, filtered_ads.Count());
-            Assert.Equal("Predam psa", filtered_ads.First().Title);
+            IAdFacade adFacade = new AdFacade(adServiceMockInstance, tagServiceMockInstance, imageServiceMockInstance, reactionServiceMockInstance, unitOfWorkInstance);
+            var filteredAds = await adFacade.FilterAds(new AdFilterDto() { OnlyOffer = true });
+            Assert.Equal(3, filteredAds.Count());
+            Assert.Equal("Predam psa", filteredAds.First().Title);
         }
 
         [Fact]
         public async Task UserFacadeReturnsCorrectUserDetail()
         {
-            var ReviewServiceInstance = new Mock<IReviewService>(MockBehavior.Loose).Object;
+            var reviewServiceInstance = new Mock<IReviewService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
 
             var userService = new Mock<IUserService>(MockBehavior.Loose);
             userService.Setup(x => x.GetByIdAsync<UserProfileDetailDto>(It.IsAny<Guid>())).ReturnsAsync(userDetail);
             var userServiceInstance = userService.Object;
 
-            IUserFacade userFacade = new UserFacade(userServiceInstance, ReviewServiceInstance, unitOfWorkInstance);
+            IUserFacade userFacade = new UserFacade(userServiceInstance, reviewServiceInstance, unitOfWorkInstance);
             var detail = await userFacade.GetUserProfileDetail(userId);
             Assert.Equal("Ferko", detail.UserName);
             Assert.Equal("Velky", detail.LastName);
