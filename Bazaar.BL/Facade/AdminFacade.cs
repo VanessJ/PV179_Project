@@ -22,7 +22,7 @@ namespace Bazaar.BL.Facade
         private readonly IAdService _adService;
         private readonly IUnitOfWork _unitOfWork;
 
-        AdminFacade(IUserService userUserService, ITagService tagService, IAdService adService, IUnitOfWork unitOfWork)
+        public AdminFacade(IUserService userUserService, ITagService tagService, IAdService adService, IUnitOfWork unitOfWork)
         {
             _userService = userUserService;
             _tagService = tagService;

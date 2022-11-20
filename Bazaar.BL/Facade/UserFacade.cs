@@ -25,7 +25,7 @@ namespace Bazaar.BL.Facade
         private readonly IUnitOfWork _unitOfWork;
 
 
-        UserFacade(IUserService userUserService, IReviewService reviewService, IUnitOfWork unitOfWork)
+        public UserFacade(IUserService userUserService, IReviewService reviewService, IUnitOfWork unitOfWork)
         {
             _userService = userUserService;
             _reviewService = reviewService;
@@ -49,9 +49,9 @@ namespace Bazaar.BL.Facade
             throw new NotImplementedException();
         }
 
-        public async Task<UserProfileDetail> GetUserProfileDetail(Guid id)
+        public async Task<UserProfileDetailDto> GetUserProfileDetail(Guid id)
         {
-            var user = await _userService.GetByIdAsync<UserProfileDetail>(id);
+            var user = await _userService.GetByIdAsync<UserProfileDetailDto>(id);
             if (user == null)
             {
                 throw new ArgumentException();

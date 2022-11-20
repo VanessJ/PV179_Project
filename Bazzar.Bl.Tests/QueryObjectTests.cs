@@ -67,7 +67,7 @@ namespace Bazzar.Bl.Tests
                 new User
                 {
                     Id = userId2,
-                    UserName = "TestUser2",
+                    UserName = "ATestUser2",
                     FirstName = "AFerko",
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
@@ -233,11 +233,11 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "FirstName".Some()};
+            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "UserName".Some()};
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(2, result.Count());
-            Assert.Equal("AFerko", result.First().FirstName);
+            Assert.Equal("ATestUser2", result.First().UserName);
         }
 
         [Fact]
@@ -252,7 +252,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1".Some(), OderCriteria = "FirstName".Some() };
+            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1".Some(), OderCriteria = "Username".Some() };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(1, result.Count());

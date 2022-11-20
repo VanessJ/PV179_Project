@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Dtos.User
 {
-    public class UserProfileDetail
+    public class UserProfileDetailDto
     {
         public Guid Id { get; set; }
         public string UserName { get; set; } = null!;
