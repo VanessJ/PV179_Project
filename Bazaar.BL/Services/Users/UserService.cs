@@ -9,6 +9,8 @@ using System.Numerics;
 using Bazaar.BL.Services.Users;
 using Bazaar.BL.Services.CRUDServices;
 using Bazaar.BL.QueryObjects.Users;
+using System.Security.Cryptography.X509Certificates;
+using Optional;
 
 namespace Bazaar.BL.Services
 {
@@ -47,5 +49,10 @@ namespace Bazaar.BL.Services
             return user.ReviewerIn;
         }
 
+        public async Task<bool> IsUsernameTaken(string username)
+        {
+            var users = await ExecuteQueryAsync(new UserFilterDto { ContainsUserName = username.Some() });
+            return (users == null);
+        }
     }
 }
