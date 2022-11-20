@@ -25,41 +25,20 @@ using Optional;
 using BazaarDI;
 using System;
 using Bazaar.BL.QueryObjects.Users;
+using Bazaar.BL.Services.Ads;
+using Bazaar.BL.QueryObjects.Ads;
 
 namespace Bazzar.Bl.Tests
 {
-    public class UserServiceTests
+    public class ServiceTests
     {
         private DbContextOptions<BazaarDBContext> _options;
         private readonly Guid userId1 = Guid.NewGuid();
         private readonly Guid userId2 = Guid.NewGuid();
-        private readonly AutoMapper.MapperConfiguration config = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Ad, AdCreateDto>().ReverseMap();
-            cfg.CreateMap<Ad, AdDto>().ReverseMap();
-            cfg.CreateMap<Ad, AdEditDto>().ReverseMap();
-            cfg.CreateMap<Ad, AdListDto>().ReverseMap();
+        private readonly Guid adId1 = Guid.NewGuid();
+        private readonly IMapper mapper = new Mapper(new MapperConfiguration(Bazaar.BL.Config.BusinessMapperConfig.ConfigureMapping));
 
-            cfg.CreateMap<Image, ImageCreateDto>().ReverseMap();
-            cfg.CreateMap<Image, ImageDto>().ReverseMap();
-
-            cfg.CreateMap<Reaction, ReactionCreateDto>().ReverseMap();
-            cfg.CreateMap<Reaction, ReactionDto>().ReverseMap();
-
-            cfg.CreateMap<Review, ReviewCreateDto>().ReverseMap();
-            cfg.CreateMap<Review, ReviewDto>().ReverseMap();
-
-            cfg.CreateMap<Tag, TagCreateDto>().ReverseMap();
-            cfg.CreateMap<Tag, TagDto>().ReverseMap();
-            cfg.CreateMap<Tag, TagListDto>().ReverseMap();
-
-            cfg.CreateMap<User, UserCreateDto>().ReverseMap();
-            cfg.CreateMap<User, UserDto>().ReverseMap();
-            cfg.CreateMap<User, UserEditDto>().ReverseMap();
-            cfg.CreateMap<User, UserListDto>().ReverseMap();
-        });
-
-        public UserServiceTests()
+        public ServiceTests()
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
@@ -99,22 +78,36 @@ namespace Bazzar.Bl.Tests
                     PasswordHash = "supertajneheslo"
                 }
             );
-            
+
+            _bazaarDbContext.Ad.Add
+           (
+               new Ad
+               {
+                   Id = adId1,
+                   Title = "Predam psa",
+                   Description = "Je velmi zlata, zbavte ma jej, prosim",
+                   IsOffer = true,
+                   IsPremium = false,
+                   IsValid = true,
+                   Price = 100,
+                   UserId = userId1,
+               }
+           );
+
             _bazaarDbContext.SaveChanges();
         }
 
 
         [Fact]
-        public async Task GetUserTest()
+        public async Task GetUserReturnsCorrectUserName()
         {
             var context = new BazaarDBContext(_options);
             IUnitOfWork uow = new EFUnitOfWork(context);
             IQuery<User> query = new EFQuery<User>(context);
-
-            Mapper mapper = new Mapper(config);
             UserQueryObject userQueryObject = new UserQueryObject(mapper, query);
             var userService = new UserService(uow, mapper, userQueryObject);
             
+
             var result = await userService.GetByIdAsync<UserDto>(userId1);
             var d = await userService.ExecuteQueryAsync(new UserFilterDto() { LikeUserName = "Test".Some()});
 
@@ -123,16 +116,12 @@ namespace Bazzar.Bl.Tests
         }
 
 
-        //random test na otestovanie mapping vztahov, potom to dam prec
         [Fact]
-        public async Task Test2()
+        public async Task ReviewCreatedWithCorrectUsernameOfCreator()
         {
             var context = new BazaarDBContext(_options);
             IUnitOfWork uow = new EFUnitOfWork(context);
             IQuery<User> query = new EFQuery<User>(context);
-
-            Mapper mapper = new Mapper(config);
-            IUserQueryObject userQueryObject = new UserQueryObject(mapper, query);
             var reviewService = new ReviewService(uow, mapper);
 
             var dto = new ReviewCreateDto() { Descritption = "Super muz", ReviewedId = userId1, ReviewerId = userId2, Score = 5};
@@ -141,16 +130,25 @@ namespace Bazzar.Bl.Tests
 
             var dto_test = await reviewService.GetByIdAsync<ReviewDto>(review_id, nameof(Review.Reviewer), nameof(Review.Reviewed));
 
-            Assert.Equal(dto_test.Reviewed.UserName, "TestUser1");
+            Assert.Equal("TestUser1", dto_test.Reviewed.UserName);
         }
+
 
         [Fact]
-        public async Task Test3()
+        public async Task SetAdAsInvalidSetsAdAsInvalid()
         {
-            
+            var context = new BazaarDBContext(_options);
+            IUnitOfWork uow = new EFUnitOfWork(context);
+            IQuery<Ad> query = new EFQuery<Ad>(context);
+            IAdQueryObject adQueryObject = new AdQueryObject(mapper, query);
+            var ad_service = new AdService(uow, mapper, adQueryObject);
 
+            await ad_service.SetAdAsInvalid(adId1);
+            var ad = await ad_service.GetByIdAsync<AdDto>(adId1);
 
-
+            Assert.False(ad.IsValid);
         }
+
+
     }
 }

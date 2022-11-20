@@ -66,8 +66,8 @@ namespace Bazaar.Infrastructure.EFCore.Repository
 
         public void Update(TEntity entity)
         {
-            _dbSet.Attach(entity);
-            _dbContext.Entry(entity).State = EntityState.Modified;
+            var entityToUpdat = _dbContext.Set<TEntity>().Find(entity.Id);
+            _dbContext.Entry(entityToUpdat).CurrentValues.SetValues(entity);
         }
 
         public async Task SaveAsync()

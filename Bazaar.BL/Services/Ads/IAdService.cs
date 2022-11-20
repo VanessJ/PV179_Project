@@ -7,11 +7,11 @@ namespace Bazaar.BL.Services.Ads
 {
     public interface IAdService : ICRUDService
     {
-        public Task SetAdAsInvalid(Guid id);
+        Task SetAdAsInvalid(Guid id);
 
-        public Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
+        Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 
-        public Task<IEnumerable<AdListDto>> ExecuteQueryAsync(AdFilterDto filterDto);
+        Task<IEnumerable<AdListDto>> ExecuteQueryAsync(AdFilterDto filterDto);
 
     }
 }
