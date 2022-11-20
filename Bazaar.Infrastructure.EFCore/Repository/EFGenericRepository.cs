@@ -59,7 +59,10 @@ namespace Bazaar.Infrastructure.EFCore.Repository
 
         public async Task<Guid> InsertAsync(TEntity entity)
         {
-            entity.Id = Guid.NewGuid();
+            if (entity.Id == null || entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+            }
             await _dbSet.AddAsync(entity);
             return entity.Id;
         }
