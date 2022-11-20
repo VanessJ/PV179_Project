@@ -21,5 +21,7 @@ namespace Bazaar.BL.Services.Users
 
         Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id);
 
+        Task<bool> IsUsernameTaken(string username);
+
     }
 }

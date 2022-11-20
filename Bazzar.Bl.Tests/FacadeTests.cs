@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Bazaar.BL.Dtos;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
@@ -102,6 +103,22 @@ namespace Bazzar.Bl.Tests
             };
 
             bannedList = new List<UserListDto>() { banned1, banned2 };
+
+        }
+
+        [Fact]
+        public async Task RegisteringUserWithTakenUserNameThrowsException()
+        {
+            var ReviewServiceInstance = new Mock<IReviewService>(MockBehavior.Loose).Object;
+            var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
+
+            var userService = new Mock<IUserService>(MockBehavior.Loose);
+            userService.Setup(x => x.IsUsernameTaken(It.IsAny<string>())).ReturnsAsync(true);
+            userService.Setup(x => x.CreateAsync(It.IsAny<UserCreateDto>())).ReturnsAsync(Guid.NewGuid());
+            var userServiceInstance = userService.Object;
+
+            IUserFacade userFacade = new UserFacade(userServiceInstance, ReviewServiceInstance, unitOfWorkInstance);
+            Assert.ThrowsAsync<ArgumentException>(() => userFacade.RegisterUser(new UserCreateDto { }));
 
         }
 

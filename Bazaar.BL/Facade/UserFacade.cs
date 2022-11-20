@@ -10,6 +10,7 @@ using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
+using Optional;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,13 @@ namespace Bazaar.BL.Facade
 
         public async Task RegisterUser(UserCreateDto createDto)
         {
-            throw new NotImplementedException();
+            if (await _userService.IsUsernameTaken(createDto.UserName))
+            {
+                throw new ArgumentException();
+            }
+
+            var user = await _userService.CreateAsync<UserCreateDto>(createDto);
+            await _unitOfWork.CommitAsync();   
         }
 
         public async Task<UserProfileDetailDto> GetUserProfileDetail(Guid id)
