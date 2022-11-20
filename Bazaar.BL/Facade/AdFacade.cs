@@ -115,7 +115,9 @@ namespace Bazaar.BL.Facade
 
         public async Task DeleteAd(Guid id)
         {
-            await _adService.DeleteAsync(id);
+            var adDeleteDto = await _adService.GetByIdAsync<AdDeleteDto>(id);
+            adDeleteDto.IsValid = false;
+            await _adService.UpdateAsync(adDeleteDto);
             await _unitOfWork.CommitAsync();
         }
 

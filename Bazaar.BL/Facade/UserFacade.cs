@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.BL.Facade
 {
-    public class UserFacade
+    public class UserFacade : IUserFacade
     {
         private readonly IUserService _userService;
         private readonly IReactionService _reactionService;
@@ -92,11 +92,5 @@ namespace Bazaar.BL.Facade
             await _reviewService.CreateAsync<ReactionCreateDto>(reactionCreateDto);
             await _unitOfWork.CommitAsync();
         }
-
-
-
-
-
-
     }
 }

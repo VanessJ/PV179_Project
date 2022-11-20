@@ -6,8 +6,13 @@ using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+<<<<<<< HEAD
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.QueryObjects.Users;
+=======
+using Bazaar.BL.QueryObjects;
+using Optional;
+>>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee
 
 namespace Bazzar.Bl.Tests
 {
@@ -228,7 +233,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser", OderCriteria = "FirstName"};
+            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "FirstName".Some()};
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(2, result.Count());
@@ -247,7 +252,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1", OderCriteria = "FirstName"};
+            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1".Some(), OderCriteria = "FirstName".Some() };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(1, result.Count());
@@ -266,7 +271,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var adQueryObject = new AdQueryObject(mapper, query);
-            var ad_filter_dto = new AdFilterDto() { ContainsTitleName = "Predam svoju svokru!" };
+            var ad_filter_dto = new AdFilterDto() { ContainsTitleName = "Predam svoju svokru!".Some() };
             var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
             Assert.Equal(1, result.Count());
@@ -286,7 +291,7 @@ namespace Bazzar.Bl.Tests
             var mapper = new Mapper(config);
             var adQueryObject = new AdQueryObject(mapper, query);
             var tagNames = new List<string>() { "Pes", "Zviera", "Svokra" };
-            var ad_filter_dto = new AdFilterDto() { TagNames = tagNames, OderCriteria = "Title" };
+            var ad_filter_dto = new AdFilterDto() { TagNames = tagNames.Some(), OderCriteria = "Title".Some() };
             var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
             Assert.Equal(3, result.Count());
