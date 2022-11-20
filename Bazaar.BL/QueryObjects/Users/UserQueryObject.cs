@@ -2,11 +2,10 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.User;
 using AutoMapper;
-<<<<<<< HEAD:Bazaar.BL/QueryObjects/Users/UserQueryObject.cs
 using Bazaar.BL.QueryObjects.Base;
-=======
 using Optional.Unsafe;
->>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee:Bazaar.BL/QueryObjects/UserQueryObject.cs
+using Bazaar.BL.QueryObjects.Base;
+using Optional.Unsafe;
 
 namespace Bazaar.BL.QueryObjects.Users
 {

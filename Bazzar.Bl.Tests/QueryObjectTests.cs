@@ -5,14 +5,14 @@ using Bazaar.DAL.Data;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-<<<<<<< HEAD
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.QueryObjects.Users;
-=======
 using Bazaar.BL.QueryObjects;
 using Optional;
->>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee
+using Bazaar.BL.QueryObjects.Ads;
+using Bazaar.BL.QueryObjects.Users;
+using Optional;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bazzar.Bl.Tests
 {

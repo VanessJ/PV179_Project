@@ -2,11 +2,8 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos.Ad;
 using AutoMapper;
-<<<<<<< HEAD:Bazaar.BL/QueryObjects/Ads/AdQueryObject.cs
 using Bazaar.BL.QueryObjects.Base;
-=======
 using Optional.Unsafe;
->>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee:Bazaar.BL/QueryObjects/AdQueryObject.cs
 
 namespace Bazaar.BL.QueryObjects.Ads
 {

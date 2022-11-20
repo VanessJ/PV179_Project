@@ -17,13 +17,14 @@ using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
-<<<<<<< HEAD
 using BazaarDI;
 using System;
 using Bazaar.BL.QueryObjects.Users;
-=======
 using Optional;
->>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee
+using Optional;
+using BazaarDI;
+using System;
+using Bazaar.BL.QueryObjects.Users;
 
 namespace Bazzar.Bl.Tests
 {

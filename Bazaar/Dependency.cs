@@ -52,7 +52,6 @@ namespace BazaarDI
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient(typeof(IQuery<>), typeof(EFQuery<>));
 
-<<<<<<< HEAD
             services.AddAutoMapper(BusinessMapperConfig.ConfigureMapping);
             //services.AddSingleton<Func<IMapper>>(() => new Mapper(new MapperConfiguration(BusinessMapperConfig.ConfigureMapping)));
 
@@ -65,19 +64,11 @@ namespace BazaarDI
             services.AddTransient<ITagService, TagService>();
             services.AddTransient<IReactionService, ReactionService>();
             services.AddTransient<IImageService, ImageService>();
-            services.AddTransient<IReviewService, ReviewService>();
-            services.AddTransient<IAdService, AdService>();
-
-=======
-            services.AddSingleton<Func<IMapper>>(() => new Mapper(new MapperConfiguration(BusinessMapperConfig.ConfigureMapping)));
-
-            services.AddTransient<IAdService, AdService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ITagService, TagService>();
             services.AddTransient<IReactionService, ReactionService>();
-            services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IImageService, ImageService>();
->>>>>>> 04a01617bf450eaf01d6e7a0c358d2c206072cee
+            services.AddTransient<IReviewService, ReviewService>();
+            services.AddTransient<IAdService, AdService>();
+
 
             services.AddTransient<IAdFacade, AdFacade>();
             services.AddTransient<IAdminFacade, AdminFacade>();

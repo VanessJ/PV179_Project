@@ -12,6 +12,6 @@ namespace Bazaar.BL.QueryObjects.Ads
 {
     public interface IAdQueryObject : IBaseQueryObject<AdListDto, AdFilterDto, Ad, IQuery<Ad>>
     {
-        public IQuery<Ad> FilterByWhere(IQuery<Ad> query, AdFilterDto filterDto);
+        IQuery<Ad> FilterByWhere(IQuery<Ad> query, AdFilterDto filterDto);
     }
 }
