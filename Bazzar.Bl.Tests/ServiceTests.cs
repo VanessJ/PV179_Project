@@ -17,12 +17,10 @@ using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Headers;
-using BazaarDI;
 using System;
 using Bazaar.BL.QueryObjects.Users;
 using Optional;
 using Optional;
-using BazaarDI;
 using System;
 using Bazaar.BL.QueryObjects.Users;
 using Bazaar.BL.Services.Ads;
@@ -30,6 +28,7 @@ using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.QueryObjects.Tags;
 using Bazaar.BL.Services.Tags;
+using Bazaar.BL.Config;
 
 namespace Bazzar.Bl.Tests
 {
@@ -43,7 +42,7 @@ namespace Bazzar.Bl.Tests
         private readonly Guid tagId1 = Guid.NewGuid();
         private readonly Guid tagId2 = Guid.NewGuid();
         private readonly Guid reactionId = Guid.NewGuid();
-        private readonly IMapper mapper = new Mapper(new MapperConfiguration(Bazaar.BL.Config.BusinessMapperConfig.ConfigureMapping));
+        private readonly IMapper mapper = new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<BusinessMapperConfig>()));
 
         public ServiceTests()
         {

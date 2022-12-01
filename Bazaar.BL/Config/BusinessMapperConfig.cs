@@ -10,32 +10,32 @@ using Bazaar.BL.Dtos.User;
 
 namespace Bazaar.BL.Config
 {
-    public class BusinessMapperConfig
+    public class BusinessMapperConfig : Profile
     {
-        public static void ConfigureMapping(IMapperConfigurationExpression config)
+        public BusinessMapperConfig()
         {
-            config.CreateMap<Ad, AdCreateDto>().ReverseMap();
-            config.CreateMap<Ad, AdDto>().ReverseMap();
-            config.CreateMap<Ad, AdEditDto>().ReverseMap();
-            config.CreateMap<Ad, AdListDto>().ReverseMap();
+            CreateMap<Ad, AdCreateDto>().ReverseMap();
+            CreateMap<Ad, AdDto>().ReverseMap();
+            CreateMap<Ad, AdEditDto>().ReverseMap();
+            CreateMap<Ad, AdListDto>().ReverseMap();
 
-            config.CreateMap<Image, ImageCreateDto>().ReverseMap();
-            config.CreateMap<Image, ImageDto>().ReverseMap();
+            CreateMap<Image, ImageCreateDto>().ReverseMap();
+            CreateMap<Image, ImageDto>().ReverseMap();
 
-            config.CreateMap<Reaction, ReactionCreateDto>().ReverseMap();
-            config.CreateMap<Reaction, ReactionDto>().ReverseMap();
+            CreateMap<Reaction, ReactionCreateDto>().ReverseMap();
+            CreateMap<Reaction, ReactionDto>().ReverseMap();
 
-            config.CreateMap<Review, ReviewCreateDto>().ReverseMap();
-            config.CreateMap<Review, ReviewDto>().ReverseMap();
+            CreateMap<Review, ReviewCreateDto>().ReverseMap();
+            CreateMap<Review, ReviewDto>().ReverseMap();
 
-            config.CreateMap<Tag, TagCreateDto>().ReverseMap();
-            config.CreateMap<Tag, TagDto>().ReverseMap();
-            config.CreateMap<Tag, TagListDto>().ReverseMap();
+            CreateMap<Tag, TagCreateDto>().ReverseMap();
+            CreateMap<Tag, TagDto>().ReverseMap();
+            CreateMap<Tag, TagListDto>().ReverseMap();
 
-            config.CreateMap<User, UserCreateDto>().ReverseMap();
-            config.CreateMap<User, UserDto>().ReverseMap();
-            config.CreateMap<User, UserEditDto>().ReverseMap();
-            config.CreateMap<User, UserListDto>().ReverseMap();
+            CreateMap<User, UserCreateDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserEditDto>().ReverseMap();
+            CreateMap<User, UserListDto>().ReverseMap();
         }
     }
 }

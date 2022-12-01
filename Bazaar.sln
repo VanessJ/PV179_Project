@@ -15,10 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.BL", "Bazaar.BL\Baza
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazzar.Bl.Tests", "Bazzar.Bl.Tests\Bazzar.Bl.Tests.csproj", "{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar", "Bazaar\Bazaar.csproj", "{6DDEE60B-65D5-4A3B-A17E-F46CE17EBF09}"
-	ProjectSection(ProjectDependencies) = postProject
-		{89F89EBA-FC54-4B0D-9C71-D317CA096632} = {89F89EBA-FC54-4B0D-9C71-D317CA096632}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.App", "BazaarApp\Bazaar.App.csproj", "{0165B0FD-DB43-45A4-B6F8-A74A44CF7E74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +47,10 @@ Global
 		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD02A2A5-E70B-465E-B3C3-3A2042EEB8B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DDEE60B-65D5-4A3B-A17E-F46CE17EBF09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DDEE60B-65D5-4A3B-A17E-F46CE17EBF09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DDEE60B-65D5-4A3B-A17E-F46CE17EBF09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DDEE60B-65D5-4A3B-A17E-F46CE17EBF09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0165B0FD-DB43-45A4-B6F8-A74A44CF7E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0165B0FD-DB43-45A4-B6F8-A74A44CF7E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0165B0FD-DB43-45A4-B6F8-A74A44CF7E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0165B0FD-DB43-45A4-B6F8-A74A44CF7E74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,7 +51,7 @@ namespace Bazaar.DAL.Tests
         {
             using BazaarDBContext _bazaarDbContext = new BazaarDBContext(_options);
             var unitOfWork = new EFUnitOfWork(_bazaarDbContext);
-            var user = await unitOfWork.UserRepository.GetByIdAsync(userId);
+            var user = await unitOfWork.GetRepository<User>().GetByIdAsync(userId);
             Assert.Equal(userId, user.Id);
         }
     }

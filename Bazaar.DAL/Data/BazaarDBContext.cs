@@ -13,16 +13,26 @@ namespace Bazaar.DAL.Data
         public DbSet<Review> Review { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
+        private readonly IConfigurationBuilder _configurationBuilder;
+
+        //constructor for migrations
         public BazaarDBContext(){}
+        
+        //constructor for tests
         public BazaarDBContext(DbContextOptions<BazaarDBContext> options) : base(options)
         {
+        }
+
+        public BazaarDBContext(IConfigurationBuilder configurationBuilder, DbContextOptions<BazaarDBContext> options) : base(options)
+        {
+            _configurationBuilder = configurationBuilder;
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                IConfiguration config = new ConfigurationBuilder()
+                IConfiguration config = _configurationBuilder
                     .AddJsonFile("appsettings.json")
                     .Build();
                 var settings = config.GetRequiredSection(Settings.SectionName).Get<Settings>();

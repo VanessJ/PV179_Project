@@ -11,88 +11,22 @@ namespace Bazaar.Infrastructure.EFCore.UnitOfWork
     {
         public BazaarDBContext _bazaarDbContext;
 
-        private IGenericRepository<Ad> adRepository;
-        private IGenericRepository<Image> imageRepository;
-        private IGenericRepository<Reaction> reactionRepository;
-        private IGenericRepository<Review> reviewRepository;
-        private IGenericRepository<Tag> tagRepository;
-        private IGenericRepository<User> userRepository;
+        private Dictionary<Type, object> _repositories;
 
         public EFUnitOfWork(BazaarDBContext bazaarDbContext)
         {
             _bazaarDbContext = bazaarDbContext;
+            _repositories = new Dictionary<Type, object>();
         }
 
-        public IGenericRepository<Ad> AdRepository
+        public IGenericRepository<T> GetRepository<T>() where T : BaseEntity
         {
-            get
+            if (!_repositories.ContainsKey(typeof(T)))
             {
-                if (this.adRepository == null)
-                {
-                    this.adRepository = new EFGenericRepository<Ad>(_bazaarDbContext);
-                }
-                return adRepository;
+                _repositories.Add(typeof(T), new EFGenericRepository<T>(_bazaarDbContext));
             }
-        }
 
-        public IGenericRepository<Image> ImageRepository
-        {
-            get
-            {
-                if (this.imageRepository == null)
-                {
-                    this.imageRepository = new EFGenericRepository<Image>(_bazaarDbContext);
-                }
-                return imageRepository;
-            }
-        }
-
-        public IGenericRepository<Reaction> ReactionRepository
-        {
-            get
-            {
-                if (this.reactionRepository == null)
-                {
-                    this.reactionRepository = new EFGenericRepository<Reaction>(_bazaarDbContext);
-                }
-                return reactionRepository;
-            }
-        }
-
-        public IGenericRepository<Review> ReviewRepository
-        {
-            get
-            {
-                if (this.reviewRepository == null)
-                {
-                    this.reviewRepository = new EFGenericRepository<Review>(_bazaarDbContext);
-                }
-                return reviewRepository;
-            }
-        }
-
-        public IGenericRepository<Tag> TagRepository
-        {
-            get
-            {
-                if (this.tagRepository == null)
-                {
-                    this.tagRepository = new EFGenericRepository<Tag>(_bazaarDbContext);
-                }
-                return tagRepository;
-            }
-        }
-
-        public IGenericRepository<User> UserRepository
-        {
-            get
-            {
-                if (this.userRepository == null)
-                {
-                    this.userRepository = new EFGenericRepository<User>(_bazaarDbContext);
-                }
-                return userRepository;
-            }
+            return (EFGenericRepository<T>) _repositories[typeof(T)];
         }
 
         public async Task CommitAsync()

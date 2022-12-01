@@ -16,24 +16,7 @@ namespace Bazaar.BL.Services.CRUDServices
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-
-            var entityName = typeof(TEntity).Name;
-
-            var repositoryInfo = typeof(IUnitOfWork).GetProperty($"{entityName}Repository");
-
-            if (repositoryInfo == null)
-            {
-                throw new ArgumentException();
-            }
-
-            var repository = (IGenericRepository<TEntity>?)repositoryInfo.GetValue(_unitOfWork, null);
-
-            if (repository == null)
-            {
-                throw new ArgumentException();
-            }
-
-            _repository = repository;
+            _repository = unitOfWork.GetRepository<TEntity>();
         }
 
         public async Task<Tdto?> GetByIdAsync<Tdto>(Guid id, params string[] includes)
