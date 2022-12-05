@@ -48,7 +48,7 @@ namespace BazaarDI
             services.AddDbContext<BazaarDBContext>();
             services.AddSingleton<Func<BazaarDBContext>>(() => new BazaarDBContext(new DbContextOptions<BazaarDBContext>()));
 
-            services.AddTransient(typeof(IGenericRepository<>), typeof(EFGenericRepository<>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(EFGenericRepository<>));
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
             services.AddTransient(typeof(IQuery<>), typeof(EFQuery<>));
 

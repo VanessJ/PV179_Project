@@ -56,3 +56,4 @@ await unitOfWork.TagRepository.InsertAsync(new Tag()
 
 await unitOfWork.CommitAsync();
 
+await facade.AddNewAdAsync(userId, new List<ImageCreateDto>() { new ImageCreateDto() { Title = "HALO", Url = "path" } }, new List<Guid>() { tagId }, new AdCreateDto() { Title = "Moj novy inzerat" });

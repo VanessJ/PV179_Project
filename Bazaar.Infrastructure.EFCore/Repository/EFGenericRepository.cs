@@ -64,6 +64,7 @@ namespace Bazaar.Infrastructure.EFCore.Repository
                 entity.Id = Guid.NewGuid();
             }
             await _dbSet.AddAsync(entity);
+
             return entity.Id;
         }
 
