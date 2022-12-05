@@ -25,7 +25,7 @@ namespace Bazaar.BL.Facade
         }
         public async Task AddNewTag(TagCreateDto tagCreateDto)
         {
-            await _userService.CreateAsync<TagCreateDto>(tagCreateDto);
+            await _tagService.CreateAsync<TagCreateDto>(tagCreateDto);
             await _unitOfWork.CommitAsync();
         }
 
