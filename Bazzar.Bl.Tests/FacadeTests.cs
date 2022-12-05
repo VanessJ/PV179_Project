@@ -1,5 +1,4 @@
-﻿using Azure;
-using Bazaar.BL.Dtos;
+﻿using Bazaar.BL.Dtos;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
@@ -9,14 +8,8 @@ using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
-using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazzar.Bl.Tests
 {

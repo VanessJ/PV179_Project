@@ -1,11 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Review;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.BL.Dtos.User
 {

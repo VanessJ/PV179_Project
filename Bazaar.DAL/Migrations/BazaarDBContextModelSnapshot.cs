@@ -77,14 +77,14 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e73c3dc9-9744-4fa6-a40c-788c19893ca3"),
+                            Id = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
                             IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = new Guid("b6aad1d3-a35c-4c3b-8e99-2a34963699fc")
+                            UserId = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c")
                         });
                 });
 
@@ -115,8 +115,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f6504fa4-7d18-4e40-a844-1b9ec88b6a54"),
-                            AdId = new Guid("e73c3dc9-9744-4fa6-a40c-788c19893ca3"),
+                            Id = new Guid("2e44f1f6-19a1-4481-8e32-a5920711f0ae"),
+                            AdId = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
                             Title = "Milovana macka",
                             Url = "\\obrazokmacky.jpg"
                         });
@@ -152,8 +152,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = new Guid("e73c3dc9-9744-4fa6-a40c-788c19893ca3"),
-                            UserId = new Guid("67943a2e-28de-4111-b124-e2811e84fb27"),
+                            AdId = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
+                            UserId = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
                             Accepted = true,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Id = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -190,11 +190,11 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ReviewerId = new Guid("67943a2e-28de-4111-b124-e2811e84fb27"),
-                            ReviewedId = new Guid("b6aad1d3-a35c-4c3b-8e99-2a34963699fc"),
+                            ReviewerId = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
+                            ReviewedId = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c"),
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Descritption = "Krasna macka, 10/10 spokojnost",
-                            Id = new Guid("46e2bd5a-6280-4f7e-8af4-b10e477f38b2"),
+                            Id = new Guid("c738cc1d-8525-41b7-b2b9-5882813ae2d9"),
                             Score = 5
                         });
                 });
@@ -217,12 +217,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("323b300f-e4de-4e29-8b33-47bb6668c78b"),
+                            Id = new Guid("878c72ab-db08-47b6-a3a8-d3e88c2ec697"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("ec77b015-a323-4602-9170-af30de10b89d"),
+                            Id = new Guid("ce48fc8e-c99b-4715-ad80-f0e99c296a58"),
                             TagName = "Sell"
                         });
                 });
@@ -249,14 +249,15 @@ namespace Bazaar.DAL.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Roles")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -272,26 +273,26 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b6aad1d3-a35c-4c3b-8e99-2a34963699fc"),
+                            Id = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c"),
                             Banned = false,
                             Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
                             LastName = "Mrkvicka",
-                            Level = 0,
                             PasswordHash = "tajneheslo",
                             PhoneNumber = "0000000",
+                            Roles = "User",
                             UserName = "TestUser"
                         },
                         new
                         {
-                            Id = new Guid("67943a2e-28de-4111-b124-e2811e84fb27"),
+                            Id = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
                             Banned = false,
                             Email = "ferko@gmailol.com",
                             FirstName = "Ferko",
                             LastName = "Priezviskovy",
-                            Level = 0,
                             PasswordHash = "supertajneheslo",
                             PhoneNumber = "2020040444",
+                            Roles = "User",
                             UserName = "Feri"
                         });
                 });

@@ -7,8 +7,6 @@ namespace Bazaar.DAL.Models
         [MaxLength(64)]
         public string UserName { get; set; }
 
-        public int Level { get; set; }
-
         public bool Banned { get; set; }
 
         [MaxLength(64)]
@@ -22,6 +20,8 @@ namespace Bazaar.DAL.Models
         public string PhoneNumber { get; set; }
 
         public string PasswordHash { get; set; }
+
+        public string Roles { get; set; } = "User";
 
         public virtual ICollection<Ad> Ads { get; set; }
 

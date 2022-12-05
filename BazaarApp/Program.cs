@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Bazaar.DAL.Data;
-using Bazaar.App;
+using Bazaar.App.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 

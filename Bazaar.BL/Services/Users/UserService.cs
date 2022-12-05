@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.User;
-using Bazaar.BL.Dtos.Ad;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 using Bazaar.BL.Dtos;
-using System.Numerics;
 using Bazaar.BL.Services.Users;
 using Bazaar.BL.Services.CRUDServices;
 using Bazaar.BL.QueryObjects.Users;
-using System.Security.Cryptography.X509Certificates;
 using Optional;
 
 namespace Bazaar.BL.Services

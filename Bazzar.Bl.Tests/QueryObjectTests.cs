@@ -7,10 +7,6 @@ using Bazaar.Infrastructure.EFCore.Query;
 using Microsoft.EntityFrameworkCore;
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.QueryObjects.Users;
-using Bazaar.BL.QueryObjects;
-using Optional;
-using Bazaar.BL.QueryObjects.Ads;
-using Bazaar.BL.QueryObjects.Users;
 using Optional;
 using Microsoft.Extensions.DependencyInjection;
 
