@@ -26,11 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bazaar.App\Bazaar.App.csproj" />
     <ProjectReference Include="..\Bazaar.BL\Bazaar.BL.csproj" />
     <ProjectReference Include="..\Bazaar.DAL\Bazaar.DAL.csproj" />
     <ProjectReference Include="..\Bazaar.Infrastructure.EFCore\Bazaar.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\Bazaar.Infrastructure\Bazaar.Infrastructure.csproj" />
-    <ProjectReference Include="..\BazaarApp\Bazaar.App.csproj" />
   </ItemGroup>
 
 </Project>
