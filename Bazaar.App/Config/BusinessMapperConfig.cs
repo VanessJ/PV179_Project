@@ -29,6 +29,7 @@ namespace Bazaar.App.Config
             CreateMap<Review, ReviewDto>().ReverseMap();
 
             CreateMap<Tag, TagCreateDto>().ReverseMap();
+            CreateMap<Tag, TagEditDto>().ReverseMap();
             CreateMap<Tag, TagDto>().ReverseMap();
             CreateMap<Tag, TagListDto>().ReverseMap();
 
