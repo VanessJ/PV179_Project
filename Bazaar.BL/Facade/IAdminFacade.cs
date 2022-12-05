@@ -7,6 +7,8 @@ namespace Bazaar.BL.Facade
     {
         Task AddNewTag(TagCreateDto tagCreateDto);
 
+        Task UpdateTag(TagEditDto tagEditDto);
+
         Task EditTag(TagEditDto tagCreateDto);
 
         Task DeleteTag(Guid id);
