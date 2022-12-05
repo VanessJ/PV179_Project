@@ -8,7 +8,7 @@ using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
 
-namespace Bazaar.BL.Config
+namespace Bazaar.App.Config
 {
     public class BusinessMapperConfig : Profile
     {

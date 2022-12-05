@@ -1,15 +1,6 @@
-﻿using AutoMapper;
-using Bazaar.BL.Dtos.Ad;
+﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Tag;
-using Bazaar.BL.QueryObjects;
 using Bazaar.BL.Services.CRUDServices;
-using Bazaar.DAL.Models;
-using Bazaar.Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bazaar.BL.Services.Tags
 {

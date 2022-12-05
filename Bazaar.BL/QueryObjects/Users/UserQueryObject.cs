@@ -4,8 +4,6 @@ using Bazaar.BL.Dtos.User;
 using AutoMapper;
 using Bazaar.BL.QueryObjects.Base;
 using Optional.Unsafe;
-using Bazaar.BL.QueryObjects.Base;
-using Optional.Unsafe;
 
 namespace Bazaar.BL.QueryObjects.Users
 {

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Bazaar.BL.Dtos;
 using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos.Image;
-using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Review;
-using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Services;
 using Bazaar.BL.Services.Reviews;
@@ -16,19 +13,11 @@ using Bazaar.Infrastructure.Query;
 using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http.Headers;
-using System;
 using Bazaar.BL.QueryObjects.Users;
 using Optional;
-using Optional;
-using System;
-using Bazaar.BL.QueryObjects.Users;
 using Bazaar.BL.Services.Ads;
 using Bazaar.BL.QueryObjects.Ads;
-using Bazaar.BL.Services.Reactions;
-using Bazaar.BL.QueryObjects.Tags;
-using Bazaar.BL.Services.Tags;
-using Bazaar.BL.Config;
+using Bazaar.App.Config;
 
 namespace Bazzar.Bl.Tests
 {

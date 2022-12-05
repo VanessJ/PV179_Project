@@ -1,5 +1,4 @@
-﻿using Bazaar.BL.Config;
-using Bazaar.BL.Facade;
+﻿using Bazaar.BL.Facade;
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.QueryObjects.Tags;
 using Bazaar.BL.QueryObjects.Users;
@@ -18,7 +17,7 @@ using Bazaar.Infrastructure.Query;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
 
-namespace Bazaar.App
+namespace Bazaar.App.Config
 {
     public static class Dependencies
     {

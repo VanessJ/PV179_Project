@@ -4,6 +4,7 @@ using Bazaar.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazaar.DAL.Migrations
 {
     [DbContext(typeof(BazaarDBContext))]
-    partial class BazaarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221205143154_deleteUserLevel")]
+    partial class deleteUserLevel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,14 +80,14 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
+                            Id = new Guid("44fb4726-7979-4861-8f8a-df18360df1df"),
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
                             IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c")
+                            UserId = new Guid("9f867b57-47a5-47a6-8c8d-dfa866b519a3")
                         });
                 });
 
@@ -115,8 +118,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2e44f1f6-19a1-4481-8e32-a5920711f0ae"),
-                            AdId = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
+                            Id = new Guid("5342d488-1d06-4821-a5f4-adda7be45fb2"),
+                            AdId = new Guid("44fb4726-7979-4861-8f8a-df18360df1df"),
                             Title = "Milovana macka",
                             Url = "\\obrazokmacky.jpg"
                         });
@@ -152,8 +155,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = new Guid("eeaa9ac3-bd7f-4d43-85a1-ccbacb49e536"),
-                            UserId = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
+                            AdId = new Guid("44fb4726-7979-4861-8f8a-df18360df1df"),
+                            UserId = new Guid("daf8852f-9201-44ef-9edb-1719958eaa74"),
                             Accepted = true,
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Id = new Guid("00000000-0000-0000-0000-000000000000"),
@@ -190,11 +193,11 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ReviewerId = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
-                            ReviewedId = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c"),
+                            ReviewerId = new Guid("daf8852f-9201-44ef-9edb-1719958eaa74"),
+                            ReviewedId = new Guid("9f867b57-47a5-47a6-8c8d-dfa866b519a3"),
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Descritption = "Krasna macka, 10/10 spokojnost",
-                            Id = new Guid("c738cc1d-8525-41b7-b2b9-5882813ae2d9"),
+                            Id = new Guid("b0f6ca32-0b90-45be-b999-8101303f8c49"),
                             Score = 5
                         });
                 });
@@ -217,12 +220,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("878c72ab-db08-47b6-a3a8-d3e88c2ec697"),
+                            Id = new Guid("50c33b42-cad4-4d36-a51c-84d821e961bc"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("ce48fc8e-c99b-4715-ad80-f0e99c296a58"),
+                            Id = new Guid("05d6e513-d181-4d04-83b5-e67d0c245b36"),
                             TagName = "Sell"
                         });
                 });
@@ -257,10 +260,6 @@ namespace Bazaar.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Roles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -273,26 +272,24 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f719643c-854e-4d30-913b-4accccfbbf2c"),
+                            Id = new Guid("9f867b57-47a5-47a6-8c8d-dfa866b519a3"),
                             Banned = false,
                             Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
                             LastName = "Mrkvicka",
                             PasswordHash = "tajneheslo",
                             PhoneNumber = "0000000",
-                            Roles = "User",
                             UserName = "TestUser"
                         },
                         new
                         {
-                            Id = new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"),
+                            Id = new Guid("daf8852f-9201-44ef-9edb-1719958eaa74"),
                             Banned = false,
                             Email = "ferko@gmailol.com",
                             FirstName = "Ferko",
                             LastName = "Priezviskovy",
                             PasswordHash = "supertajneheslo",
                             PhoneNumber = "2020040444",
-                            Roles = "User",
                             UserName = "Feri"
                         });
                 });

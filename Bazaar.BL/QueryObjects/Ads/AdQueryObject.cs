@@ -15,7 +15,7 @@ namespace Bazaar.BL.QueryObjects.Ads
         {
             if (filterDto.ContainsTitleName.HasValue)
             {
-                query = query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName.ValueOrDefault()));
+                query.Filter(a => a.Title.Equals(filterDto.ContainsTitleName.ValueOrDefault()));
             }
             if (filterDto.LikeTitleName.HasValue)
             {
@@ -34,7 +34,7 @@ namespace Bazaar.BL.QueryObjects.Ads
 
             if (filterDto.TagNames.HasValue)
             {
-                return query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
+                query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
             }
 
             if (filterDto.MaxPrice > 0)

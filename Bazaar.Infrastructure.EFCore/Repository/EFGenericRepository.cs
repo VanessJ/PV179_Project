@@ -2,7 +2,6 @@
 using Bazaar.Infrastructure.Repository;
 using Bazaar.DAL.Models;
 using Bazaar.DAL.Data;
-using System.Linq;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Bazaar.Infrastructure.EFCore.Repository

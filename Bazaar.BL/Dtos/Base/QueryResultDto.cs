@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bazaar.BL.Dtos.Base
+﻿namespace Bazaar.BL.Dtos.Base
 {
     public class QueryResultDto<TDto>
     {

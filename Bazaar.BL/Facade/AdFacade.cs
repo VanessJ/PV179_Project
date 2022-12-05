@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bazaar.BL.Dtos;
-using Bazaar.BL.Dtos.Ad;
+﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
@@ -12,9 +6,8 @@ using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Images;
 using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Tags;
-using Bazaar.BL.Services.Users;
+using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Bazaar.BL.Facade
 {
@@ -79,7 +72,7 @@ namespace Bazaar.BL.Facade
             var ad = await _adService.GetByIdAsync<AdDetailDto>(id);
             if (ad == null)
             {
-                throw new ArgumentException();
+                throw new EntityNotFoundException();
             }
             return ad;
         }
@@ -116,6 +109,10 @@ namespace Bazaar.BL.Facade
         public async Task DeleteAd(Guid id)
         {
             var adDeleteDto = await _adService.GetByIdAsync<AdDeleteDto>(id);
+            if (adDeleteDto == null)
+            {
+                throw new ArgumentException();
+            }
             adDeleteDto.IsValid = false;
             await _adService.UpdateAsync(adDeleteDto);
             await _unitOfWork.CommitAsync();

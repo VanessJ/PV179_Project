@@ -32,12 +32,11 @@ namespace Bazaar.DAL.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                IConfiguration config = _configurationBuilder
+                /*IConfiguration config = _configurationBuilder
                     .AddJsonFile("appsettings.json")
                     .Build();
-                var settings = config.GetRequiredSection(Settings.SectionName).Get<Settings>();
-
-                optionsBuilder.UseSqlServer(settings.ConnectionString);
+                */
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database=BazaarDB;Trusted_Connection=True;");
                 base.OnConfiguring(optionsBuilder);
             }
         }
@@ -66,6 +65,8 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<Ad>()
                 .HasMany<Tag>(ad => ad.Tags)
                 .WithMany(t => t.Ads);
+
+            
 
             modelBuilder.Entity<Reaction>()
             .HasOne<User>(r => r.User);
