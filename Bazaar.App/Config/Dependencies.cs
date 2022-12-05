@@ -1,4 +1,4 @@
-﻿using Bazaar.BL.Config;
+﻿
 using Bazaar.BL.Facade;
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.BL.QueryObjects.Tags;
@@ -28,8 +28,7 @@ namespace Bazaar.App.Config
             //builder.Services.AddTransient<DbContext>(x => x.GetRequiredService<BazaarDBContext>());
             services.AddTransient<IConfigurationBuilder, ConfigurationBuilder>();
 
-            services.AddAutoMapper(typeof(BusinessMapperConfig));
-            services.AddAutoMapper(typeof(PresentationMapperConfig));
+            services.AddAutoMapper(typeof(BusinessMapperConfig), typeof(PresentationMapperConfig));
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(EFGenericRepository<>));
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();

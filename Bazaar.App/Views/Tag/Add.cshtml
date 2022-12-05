@@ -1,0 +1,12 @@
+﻿@model TagCreateViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.TagName)
+        @Html.TextBoxFor(x => x.TagName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.TagName, null, new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
