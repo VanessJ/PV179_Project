@@ -12,7 +12,7 @@
     <tbody>
     @foreach (var tag in Model.Tags)
     {
-        <tr>
+        <tr class="tbl">
             <td>@tag.TagName</td>
             <td>
                 @using (Html.BeginForm("Delete", "Tag", new { id = tag.Id }, FormMethod.Post, true, new { @class = "form-inline" }))

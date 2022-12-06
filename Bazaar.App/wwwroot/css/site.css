@@ -16,3 +16,41 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-unban {
+    color: #fff;
+    background-color: green;
+    border-color: green;
+}
+
+.btn-unban:hover {
+    color: #fff;
+    background-color: #008000;
+    border-color: #008000;
+}
+
+.btn-ban {
+    color: #fff;
+    background-color: #B22222;
+    border-color: #B22222;
+}
+
+.btn-ban:hover {
+    color: #fff;
+    background-color: #8B0000;
+    border-color: #8B0000;
+}
+
+.text-unban {
+    color: green;
+    font-weight: bold
+}
+
+.text-ban {
+    color: #B22222;
+    font-weight: bold
+}
+
+.tbl {
+    vertical-align: middle;
+}

@@ -14,13 +14,10 @@ namespace Bazaar.BL.Facade
         Task DeleteTag(Guid id);
         Task DeleteAd(Guid id);
 
-        Task BanUserById(Guid id);
+        Task BanUser(Guid id);
 
-        Task BanUserByUserName(string userName);
+        Task UnBanUser(Guid id);
 
-        Task UnBanUserById(Guid id);
-
-        Task UnBanUserByUserName(string userName);
 
         Task<IEnumerable<UserListDto>> GetBannedUsers();
     }
