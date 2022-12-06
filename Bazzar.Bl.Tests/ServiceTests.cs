@@ -56,8 +56,7 @@ namespace Bazzar.Bl.Tests
                     FirstName = "Ferko",
                     LastName = "Mrkvicka",
                     Email = "jozko@gmailol.com",
-                    PhoneNumber = "0000000",
-                    PasswordHash = "tajneheslo"
+                    PhoneNumber = "0000000"
                 }
              );
             _bazaarDbContext.User.Add
@@ -69,8 +68,7 @@ namespace Bazzar.Bl.Tests
                     FirstName = "AFerko",
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
-                    PhoneNumber = "2020040444",
-                    PasswordHash = "supertajneheslo"
+                    PhoneNumber = "2020040444"
                 }
             );
 

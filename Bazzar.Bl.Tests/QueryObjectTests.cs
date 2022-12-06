@@ -52,7 +52,6 @@ namespace Bazzar.Bl.Tests
                     LastName = "Mrkvicka",
                     Email = "jozko@gmailol.com",
                     PhoneNumber = "0000000",
-                    PasswordHash = "tajneheslo",
                     Banned = false
 
                 }
@@ -67,7 +66,6 @@ namespace Bazzar.Bl.Tests
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
                     PhoneNumber = "2020040444",
-                    PasswordHash = "supertajneheslo",
                     Banned = false
                 }
             ); ;

@@ -31,27 +31,7 @@ namespace Bazaar.BL.Facade
 
         public async Task UpdateTag(TagEditDto tagEditDto)
         {
-            await _tagService.UpdateAsync(tagEditDto);
-            await _unitOfWork.CommitAsync();
-        }
-
-
-        public async Task BanUserById(Guid id)
-        {
-            var userBanDto = new UserBanByIdDto()
-            {
-                UserId = id,
-                Banned = true
-            };
-            await _userService.UpdateAsync(userBanDto);
-            await _unitOfWork.CommitAsync();
-        }
-
-        public async Task BanUserByUserName(string userName)
-        {
-            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() {ContainsUserName = userName.Some()});
-            userBanDto.First().Banned = true;
-            await _userService.UpdateAsync(userBanDto.First());
+            await _tagService.UpdateAsync<TagEditDto>(tagEditDto);
             await _unitOfWork.CommitAsync();
         }
 
@@ -65,7 +45,7 @@ namespace Bazaar.BL.Facade
         {
             var adDeleteDto = await _adService.GetByIdAsync<AdDeleteDto>(id);
             adDeleteDto.IsValid = false;
-            await _adService.UpdateAsync(adDeleteDto);
+            await _adService.UpdateAsync<AdDeleteDto>(adDeleteDto);
             await _unitOfWork.CommitAsync();
         }
 
@@ -75,21 +55,18 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task UnBanUserById(Guid id)
+        public async Task BanUser(Guid id)
         {
-            var userBanDto = new UserBanByIdDto()
-            {
-                UserId = id,
-                Banned = false
-            };
-            await _userService.UpdateAsync(userBanDto);
+            var userUpdateDto = await _userService.GetByIdAsync<UserUpdateDto>(id);
+            userUpdateDto.Banned = true;
+            await _userService.UpdateAsync<UserUpdateDto>(userUpdateDto);
             await _unitOfWork.CommitAsync();
         }
-        public async Task UnBanUserByUserName(string userName)
+        public async Task UnBanUser(Guid id)
         {
-            var userBanDto = await _userService.ExecuteQueryAsync(new UserFilterDto() { ContainsUserName = userName.Some() });
-            userBanDto.First().Banned = false;
-            await _userService.UpdateAsync(userBanDto.First());
+            var userUpdateDto = await _userService.GetByIdAsync<UserUpdateDto>(id);
+            userUpdateDto.Banned = false;
+            await _userService.UpdateAsync<UserUpdateDto>(userUpdateDto);
             await _unitOfWork.CommitAsync();
         }
 
