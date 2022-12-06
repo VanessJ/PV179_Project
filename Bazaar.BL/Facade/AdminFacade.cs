@@ -29,6 +29,13 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task UpdateTag(TagEditDto tagEditDto)
+        {
+            await _tagService.UpdateAsync(tagEditDto);
+            await _unitOfWork.CommitAsync();
+        }
+
+
         public async Task BanUserById(Guid id)
         {
             var userBanDto = new UserBanByIdDto()

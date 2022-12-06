@@ -71,7 +71,7 @@ namespace Bazaar.App.Controllers
             }
 
             var dto = _mapper.Map<TagEditDto>(model);
-            await _tagService.UpdateAsync(dto);
+            await _adminFacade.UpdateTag(dto);
 
             return RedirectToAction(nameof(Index));
         }
@@ -86,7 +86,7 @@ namespace Bazaar.App.Controllers
                 return NotFound();
             }
 
-            await _tagService.DeleteAsync(id);
+            await _adminFacade.DeleteTag(id);
 
             return RedirectToAction(nameof(Index));
         }
