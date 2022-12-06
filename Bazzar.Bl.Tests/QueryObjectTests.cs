@@ -14,8 +14,10 @@ namespace Bazzar.Bl.Tests
 {
     public class QueryObjectTests
     {
+        private readonly Guid tagId2 = Guid.NewGuid();
+        private readonly Guid tagId3 = Guid.NewGuid();
+        private readonly Guid tagId5 = Guid.NewGuid();
         private DbContextOptions<BazaarDBContext> _options;
-
 
         public QueryObjectTests()
         {
@@ -39,10 +41,7 @@ namespace Bazzar.Bl.Tests
             var adId4 = Guid.NewGuid();
             var adId5 = Guid.NewGuid();
             var tagId1 = Guid.NewGuid();
-            var tagId2 = Guid.NewGuid();
-            var tagId3 = Guid.NewGuid();
             var tagId4 = Guid.NewGuid();
-            var tagId5 = Guid.NewGuid();
             _bazaarDbContext.User.Add
             (
                 new User
@@ -104,6 +103,81 @@ namespace Bazzar.Bl.Tests
                 TagName = "Svokra"
             };
 
+            var adTag1 = new AdTag
+            {
+                AdId = adId1,
+                TagId = tagId2
+            };
+
+            var adTag2 = new AdTag
+            {
+                AdId = adId1,
+                TagId = tagId3
+            };
+
+            var adTag3 = new AdTag
+            {
+                AdId = adId1,
+                TagId = tagId4
+            };
+
+            var adTag4 = new AdTag
+            {
+                AdId = adId2,
+                TagId = tagId3
+            };
+            var adTag5 = new AdTag
+            {
+                AdId = adId3,
+                TagId = tagId4
+            };
+
+            var adTag6 = new AdTag
+            {
+                AdId = adId4,
+                TagId = tagId4
+            };
+            var adTag7 = new AdTag
+            {
+                AdId = adId5,
+                TagId = tagId5
+            };
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag1
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag2
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag3
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag4
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag5
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag6
+            );
+
+            _bazaarDbContext.AdTag.Add
+            (
+                adTag7
+            );
+
             _bazaarDbContext.Tag.Add
             (
                 ostatneTag
@@ -135,11 +209,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
-                    //Tags = new List<Tag>()
-    
-                    //{
-                    //    pesTag, zvieraTag, ostatneTag
-                    //}
+                    AdTags = new List<AdTag>()
+                    {
+                        adTag1, adTag2, adTag3
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -154,10 +227,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
-                    //Tags = new List<Tag>()
-                    //{
-                    //    zvieraTag
-                    //}
+                    AdTags = new List<AdTag>()
+                    {
+                        adTag4
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -172,10 +245,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 900,
                     UserId = userId1,
-                    //Tags = new List<Tag>()
-                    //{
-                    //    ostatneTag
-                    //}
+                    AdTags = new List<AdTag>()
+                    {
+                        adTag5
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -190,10 +263,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 111,
                     UserId = userId2,
-                    //Tags = new List<Tag>()
-                    //{
-                    //    ostatneTag
-                    //}
+                    AdTags = new List<AdTag>()
+                    {
+                        adTag6
+                    }
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -208,12 +281,13 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 0,
                     UserId = userId2,
-                    //Tags = new List<Tag>()
-                    //{
-                    //    svorkaTag
-                    //}
+                    AdTags = new List<AdTag>()
+                    {
+                        adTag7
+                    }
                 }
             );
+
             _bazaarDbContext.SaveChanges();
         }
 
@@ -286,8 +360,8 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var adQueryObject = new AdQueryObject(mapper, query);
-            var tagNames = new List<string>() { "Pes", "Zviera", "Svokra" };
-            var ad_filter_dto = new AdFilterDto() { TagNames = tagNames.Some(), OderCriteria = "Title".Some() };
+            var tagNames = new List<Guid>() { tagId2, tagId3, tagId5 };
+            var ad_filter_dto = new AdFilterDto() { TagIds = tagNames.Some(), OderCriteria = "Title".Some() };
             var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
             Assert.Equal(3, result.Count());

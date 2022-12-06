@@ -11,6 +11,8 @@ namespace Bazaar.DAL.Data
         public DbSet<Image> Image { get; set; }
         public DbSet<Reaction> Reaction { get; set; }
         public DbSet<Review> Review { get; set; }
+
+        public DbSet<AdTag> AdTag { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
         private readonly IConfigurationBuilder _configurationBuilder;

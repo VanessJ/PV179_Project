@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Services.CRUDServices;
 
@@ -11,7 +12,7 @@ namespace Bazaar.BL.Services.Tags
 
         public Task<IEnumerable<TagListDto>> ExecuteQueryAsync(TagFilterDto filterDto);
 
-        public Task<IEnumerable<AdDto>> GetAllAdsWithTag(Guid id);
+        public Task<IEnumerable<AdTagDto>> GetAllAdsWithTag(Guid id);
 
     }
 }
