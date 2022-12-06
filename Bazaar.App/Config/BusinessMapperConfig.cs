@@ -17,6 +17,7 @@ namespace Bazaar.App.Config
         {
             CreateMap<Ad, AdCreateDto>().ReverseMap();
             CreateMap<Ad, AdDto>().ReverseMap();
+            CreateMap<Ad, AdDetailDto>().ReverseMap();
             CreateMap<Ad, AdEditDto>().ReverseMap();
             CreateMap<Ad, AdListDto>().ReverseMap();
 

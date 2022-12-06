@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bazaar.App.Models;
+using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.App.Config
@@ -10,6 +11,7 @@ namespace Bazaar.App.Config
         {
             CreateMap<TagEditDto, TagEditViewModel>().ReverseMap();
             CreateMap<TagCreateDto, TagCreateViewModel>().ReverseMap();
+            CreateMap<AdDetailDto, AdDetailViewModel>().ReverseMap();
         }
     }
 }

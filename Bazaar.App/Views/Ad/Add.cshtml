@@ -1,0 +1,72 @@
+﻿@model AdCreateViewModel
+
+
+<h1>Create new ad</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.Id, Model.Id)
+            
+            @for (int i = 0; i < Model.AllTags.Count(); i++)
+            {
+               @Html.HiddenFor(model => Model.AllTags[i])
+            }
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" rows="4" cols="50"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label class="control-label"> Price in €</label>
+                <input asp-for="Price" class="form-control" type="number" min="0" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label class="control-label">Select type of your ad: </label>
+                <table>
+                    <tr>
+                        <td><label>@Html.RadioButtonFor(i => i.IsOffer, true) Offer</label></td>
+                    </tr>
+                    <tr>
+                        <td><label>@Html.RadioButtonFor(i => i.IsOffer, false) Demand</label></td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+
+
+            <div class="form-group">
+                <label class="control-label">Select tags: </label>
+                <select asp-for="TagIds" class="select" style="width: 200px;" multiple>
+                    @foreach (var tag in Model.AllTags)
+                    {
+                        <option value="@tag.Id">@tag.TagName</option>
+                    }
+                 </select>
+            </div>
+            <br />
+
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

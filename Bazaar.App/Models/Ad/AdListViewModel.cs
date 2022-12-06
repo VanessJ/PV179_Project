@@ -1,10 +1,10 @@
 ﻿using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Image;
-using Bazaar.BL.Dtos.Tag;
+using Bazaar.BL.Dtos;
 
-namespace Bazaar.BL.Dtos.Ad
+namespace Bazaar.App.Models
 {
-    public class AdListDto
+    public class AdListViewModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = null!;
@@ -16,7 +16,10 @@ namespace Bazaar.BL.Dtos.Ad
         public bool IsOffer { get; set; }
 
         public int Price { get; set; }
+        public UserDto Creator { get; set; } = null!;
+
         public ICollection<ImageDto> Images { get; set; }
-        public ICollection<AdTagDto> AdTags { get; set; }
+
+
     }
 }

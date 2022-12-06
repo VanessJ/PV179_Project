@@ -1,6 +1,7 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.BL.Facade
 {
@@ -23,7 +24,11 @@ namespace Bazaar.BL.Facade
         Task DeleteAd(Guid id);
 
         Task EditAd(AdEditDto dto);
-            
+
+        Task<IEnumerable<TagDto>> GetAllTags();
+
+
+
         Task Browse();
     } 
 }

@@ -7,6 +7,7 @@ using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Images;
 using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Tags;
+using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
 
@@ -65,12 +66,18 @@ namespace Bazaar.BL.Facade
 
         public async Task<AdDetailDto> AdDetail(Guid id)
         {
-            var ad = await _adService.GetByIdAsync<AdDetailDto>(id);
+            var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags));
             if (ad == null)
             {
                 throw new EntityNotFoundException();
             }
             return ad;
+        }
+
+        public async Task<IEnumerable<TagDto>> GetAllTags()
+        {
+            var tags = await _tagService.GetAllAsync<TagDto>();
+            return tags;
         }
 
 

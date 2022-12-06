@@ -70,6 +70,7 @@ namespace Bazaar.App.Controllers
 
             var model = _mapper.Map<TagEditViewModel>(dto);
             return View(model);
+            
         }
 
         [HttpPost]
