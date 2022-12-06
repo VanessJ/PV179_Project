@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddSession(options =>
@@ -28,6 +29,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 Dependencies.RegisterDependencyInjection(builder.Services);
 
 var app = builder.Build();
+
+//create admin account
+CreateAdmin(app.Services, app.Configuration).Wait();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -59,3 +63,23 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+async Task CreateAdmin(IServiceProvider serviceProvider, IConfiguration configuration)
+{
+    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var roleName = "Admin";
+
+    var roleExist = await RoleManager.RoleExistsAsync(roleName);
+    if (!roleExist)
+    {
+        var res = await RoleManager.CreateAsync(new IdentityRole(roleName));
+    }
+
+    var user = await UserManager.FindByEmailAsync(configuration["Admin:UserEmail"]);
+
+    if (user != null)
+    {
+        await UserManager.AddToRoleAsync(user, roleName);
+    }
+}
