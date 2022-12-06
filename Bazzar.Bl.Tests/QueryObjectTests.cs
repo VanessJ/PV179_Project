@@ -135,11 +135,11 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
-                    Tags = new List<Tag>()
+                    //Tags = new List<Tag>()
     
-                    {
-                        pesTag, zvieraTag, ostatneTag
-                    }
+                    //{
+                    //    pesTag, zvieraTag, ostatneTag
+                    //}
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -154,10 +154,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
-                    Tags = new List<Tag>()
-                    {
-                        zvieraTag
-                    }
+                    //Tags = new List<Tag>()
+                    //{
+                    //    zvieraTag
+                    //}
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -172,10 +172,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 900,
                     UserId = userId1,
-                    Tags = new List<Tag>()
-                    {
-                        ostatneTag
-                    }
+                    //Tags = new List<Tag>()
+                    //{
+                    //    ostatneTag
+                    //}
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -190,10 +190,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 111,
                     UserId = userId2,
-                    Tags = new List<Tag>()
-                    {
-                        ostatneTag
-                    }
+                    //Tags = new List<Tag>()
+                    //{
+                    //    ostatneTag
+                    //}
                 }
             );
             _bazaarDbContext.Ad.Add
@@ -208,10 +208,10 @@ namespace Bazzar.Bl.Tests
                     IsValid = true,
                     Price = 0,
                     UserId = userId2,
-                    Tags = new List<Tag>()
-                    {
-                        svorkaTag
-                    }
+                    //Tags = new List<Tag>()
+                    //{
+                    //    svorkaTag
+                    //}
                 }
             );
             _bazaarDbContext.SaveChanges();

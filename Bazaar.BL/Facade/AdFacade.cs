@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
@@ -31,19 +32,14 @@ namespace Bazaar.BL.Facade
         {
             adCreateDto.UserId = userId;
 
-            if (adCreateDto.Tags == null && tagIdS.Count() != 0)
+            if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
             {
-                adCreateDto.Tags = new List<TagDto>();
+                adCreateDto.AdTags = new List<AdTagDto>();
             }
 
             foreach (var tagId in tagIdS)
             {
-                var tagDto = await _tagService.GetByIdAsync<TagDto>(tagId);
-                if (tagDto == null)
-                {
-                    throw new ArgumentException();
-                }
-                adCreateDto.Tags.Add(tagDto);
+                adCreateDto.AdTags.Add(new AdTagDto(){TagId = tagId});
             }
 
             if (adCreateDto.Images == null && imageCreateDtos.Count() != 0)

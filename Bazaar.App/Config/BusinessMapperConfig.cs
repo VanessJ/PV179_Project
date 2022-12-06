@@ -2,6 +2,7 @@
 using Bazaar.DAL.Models;
 using Bazaar.BL.Dtos;
 using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Review;
@@ -18,6 +19,8 @@ namespace Bazaar.App.Config
             CreateMap<Ad, AdDto>().ReverseMap();
             CreateMap<Ad, AdEditDto>().ReverseMap();
             CreateMap<Ad, AdListDto>().ReverseMap();
+
+            CreateMap<AdTag, AdTagDto>().ReverseMap();
 
             CreateMap<Image, ImageCreateDto>().ReverseMap();
             CreateMap<Image, ImageDto>().ReverseMap();

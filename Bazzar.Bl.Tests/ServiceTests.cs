@@ -109,11 +109,11 @@ namespace Bazzar.Bl.Tests
                    IsValid = true,
                    Price = 100,
                    UserId = userId1,
-                   Tags = new List<Tag>()
+                   //Tags = new List<Tag>()
 
-                    {
-                        pesTag, nepotrebneTag
-                   }
+                   // {
+                   //     pesTag, nepotrebneTag
+                   //}
                }
            );
 
@@ -129,11 +129,11 @@ namespace Bazzar.Bl.Tests
                IsValid = true,
                Price = 100,
                UserId = userId1,
-               Tags = new List<Tag>()
+               //Tags = new List<Tag>()
 
-                    {
-                        pesTag
-                   }
+               //     {
+               //         pesTag
+               //    }
            }
         );
 

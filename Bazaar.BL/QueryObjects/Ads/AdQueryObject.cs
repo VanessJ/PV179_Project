@@ -34,7 +34,7 @@ namespace Bazaar.BL.QueryObjects.Ads
 
             if (filterDto.TagNames.HasValue)
             {
-                query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
+                //query.Filter(a => a.AdTags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
             }
 
             if (filterDto.MaxPrice > 0)

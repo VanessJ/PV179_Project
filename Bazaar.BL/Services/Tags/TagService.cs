@@ -29,8 +29,9 @@ namespace Bazaar.BL.Services.Tags
 
         public async Task<IEnumerable<AdDto>> GetAllAdsWithTag(Guid id)
         {
-            var tag = await GetByIdAsync<TagDto>(id, nameof(Tag.Ads));
-            return tag.Ad;
+            //var tag = await GetByIdAsync<TagDto>(id, nameof(Tag.Ads));
+            //return tag.Ad;
+            return new List<AdDto>();
         }
 
 

@@ -1,5 +1,5 @@
-﻿using Bazaar.BL.Dtos.Image;
-using Bazaar.BL.Dtos.Tag;
+﻿using Bazaar.BL.Dtos.AdTag;
+using Bazaar.BL.Dtos.Image;
 
 namespace Bazaar.BL.Dtos.Ad
 {
@@ -19,6 +19,6 @@ namespace Bazaar.BL.Dtos.Ad
         public Guid UserId { get; set; }
 
         public  ICollection<ImageCreateDto> Images { get; set; }
-        public ICollection<TagDto> Tags { get; set; }
+        public ICollection<AdTagDto> AdTags { get; set; }
     }
 }

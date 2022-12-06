@@ -1,6 +1,6 @@
-﻿using Bazaar.BL.Dtos.Image;
+﻿using Bazaar.BL.Dtos.AdTag;
+using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
-using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.BL.Dtos.Ad
 {
@@ -21,7 +21,7 @@ namespace Bazaar.BL.Dtos.Ad
 
         public ICollection<ImageDto> Images { get; set; }
 
-        public ICollection<TagDto> Tags { get; set; }
+        public ICollection<AdTagDto> AdTags { get; set; }
         public ICollection<ReactionDto> Reactions { get; set; }
     }
 }

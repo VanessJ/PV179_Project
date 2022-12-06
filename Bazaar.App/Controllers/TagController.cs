@@ -50,11 +50,12 @@ namespace Bazaar.App.Controllers
             var dto = _mapper.Map<TagCreateDto>(model);
             await _adminFacade.AddNewTag(dto);
 
-            await _adFacade.AddNewAdAsync(new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"), new List<ImageCreateDto>(),
+            await _adFacade.AddNewAdAsync(new Guid("25fc850f-5dca-4608-bb79-cd81242bfdff"), new List<ImageCreateDto>(),
                 new List<Guid>()
                 {
-                    new Guid("c252e554-01cc-44d4-8e9e-9df9be57c9c6"), new Guid("3a9e071f-4c7b-467a-8e25-d0293c9c45cf")
-                }, new AdCreateDto() {Title = "TOTO JE MOJA PONUKA", Description = "HALO"});
+                    new Guid("98644e76-1757-48b3-839d-7fa3d94238bf"),
+                    new Guid("7c9b9c8c-e8a3-40c0-bd59-62faa29dd414")
+                }, new AdCreateDto() {Title = "123", Description = "TEST"});
 
             return RedirectToAction(nameof(Index));
         }
