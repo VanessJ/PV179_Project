@@ -22,8 +22,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
             FirstName = "Anicka",
             LastName = "Mrkvicka",
             Email = "anicka@gmailol.com",
-            PhoneNumber = "0000000",
-            PasswordHash = "najtajnejsie heslo"
+            PhoneNumber = "0000000"
         };
 
 
@@ -51,7 +50,6 @@ namespace Bazaar.Infrastructure.EFCore.Tests
                     LastName = "Mrkvicka",
                     Email = "jozko@gmailol.com",
                     PhoneNumber = "0000000",
-                    PasswordHash = "tajneheslo"
                 }
              );
             _bazaarDbContext.User.Add
@@ -63,8 +61,7 @@ namespace Bazaar.Infrastructure.EFCore.Tests
                     FirstName = "Ferko",
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
-                    PhoneNumber = "2020040444",
-                    PasswordHash = "supertajneheslo"
+                    PhoneNumber = "2020040444"
                 }
             );
             

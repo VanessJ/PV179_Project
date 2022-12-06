@@ -36,11 +36,6 @@ namespace Bazaar.BL.Facade
 
         public async Task RegisterUser(UserCreateDto createDto)
         {
-            if (await _userService.IsUsernameTaken(createDto.UserName))
-            {
-                throw new ArgumentException();
-            }
-
             var user = await _userService.CreateAsync<UserCreateDto>(createDto);
             await _unitOfWork.CommitAsync();   
         }

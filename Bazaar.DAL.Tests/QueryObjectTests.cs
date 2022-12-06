@@ -44,7 +44,6 @@ namespace EFCore.Tests
                     LastName = "Mrkvicka",
                     Email = "jozko@gmailol.com",
                     PhoneNumber = "0000000",
-                    PasswordHash = "tajneheslo"
                 }
              );
             _bazaarDbContext.User.Add
@@ -56,8 +55,7 @@ namespace EFCore.Tests
                     FirstName = "Ferko",
                     LastName = "Priezviskovy",
                     Email = "ferko@gmailol.com",
-                    PhoneNumber = "2020040444",
-                    PasswordHash = "supertajneheslo"
+                    PhoneNumber = "2020040444"
                 }
             );
             _bazaarDbContext.Ad.Add

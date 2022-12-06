@@ -25,7 +25,6 @@ namespace Bazaar.DAL.Data
                    LastName = "Mrkvicka",
                    Email = "jozko@gmailol.com",
                    PhoneNumber = "0000000",
-                   PasswordHash = "tajneheslo"
                }
            );
 
@@ -39,7 +38,6 @@ namespace Bazaar.DAL.Data
                    LastName = "Priezviskovy",
                    Email = "ferko@gmailol.com",
                    PhoneNumber = "2020040444",
-                   PasswordHash = "supertajneheslo"
 
                }
            );

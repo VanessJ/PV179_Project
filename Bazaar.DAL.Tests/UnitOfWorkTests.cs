@@ -37,8 +37,7 @@ namespace Bazaar.DAL.Tests
                    FirstName = "Ferko",
                    LastName = "Mrkvicka",
                    Email = "jozko@gmailol.com",
-                   PhoneNumber = "0000000",
-                   PasswordHash = "tajneheslo"
+                   PhoneNumber = "0000000"
                }
             );
 
