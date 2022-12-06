@@ -32,9 +32,9 @@ namespace Bazaar.BL.QueryObjects.Ads
                 query.Filter(a => a.UserId == filterDto.UserId.ValueOrDefault());
             }
 
-            if (filterDto.TagNames.HasValue)
+            if (filterDto.TagIds.HasValue)
             {
-                query.Filter(a => a.Tags.Any(tag => filterDto.TagNames.ValueOrDefault().Contains(tag.TagName)));
+                query.Filter(a => a.AdTags.Any(tag => filterDto.TagIds.ValueOrDefault().Contains(tag.TagId)));
             }
 
             if (filterDto.MaxPrice > 0)

@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Image;
+using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.BL.Dtos.Ad
 {
@@ -14,7 +15,7 @@ namespace Bazaar.BL.Dtos.Ad
         public bool IsOffer { get; set; }
 
         public int Price { get; set; }
-        public ICollection<ImageDto> Images { get; set; } 
-        public ICollection<AdDto> Tags { get; set; } 
+        public ICollection<ImageDto> Images { get; set; }
+        public ICollection<TagDto> Tags { get; set; }
     }
 }

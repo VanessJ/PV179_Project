@@ -19,6 +19,7 @@ namespace Bazaar.BL.Dtos.Ad
 
         public Option<string> ContainsInDescription { get; set; }
         public Option<Guid> UserId { get; set; }
-        public Option<List<string>> TagNames { get; set; }
+
+        public Option<List<Guid>> TagIds { get; set; }
     }
 }

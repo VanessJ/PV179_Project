@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.QueryObjects.Tags;
 using Bazaar.BL.Services.CRUDServices;
@@ -27,10 +28,10 @@ namespace Bazaar.BL.Services.Tags
             return await _tagQueryObject.ExecuteQueryAsync(filterDto);
         }
 
-        public async Task<IEnumerable<AdDto>> GetAllAdsWithTag(Guid id)
+        public async Task<IEnumerable<AdTagDto>> GetAllAdsWithTag(Guid id)
         {
-            var tag = await GetByIdAsync<TagDto>(id, nameof(Tag.Ads));
-            return tag.Ad;
+            var tag = await GetByIdAsync<TagDto>(id, nameof(Tag.AdTags));
+            return tag.AdTags;
         }
 
 

@@ -11,6 +11,8 @@ namespace Bazaar.DAL.Data
         public DbSet<Image> Image { get; set; }
         public DbSet<Reaction> Reaction { get; set; }
         public DbSet<Review> Review { get; set; }
+
+        public DbSet<AdTag> AdTag { get; set; }
         public DbSet<Tag> Tag { get; set; }
 
         private readonly IConfigurationBuilder _configurationBuilder;
@@ -62,13 +64,19 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<Reaction>().HasKey(r => new { r.AdId, r.UserId });
 
             //many to many
-            modelBuilder.Entity<Ad>()
-                .HasMany<Tag>(ad => ad.Tags)
-                .WithMany(t => t.Ads);
-            
-            modelBuilder.Entity<Tag>()
-                .HasMany<Ad>(tag => tag.Ads)
-                .WithMany(ad => ad.Tags);
+            modelBuilder.Entity<AdTag>()
+                .HasKey(t => new { t.TagId, t.AdId });
+
+            modelBuilder.Entity<AdTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(p => p.AdTags)
+                .HasForeignKey(pt => pt.TagId);
+
+            modelBuilder.Entity<AdTag>()
+                .HasOne(pt => pt.Ad)
+                .WithMany(t => t.AdTags)
+                .HasForeignKey(pt => pt.AdId);
+
 
             modelBuilder.Entity<Reaction>()
             .HasOne<User>(r => r.User);
