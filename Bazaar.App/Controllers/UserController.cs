@@ -29,15 +29,15 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Inspect(Guid id)
+        public async Task<IActionResult> Detail(Guid id)
         {
-            var dto = await _userService.GetByIdAsync<UserDetailDto>(id);
+            var dto = await _userService.GetByIdAsync<UserProfileDetailDto>(id);
             if (dto == null)
             {
                 return NotFound();
             }
 
-            var model = _mapper.Map<UserInspectViewModel>(dto);
+            var model = _mapper.Map<UserDetailViewModel>(dto);
             return View(model);
         }
 

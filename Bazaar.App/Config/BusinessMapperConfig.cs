@@ -41,6 +41,7 @@ namespace Bazaar.App.Config
             CreateMap<User, UserEditDto>().ReverseMap();
             CreateMap<User, UserListDto>().ReverseMap();
             CreateMap<User, UserUpdateDto>().ReverseMap();
+            CreateMap<User, UserProfileDetailDto>();
         }
     }
 }
