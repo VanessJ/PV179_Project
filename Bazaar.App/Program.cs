@@ -31,7 +31,10 @@ Dependencies.RegisterDependencyInjection(builder.Services);
 var app = builder.Build();
 
 //create admin account
-CreateAdmin(app.Services, app.Configuration).Wait();
+using (var scope = app.Services.CreateScope())
+{
+    CreateAdmin(scope.ServiceProvider, builder.Configuration).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
