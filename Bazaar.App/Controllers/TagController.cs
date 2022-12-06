@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Bazaar.App.Models;
+using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
@@ -12,12 +14,14 @@ namespace Bazaar.App.Controllers
         private readonly ITagService _tagService;
         private readonly IAdminFacade _adminFacade;
         private readonly IMapper _mapper;
+        private readonly IAdFacade _adFacade;
 
-        public TagController(ITagService tagService, IAdminFacade admin, IMapper mapper)
+        public TagController(ITagService tagService, IAdminFacade admin, IMapper mapper, IAdFacade adFacade)
         {
             _tagService = tagService;
             _adminFacade = admin;
             _mapper = mapper;
+            _adFacade = adFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -45,6 +49,12 @@ namespace Bazaar.App.Controllers
 
             var dto = _mapper.Map<TagCreateDto>(model);
             await _adminFacade.AddNewTag(dto);
+
+            await _adFacade.AddNewAdAsync(new Guid("40678c71-cd5f-4a6c-bd00-442da8a88591"), new List<ImageCreateDto>(),
+                new List<Guid>()
+                {
+                    new Guid("c252e554-01cc-44d4-8e9e-9df9be57c9c6"), new Guid("3a9e071f-4c7b-467a-8e25-d0293c9c45cf")
+                }, new AdCreateDto() {Title = "TOTO JE MOJA PONUKA", Description = "HALO"});
 
             return RedirectToAction(nameof(Index));
         }
