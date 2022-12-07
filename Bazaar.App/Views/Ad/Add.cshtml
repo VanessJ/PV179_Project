@@ -16,9 +16,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(m => m.Id, Model.Id)
             
-            @for (int i = 0; i < Model.AllTags.Count(); i++)
+            @for (int i = 0; i < Model.AllTags.Count; i++)
             {
-                @Html.HiddenFor(model => Model.AllTags[i])
+               @Html.HiddenFor(model => Model.AllTags[i])
             }
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -56,7 +56,8 @@
 
             <div class="form-group">
                 <label class="control-label">Select tags: </label>
-                <select class="selectpicker" multiple data-live-search="true">
+                <br />
+                <select asp-for="TagIds" class="select" style="width: 200px;" multiple>
                     @foreach (var tag in Model.AllTags)
                     {
                         <option value="@tag.Id">@tag.TagName</option>
@@ -71,7 +72,8 @@
             </div>
         </form>
     </div>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>

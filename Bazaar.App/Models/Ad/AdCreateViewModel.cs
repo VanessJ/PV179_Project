@@ -22,9 +22,9 @@ namespace Bazaar.App.Models
         
         [Range(0, int.MaxValue, ErrorMessage = "Price must be a positive number")]
         public int Price { get; set; }
-        public UserDto Creator { get; set; } = null!;
+        public Guid UserId { get; set; }
 
-        public List<Guid> ImageIds { get; set; }
+        public List<Guid> ImageIds { get; set; } = new List<Guid>();
 
         public IEnumerable<Guid> TagIds{ get; set; }
 

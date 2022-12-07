@@ -66,7 +66,7 @@ namespace Bazaar.BL.Facade
 
         public async Task<AdDetailDto> AdDetail(Guid id)
         {
-            var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags));
+            var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags), "AdTags.Tag");
             if (ad == null)
             {
                 throw new EntityNotFoundException();
