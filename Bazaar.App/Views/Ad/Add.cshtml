@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label class="control-label">Select tags: </label>
                 <br />
-                <select asp-for="TagIds" class="select" style="width: 200px;" multiple>
+                <select asp-for="TagIds" style="width: 200px;" class="selectpicker" multiple data-live-search="true">
                     @foreach (var tag in Model.AllTags)
                     {
                         <option value="@tag.Id">@tag.TagName</option>
