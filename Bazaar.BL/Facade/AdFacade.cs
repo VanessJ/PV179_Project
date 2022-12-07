@@ -80,6 +80,18 @@ namespace Bazaar.BL.Facade
             return tags;
         }
 
+        public async Task<TagDto> GetTagById(Guid tagId)
+        {
+            var tag = await _tagService.GetByIdAsync<TagDto>(tagId);
+            return tag;
+        }
+        
+        public async Task<IEnumerable<TagListDto>> FilterTags(TagFilterDto filterDto)
+        {
+            var tags = await _tagService.ExecuteQueryAsync(filterDto);
+            return tags;
+        }
+
 
         public async Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id)
         {

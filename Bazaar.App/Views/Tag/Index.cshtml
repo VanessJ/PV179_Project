@@ -2,6 +2,14 @@
 
 <h4>Tags</h4>
 <a class="btn btn-primary" href="@Url.Action("Add")">Add</a>
+
+<div style="width: auto">
+    <form class="search" asp-action="Index" style="position: ">
+        <input asp-for="LikeTagName" class="form-control my-1" placeholder="Search">
+        <button class="btn btn-secondary my-1"  type="submit">Search</button>
+    </form>
+</div>
+
 <table class="table table-striped">
     <thead>
     <tr>

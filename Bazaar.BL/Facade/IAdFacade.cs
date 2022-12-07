@@ -27,7 +27,9 @@ namespace Bazaar.BL.Facade
 
         Task<IEnumerable<TagDto>> GetAllTags();
 
+        Task<TagDto> GetTagById(Guid tagId);
 
+        Task<IEnumerable<TagListDto>> FilterTags(TagFilterDto filterDto);
 
         Task Browse();
     } 

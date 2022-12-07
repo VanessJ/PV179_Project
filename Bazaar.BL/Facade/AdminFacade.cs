@@ -29,12 +29,6 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task UpdateTag(TagEditDto tagEditDto)
-        {
-            await _tagService.UpdateAsync<TagEditDto>(tagEditDto);
-            await _unitOfWork.CommitAsync();
-        }
-
         public async Task DeleteTag(Guid id)
         {
             await _tagService.DeleteAsync(id);
@@ -49,9 +43,9 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task EditTag(TagEditDto tagEditDto)
+        public async Task EditTag(TagDto tagEditDto)
         {
-            await _tagService.UpdateAsync<TagEditDto>(tagEditDto);
+            await _tagService.UpdateAsync<TagDto>(tagEditDto);
             await _unitOfWork.CommitAsync();
         }
 

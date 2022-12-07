@@ -54,3 +54,20 @@ body {
 .tbl {
     vertical-align: middle;
 }
+
+.search {
+    display: flex;
+    flex-direction: row;
+}
+
+.search input {
+    width: 200px;
+}
+
+.search button {
+    float: left;
+}
+
+.search input + button {
+    margin-left: 5px;
+}

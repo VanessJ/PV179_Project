@@ -10,7 +10,7 @@ namespace Bazaar.App.Config
     {
         public PresentationMapperConfig()
         {
-            CreateMap<TagEditDto, TagEditViewModel>().ReverseMap();
+            CreateMap<TagDto, TagEditViewModel>().ReverseMap();
             CreateMap<TagCreateDto, TagCreateViewModel>().ReverseMap();
             CreateMap<UserProfileDetailDto, UserDetailViewModel>().ReverseMap();
             CreateMap<AdDetailDto, AdDetailViewModel>().ReverseMap();
