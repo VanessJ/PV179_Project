@@ -1,5 +1,11 @@
 ﻿@model AdCreateViewModel
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 
 <h1>Create new ad</h1>
 <hr />
@@ -12,7 +18,7 @@
             
             @for (int i = 0; i < Model.AllTags.Count(); i++)
             {
-               @Html.HiddenFor(model => Model.AllTags[i])
+                @Html.HiddenFor(model => Model.AllTags[i])
             }
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -50,12 +56,12 @@
 
             <div class="form-group">
                 <label class="control-label">Select tags: </label>
-                <select asp-for="TagIds" class="select" style="width: 200px;" multiple>
+                <select class="selectpicker" multiple data-live-search="true">
                     @foreach (var tag in Model.AllTags)
                     {
                         <option value="@tag.Id">@tag.TagName</option>
                     }
-                 </select>
+                </select>
             </div>
             <br />
 
@@ -65,8 +71,7 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
