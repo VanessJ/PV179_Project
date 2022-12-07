@@ -50,6 +50,7 @@
 
             <div class="form-group">
                 <label class="control-label">Select tags: </label>
+                <br />
                 <select asp-for="TagIds" class="select" style="width: 200px;" multiple>
                     @foreach (var tag in Model.AllTags)
                     {
