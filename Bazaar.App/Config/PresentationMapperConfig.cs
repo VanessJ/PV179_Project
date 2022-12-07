@@ -14,6 +14,7 @@ namespace Bazaar.App.Config
             CreateMap<TagCreateDto, TagCreateViewModel>().ReverseMap();
             CreateMap<UserProfileDetailDto, UserDetailViewModel>().ReverseMap();
             CreateMap<AdDetailDto, AdDetailViewModel>().ReverseMap();
+            CreateMap<AdCreateDto, AdCreateViewModel>().ReverseMap();
         }
     }
 }

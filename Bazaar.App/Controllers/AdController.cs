@@ -58,10 +58,13 @@ namespace Bazaar.App.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var tags = await _adFacade.GetAllTags();
+                var tagList = tags.ToList();
+                model.AllTags = tagList;
                 return View(model);
             }
-
-
+            var dto = _mapper.Map<AdCreateDto>(model);
+            await _adFacade.AddNewAdAsync(new Guid("25fc850f-5dca-4608-bb79-cd81242bfdff"), new List<ImageCreateDto>(), model.TagIds, dto);
             return RedirectToAction(nameof(Index));
         }
 

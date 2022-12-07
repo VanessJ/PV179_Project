@@ -10,6 +10,7 @@ namespace Bazaar.DAL.Models
     public class AdTag
     {
         public Guid TagId { get; set; }
+        
         [ForeignKey(nameof(TagId))]
         public virtual Tag Tag { get; set; }
 
