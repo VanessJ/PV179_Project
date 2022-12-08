@@ -1,10 +1,44 @@
 ﻿@model UserIndexViewModel
 
 <h4>Users</h4>
+
+
+<div class="w-a">
+    <form class="search" asp-action="Index">
+        <table class="main_div">
+            <tr>
+                <td><label class="control-label">Username: </label></td>
+                <td><label for="sel1">Select Role:</label></td>
+                <td><label for="sel1">Select Status:</label></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input class="form-control my-1" placeholder="Search"> <!--asp-for="LikeUserName"--></td>
+                <td> 
+                    <select class="form-control" id="sel1" name="sellist1">
+                        <option>None</option>
+                        <option>User</option>
+                        <option>Admin</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="form-control" id="sel1" name="sellist1">
+                        <option>None</option>
+                        <option>Not-Banned</option>
+                        <option>Banned</option>
+                    </select>
+                </td>
+                <td><button class="btn btn-secondary my-1" type="submit">Search</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
 <table class="table table-striped">
     <thead>
     <tr>
         <th style="width:70%">UserName</th>
+        <th>Role</th>
         <th>Status</th>
         <th>Actions</th>
     </tr>
@@ -14,6 +48,7 @@
     {
         <tr class="tbl">
             <td>@user.UserName</td>
+            <td>...</td>
             @if (user.Banned)
             {
                 <td class="text-ban">Banned</td>
@@ -27,7 +62,7 @@
             }
             else
             {
-                <td class="text-unban">Active</td>
+                <td class="text-unban">Not-Banned</td>
                 <td>
                     @using (Html.BeginForm("Ban", "User", new { id = user.Id }, FormMethod.Post, true, new { @class = "form-inline" }))
                     {

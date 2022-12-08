@@ -58,16 +58,19 @@ body {
 .search {
     display: flex;
     flex-direction: row;
+    float: left;
+}
+
+.search table {
+    border-spacing: 10px 0;
+    border-collapse: separate;
+}
+
+.search div {
+    bottom: 0 !important;
 }
 
 .search input {
     width: 200px;
-}
-
-.search button {
-    float: left;
-}
-
-.search input + button {
-    margin-left: 5px;
+    bottom: 0 !important;
 }
