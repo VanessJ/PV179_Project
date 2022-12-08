@@ -25,10 +25,11 @@ namespace Bazaar.App.Controllers
 
         public async Task<IActionResult> Index(string likeTagName)
         {
-            var dto = new TagFilterDto() { LikeTagName = likeTagName == null ? new Option<string>() : likeTagName.Some() };
+            var filterDto = new TagFilterDto();
+            filterDto.LikeTagName = OptionExtensions.SomeNotNull(likeTagName!);
             var model = new TagIndexViewModel()
             {
-                Tags = await _adFacade.FilterTags(dto)
+                Tags = await _adFacade.FilterTags(filterDto)
             };
             return View(model);
         }

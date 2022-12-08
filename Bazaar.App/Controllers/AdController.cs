@@ -6,6 +6,7 @@ using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
 using Microsoft.AspNetCore.Mvc;
+using Optional;
 
 namespace Bazaar.App.Controllers
 {
@@ -19,13 +20,16 @@ namespace Bazaar.App.Controllers
             _adFacade = adFacade;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(AdIndexViewModel model)
         {
-            var dto = new AdFilterDto();
-            var model = new AdIndexViewModel()
+            var filterDto = new AdFilterDto();
+            filterDto.LikeTitleName = OptionExtensions.SomeNotNull(model.LikeTitleName!);
+            filterDto.MinPrice = model.MinPrice;
+            filterDto.MaxPrice = model.MaxPrice;
+            model = new AdIndexViewModel()
             {
                 
-                Ads = await _adFacade.FilterAds(dto)
+                Ads = await _adFacade.FilterAds(filterDto)
             };
             return View(model);
         }
