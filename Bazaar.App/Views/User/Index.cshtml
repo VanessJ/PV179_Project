@@ -44,28 +44,39 @@
         <tr class="tbl">
             <td>@user.UserName</td>
             <td>@(user.Level == 0 ? "User" : "Admin")</td>
-            @if (user.Banned)
-            {
-                <td class="text-ban">Banned</td>
-                <td>
+            <td class="@(user.Banned ? "text-ban" : "text-unban")">@(user.Banned ? "Banned" : "Not banned")</td>
+	        <td>
+                <a class="btn btn-secondary my-1" href="@Url.Action("Details", new { Id = user.Id })">Details</a>
+                @if (user.Banned)
+                {
                     @using (Html.BeginForm("Unban", "User", new { id = user.Id }, FormMethod.Post, true, new { @class = "form-inline" }))
                     {
-                        <a class="btn btn-secondary my-1" href="@Url.Action("Details", new { Id = user.Id })">Details</a>
                         <input class="btn btn-unban my-1" type="submit" value="Unban" />
                     }
-                </td>
-            }
-            else
-            {
-                <td class="text-unban">Not-Banned</td>
-                <td>
+                }
+                else
+                {
                     @using (Html.BeginForm("Ban", "User", new { id = user.Id }, FormMethod.Post, true, new { @class = "form-inline" }))
                     {
-                        <a class="btn btn-secondary my-1" href="@Url.Action("Details", new { Id = user.Id })">Details</a>
                         <input class="btn btn-ban my-1" type="submit" value="Ban" />
                     }
-                </td>
-            }
+                }
+                @if (user.Level == 0)
+                {
+                    @using (Html.BeginForm("Upgrade", "User", new { id = user.Id }, FormMethod.Post, true, new { @class = "form-inline" }))
+                    {
+                        <input class="btn btn-primary my-1" type="submit" value="Upgrade" />
+                    }
+                }
+                else
+                {
+                    @using (Html.BeginForm("Downgrade", "User", new { id = user.Id }, FormMethod.Post, true, new { @class = "form-inline" }))
+                    {
+                        <input class="btn btn-primary my-1" type="submit" value="Downgrade" />
+                    }
+                }
+            </td>
+            
         </tr>
     }
     </tbody>

@@ -88,5 +88,23 @@ namespace Bazaar.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upgrade(Guid id)
+        {
+            await _adminFacade.UpgradeUser(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Downgrade(Guid id)
+        {
+            await _adminFacade.DowngradeUser(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

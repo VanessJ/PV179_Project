@@ -9,6 +9,7 @@ using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 
 namespace Bazzar.Bl.Tests
@@ -156,13 +157,14 @@ namespace Bazzar.Bl.Tests
             var tagServiceMockInstance = new Mock<ITagService>(MockBehavior.Loose).Object;
             var adServiceInstance = new Mock<IAdService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
+            var userManagerInstance = new Mock<UserManager<IdentityUser>>(MockBehavior.Loose).Object;
 
             var userService = new Mock<IUserService>(MockBehavior.Loose);
             
             userService.Setup(x => x.ExecuteQueryAsync(It.IsAny<UserFilterDto>())).ReturnsAsync(bannedList);
             var userServiceInstance = userService.Object;
 
-            IAdminFacade adminFacade = new AdminFacade(userServiceInstance, tagServiceMockInstance, adServiceInstance, unitOfWorkInstance);
+            IAdminFacade adminFacade = new AdminFacade(userServiceInstance, tagServiceMockInstance, adServiceInstance, unitOfWorkInstance, userManagerInstance);
             var banned = await adminFacade.GetBannedUsers();
             Assert.Equal(2, banned.Count());
         }

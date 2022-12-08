@@ -19,7 +19,7 @@ namespace Bazaar.BL.Dtos.User
 
         public string PasswordHash { get; set; }
 
-        public string Roles { get; set; }
+        public int Level { get; set; }
 
         public ICollection<AdDto> Ads { get; set; }
 

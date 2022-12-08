@@ -12,7 +12,7 @@ namespace Bazaar.App.Models
         public string LastName { get; set; }
 
         public string Email { get; set; }
-        public string Roles { get; set; }
+        public int Level { get; set; }
         public bool Banned { get; set; }
         public string PhoneNumber { get; set; }
         public IEnumerable<AdListDto> Ads { get; set; }

@@ -6,6 +6,7 @@ using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
 using Optional;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bazaar.BL.Facade
 {
@@ -15,13 +16,15 @@ namespace Bazaar.BL.Facade
         private readonly ITagService _tagService;
         private readonly IAdService _adService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminFacade(IUserService userUserService, ITagService tagService, IAdService adService, IUnitOfWork unitOfWork)
+        public AdminFacade(IUserService userUserService, ITagService tagService, IAdService adService, IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
         {
             _userService = userUserService;
             _tagService = tagService;
             _adService = adService;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
         public async Task AddNewTag(TagCreateDto tagCreateDto)
         {
@@ -63,6 +66,32 @@ namespace Bazaar.BL.Facade
             await _userService.UpdateAsync<UserUpdateDto>(userUpdateDto);
             await _unitOfWork.CommitAsync();
         }
+
+        public async Task UpgradeUser(Guid id)
+        {
+            var result = await _userManager.AddToRoleAsync(await _userManager.FindByIdAsync(id.ToString()), "Admin");
+            if (result.Succeeded)
+            {
+                var userUpdateDto = await _userService.GetByIdAsync<UserUpdateDto>(id);
+                userUpdateDto.Level = 1;
+                await _userService.UpdateAsync<UserUpdateDto>(userUpdateDto);
+                await _unitOfWork.CommitAsync();
+            }
+
+            
+        }
+        public async Task DowngradeUser(Guid id)
+        {
+            var result = await _userManager.RemoveFromRoleAsync(await _userManager.FindByIdAsync(id.ToString()), "Admin");
+            if (result.Succeeded)
+            {
+                var userUpdateDto = await _userService.GetByIdAsync<UserUpdateDto>(id);
+                userUpdateDto.Level = 0;
+                await _userService.UpdateAsync<UserUpdateDto>(userUpdateDto);
+                await _unitOfWork.CommitAsync();
+            }
+        }
+
 
         public async Task<IEnumerable<UserListDto>> GetBannedUsers()
         {

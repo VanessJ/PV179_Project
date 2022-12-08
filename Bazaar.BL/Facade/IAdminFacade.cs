@@ -16,6 +16,10 @@ namespace Bazaar.BL.Facade
 
         Task UnBanUser(Guid id);
 
+        Task DowngradeUser(Guid id);
+
+        Task UpgradeUser(Guid id);
+
 
         Task<IEnumerable<UserListDto>> GetBannedUsers();
     }
