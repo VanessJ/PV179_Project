@@ -32,6 +32,11 @@ namespace Bazaar.BL.QueryObjects.Users
                 query.Filter(u => !u.Banned);
             }
 
+            if (filter_dto.Level.HasValue)
+            {
+                query.Filter(u => u.Level.Equals(filter_dto.Level.ValueOrDefault()));
+            }
+
             return query;
         }
     }

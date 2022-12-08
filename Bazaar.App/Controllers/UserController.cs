@@ -25,11 +25,7 @@ namespace Bazaar.App.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = new UserIndexViewModel()
-            {
-                Users = await _userFacade.GetAllUsers()
-            };
-            return View(model);
+            return View(new UserIndexViewModel() { Users = await _userFacade.GetAllUsers() });
         }
 
         [HttpPost]
@@ -38,6 +34,7 @@ namespace Bazaar.App.Controllers
         {
             var filter = new UserFilterDto();
             filter.LikeUserName = OptionExtensions.SomeNotNull(model.UserName!);
+            filter.Level = model.Level.ToOption();
             if (model.Banned == true)
             {
                 filter.OnlyBanned = true;

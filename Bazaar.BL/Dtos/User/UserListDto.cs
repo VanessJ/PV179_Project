@@ -6,5 +6,7 @@ namespace Bazaar.BL.Dtos.User
         public Guid Id { get; set; }
         public string UserName { get; set; } = null!;
         public bool Banned { get; set; }
+
+        public int Level { get; set; }
     }
 }
