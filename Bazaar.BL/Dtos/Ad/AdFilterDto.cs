@@ -7,9 +7,8 @@ namespace Bazaar.BL.Dtos.Ad
     {
         public Option<string> ContainsTitleName { get; set; }
         public Option<string> LikeTitleName { get; set; }
-
-        public int MinPrice { get; set; } = -1;
-        public int MaxPrice { get; set; } = -1;
+        public int MinPrice { get; set; }
+        public int MaxPrice { get; set; }
 
         public bool OnlyValid { get; set; } = false; 
 
