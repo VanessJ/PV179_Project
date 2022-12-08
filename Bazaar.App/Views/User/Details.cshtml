@@ -1,10 +1,52 @@
-﻿@model AdIndexViewModel
+﻿@model UserDetailViewModel
 
+<div class="d-flex justify-content-between">
+    <h4>User Profile</h4>
+    <a class="btn btn-secondary my-1" href="@Url.Action("Index")">Back</a>
+</div>
 
-<h1>Ads</h1>
-<a class="btn btn-primary" href="@Url.Action("Add")">Add</a>
+@Html.HiddenFor(x => x.Id)
+<table>
+    <tbody>
+    <tr>
+        <td>User Name: </td> 
+        <td>@Model.UserName</td>
+    </tr>
+    <tr>
+        <td>First Name: </td> 
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <td>Last Name: </td>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <td>Email: </td>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td>Role: </td>
+        <td>@Model.Roles</td>
+    </tr>
+    <tr>
+        <td>Status: </td> 
+        @if (Model.Banned)
+        {
+            <td class="text-ban">Banned</td>
+        }
+        else
+        {
+            <td class="text-unban">Active</td>
+        }
+    </tr>
+    <tr>
+        <td>Phone Number: </td> 
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    </tbody>
+</table>
 
-
+<h4 class="text-align-center">@Model.UserName's Ads</h4>
 
 <div class="container d-flex justify-content-center mt-50 mb-50 ">
     <div class="d-flex justify-content-center">
@@ -55,3 +97,4 @@
         </div>                     
     </div>
 </div>
+

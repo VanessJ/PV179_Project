@@ -8,7 +8,7 @@ namespace Bazaar.BL.Dtos.User
         public Guid Id { get; set; }
         public string UserName { get; set; } = null!;
 
-        public ICollection<AdListDto> Ads { get; set; }
+        public IEnumerable<AdListDto> Ads { get; set; }
 
         public IEnumerable<ReviewDto> ReviewerIn { get; set; }
         public IEnumerable<ReviewDto> ReviewedIn { get; set; }

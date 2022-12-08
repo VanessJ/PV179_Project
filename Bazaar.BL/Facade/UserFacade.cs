@@ -4,6 +4,7 @@ using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Users;
+using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Facade
@@ -38,6 +39,16 @@ namespace Bazaar.BL.Facade
         {
             var user = await _userService.CreateAsync<UserCreateDto>(createDto);
             await _unitOfWork.CommitAsync();   
+        }
+
+        public async Task<IEnumerable<UserListDto>> GetAllUsers()
+        {
+            var user = await _userService.GetAllAsync<UserListDto>();
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+            return user;
         }
 
         public async Task<UserProfileDetailDto> GetUserProfileDetail(Guid id)

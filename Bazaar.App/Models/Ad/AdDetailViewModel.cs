@@ -19,9 +19,9 @@ namespace Bazaar.App.Models
         public int Price { get; set; }
         public UserDto Creator { get; set; } = null!;
 
-        public ICollection<ImageDto> Images { get; set; }
+        public IEnumerable<ImageDto> Images { get; set; }
 
-        public ICollection<AdTagDto> AdTags { get; set; }
+        public IEnumerable<AdTagDto> AdTags { get; set; }
 
         public List<string> PlaceholderLinks { get; set; } = new List<string>();
     }

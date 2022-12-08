@@ -10,6 +10,7 @@ using Bazaar.BL.Services.Tags;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
+using Optional;
 
 namespace Bazaar.BL.Facade
 {
@@ -99,14 +100,14 @@ namespace Bazaar.BL.Facade
             return reactions;
         }
 
-        public async Task<AdOwnerDetailDto> AdDetailForOwner(Guid id)
+        public async Task<IEnumerable<AdListDto>> GetOwnerAds(Guid id)
         {
-            var ad = await _adService.GetByIdAsync<AdOwnerDetailDto>(id);
-            if (ad == null)
+            var ads = await _adService.ExecuteQueryAsync(new AdFilterDto() { UserId = id.Some() });
+            if (ads == null)
             {
                 throw new ArgumentException();
             }
-            return ad;
+            return ads;
         }
 
         public async Task SetAsInvalid(Guid id)

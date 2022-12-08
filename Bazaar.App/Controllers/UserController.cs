@@ -11,33 +11,44 @@ namespace Bazaar.App.Controllers
     public class UserController : Controller
     {
         private IAdminFacade _adminFacade;
-        private IUserService _userService;
+        private IUserFacade _userFacade;
         private IMapper _mapper;
-        public UserController(IAdminFacade adminFacade, IMapper mapper, IUserService userService)
+        private IAdFacade _adFacade;
+        public UserController(IAdminFacade adminFacade, IMapper mapper, IUserFacade userFacade, IAdFacade adFacade)
         {
             _adminFacade = adminFacade;
             _mapper = mapper;
-            _userService = userService;
+            _userFacade = userFacade;
+            _adFacade = adFacade;
         }
 
         public async Task<IActionResult> Index()
         {
             var model = new UserIndexViewModel()
             {
-                Users = await _userService.GetAllAsync<UserListDto>()
+                Users = await _userFacade.GetAllUsers()
             };
             return View(model);
         }
 
-        public async Task<IActionResult> Detail(Guid id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            var dto = await _userService.GetByIdAsync<UserProfileDetailDto>(id);
-            if (dto == null)
+            var userDto = await _userFacade.GetUserProfileDetail(id);
+            if (userDto == null)
             {
                 return NotFound();
             }
 
-            var model = _mapper.Map<UserDetailViewModel>(dto);
+            var userAdsDto = await _adFacade.GetOwnerAds(id);
+
+            if (userAdsDto == null)
+            {
+                return NotFound();
+            }
+
+            userDto.Ads = userAdsDto;
+
+            var model = _mapper.Map<UserDetailViewModel>(userDto);
             return View(model);
         }
 

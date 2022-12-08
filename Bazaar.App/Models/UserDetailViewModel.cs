@@ -1,4 +1,6 @@
-﻿namespace Bazaar.App.Models
+﻿using Bazaar.BL.Dtos.Ad;
+
+namespace Bazaar.App.Models
 {
     public class UserDetailViewModel
     {
@@ -13,5 +15,6 @@
         public string Roles { get; set; }
         public bool Banned { get; set; }
         public string PhoneNumber { get; set; }
+        public IEnumerable<AdListDto> Ads { get; set; }
     }
 }

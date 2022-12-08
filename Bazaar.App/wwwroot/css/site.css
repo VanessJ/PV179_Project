@@ -111,3 +111,7 @@ a {
     -ms-flex-align: start;
     align-items: flex-start;
 }
+
+text-align-center {
+    display: inline-block;
+}

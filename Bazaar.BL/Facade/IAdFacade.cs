@@ -15,7 +15,7 @@ namespace Bazaar.BL.Facade
 
         Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 
-        Task<AdOwnerDetailDto> AdDetailForOwner(Guid id);
+        Task<IEnumerable<AdListDto>> GetOwnerAds(Guid id);
 
         Task SetAsInvalid(Guid id);
 

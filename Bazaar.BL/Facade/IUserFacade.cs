@@ -10,6 +10,7 @@ namespace Bazaar.BL.Facade
         Task<IEnumerable<UserListDto>> FilterUsers(UserFilterDto filterDto);
         Task EditUser(UserEditDto editDto);
         Task RegisterUser(UserCreateDto createDto);
+        Task<IEnumerable<UserListDto>> GetAllUsers();
         Task<UserProfileDetailDto> GetUserProfileDetail(Guid id);
         Task<UserDetailDto> GetUserDetail(Guid id);
         Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id);

@@ -23,29 +23,15 @@ namespace Bazaar.App.Controllers
             _adFacade = adFacade;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string likeTagName)
         {
-            var dto = new TagFilterDto();
+            var dto = new TagFilterDto() { LikeTagName = likeTagName == null ? new Option<string>() : likeTagName.Some() };
             var model = new TagIndexViewModel()
             {
                 Tags = await _adFacade.FilterTags(dto)
             };
             return View(model);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(TagIndexViewModel model)
-        {
-            var dto = new TagFilterDto() { LikeTagName = model.LikeTagName == null ? new Option<string>() : model.LikeTagName.Some() };
-
-            model = new TagIndexViewModel()
-            {
-                Tags = await _adFacade.FilterTags(dto)
-            };
-            return View(model);
-        }
-
 
         public IActionResult Add()
         {
