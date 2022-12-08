@@ -18,7 +18,7 @@
             <tr>
                 <td>@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })</td>
                 <td> 
-                    @Html.DropDownListFor(x => x.Role, new SelectList(new string[]{"Admin", "Role"}), "None", new { @class = "form-control" })
+                    @Html.DropDownListFor(x => x.Level, new SelectList(new object[]{new {Val = 0, Name = "User"}, new {Val = 1, Name = "Admin"}}, "Val", "Name"), "None", new { @class = "form-control" })
                 </td>
                 <td>
                     @Html.DropDownListFor(x => x.Banned, new SelectList(new object[]{new {Val = true, Name = "Banned"}, new {Val = false, Name = "Not Banned"}}, "Val", "Name"), "None", new { @class = "form-control" })
@@ -43,7 +43,7 @@
     {
         <tr class="tbl">
             <td>@user.UserName</td>
-            <td>...</td>
+            <td>@(user.Level == 0 ? "User" : "Admin")</td>
             @if (user.Banned)
             {
                 <td class="text-ban">Banned</td>

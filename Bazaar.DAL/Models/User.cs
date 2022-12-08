@@ -20,6 +20,10 @@ namespace Bazaar.DAL.Models
         
         public string? PhoneNumber { get; set; }
 
+        public bool HasPremium { get; set; }
+
+        public int Level { get; set; } = 0;
+
         public virtual ICollection<Ad> Ads { get; set; }
 
         public virtual ICollection<Review> ReviewerIn { get; set; }
