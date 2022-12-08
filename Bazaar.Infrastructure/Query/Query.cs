@@ -30,7 +30,7 @@ namespace Bazaar.Infrastructure.Query
             return this;
         }
 
-        public abstract Task<IEnumerable<TEntity>> ExecuteAsync();
+        public abstract Task<IEnumerable<TEntity>> ExecuteAsync(params string[] includes);
     }
 }
 

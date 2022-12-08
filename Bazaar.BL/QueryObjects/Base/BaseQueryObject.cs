@@ -23,7 +23,7 @@ namespace Bazaar.BL.QueryObjects.Base
         }
         public abstract IQuery<TEntity> FilterByWhere(IQuery<TEntity> query, TFilter filterDto);
 
-        public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filterDto)
+        public async Task<IEnumerable<TDto>> ExecuteQueryAsync(TFilter filterDto, params string[] includes)
         {
             var query = FilterByWhere(_query, filterDto);
 
@@ -37,7 +37,7 @@ namespace Bazaar.BL.QueryObjects.Base
                 query.Page(filterDto.RequestedPageNumber.ValueOrDefault(), filterDto.PageSize.ValueOrDefault());
             }
 
-            var resultQuery = await query.ExecuteAsync();
+            var resultQuery = await query.ExecuteAsync(includes);
 
             return _mapper.Map<IEnumerable<TDto>>(resultQuery);
 

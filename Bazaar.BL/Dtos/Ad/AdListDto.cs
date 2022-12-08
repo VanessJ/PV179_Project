@@ -9,6 +9,8 @@ namespace Bazaar.BL.Dtos.Ad
         public Guid Id { get; set; }
         public string Title { get; set; } = null!;
 
+        public string Description { get; set; } = null!;
+
         public bool IsPremium { get; set; }
 
         public bool IsValid { get; set; }
@@ -16,6 +18,8 @@ namespace Bazaar.BL.Dtos.Ad
         public bool IsOffer { get; set; }
 
         public int Price { get; set; }
+
+        public UserDto Creator { get; set; }
         public ICollection<ImageDto> Images { get; set; }
         public ICollection<AdTagDto> AdTags { get; set; }
     }

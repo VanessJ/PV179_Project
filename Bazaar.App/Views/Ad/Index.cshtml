@@ -3,42 +3,55 @@
 
 <h1>Ads</h1>
 <a class="btn btn-primary" href="@Url.Action("Add")">Add</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width:20%">Photo</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Type</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+
+
+
+<div class="container d-flex justify-content-center mt-50 mb-50 ">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-10">
         @foreach (var ad in Model.Ads)
         {
-            <tr>
-                <td class="align-middle">
-                    <img src="https://psychologieprokazdeho.cz/wp-content/uploads/2018/03/zacinajici-obchodnik.jpg" alt="Bla" width="400"
-                     height="400" class="img-thumbnail">
-                </td>
-                <td class="align-middle"> @ad.Title</td>
-                <td class="align-middle"> @ad.Price</td>
+            <div class="card card-body mb-2">
+                <div class="media align-items-center align-items-lg-start text-left text-lg-left flex-column flex-lg-row">
+                    <div class="mr-2 mb-3 mb-lg-0">
 
-                <td class="align-middle">
-                    @if (ad.IsOffer)
-                    {
-                        <div>Offer</div>
-                    }
-                    @if (!ad.IsOffer)
-                    {
-                        <div>Demand</div>
-                    }
-                </td>
+                        <img src="https://i.imgur.com/5Aqgz7o.jpg" width="150" height="150" alt="">
 
-                <td class="align-middle">
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@ad.Id"> Details</a>
-                </td>
-            </tr>
+                    </div>
+
+                    <div class="media-body w-760">
+                        <h6 class="media-title font-weight-semibold">
+                            <a href="#" data-abc="true">@ad.Title</a>
+                        </h6>
+
+                        <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
+                            @foreach (var tag in ad.AdTags)
+                            {
+                                <li class="list-inline-item">#@tag.Tag.TagName</li>
+                            }
+                        </ul>
+                        <p class="mb-3">@ad.Description</p>
+
+                        <p class="position-absolute b-10">From user: <a href="#" data-abc="true">@ad.Creator.UserName</a></p>
+                    </div>
+
+                    <div class="mt-3 mt-lg-0 me-lg-3 text-center">
+                        <h3 class="mb-0 font-weight-semibold">$@ad.Price</h3>
+                        @if (ad.IsOffer)
+                        {
+                            <h6 class="text-success">Offer</h6>
+                        }
+                        @if (!ad.IsOffer)
+                        {
+                            <h6 class="text-success">Demand</h6>
+                        }
+                        
+                        <a class="btn btn-primary mt-3" asp-action="Details" asp-route-id="@ad.Id">Details</a>
+                        <a class="btn btn-outline-primary mt-2" asp-action="React" asp-route-id="@ad.Id">React</a>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+        </div>                     
+    </div>
+</div>

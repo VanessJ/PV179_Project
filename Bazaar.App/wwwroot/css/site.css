@@ -74,3 +74,40 @@ body {
     width: 200px;
     bottom: 0 !important;
 }
+
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+
+.w-760 {
+    width: 760px;
+}
+
+.b-10 {
+    bottom: 10px;
+}
+
+.bg-teal-400 {
+    background-color: #26a69a;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+
+.fa {
+    color: red;
+}
+
+.media {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
