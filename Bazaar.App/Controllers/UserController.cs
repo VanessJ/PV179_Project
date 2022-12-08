@@ -5,6 +5,7 @@ using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Users;
 using Microsoft.AspNetCore.Mvc;
+using Optional;
 
 namespace Bazaar.App.Controllers
 {
@@ -28,6 +29,26 @@ namespace Bazaar.App.Controllers
             {
                 Users = await _userFacade.GetAllUsers()
             };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(UserIndexViewModel model)
+        {
+            var filter = new UserFilterDto();
+            filter.LikeUserName = OptionExtensions.SomeNotNull(model.UserName!);
+            if (model.Banned == true)
+            {
+                filter.OnlyBanned = true;
+            }
+            if (model.Banned == false)
+            {
+                filter.OnlyNotBanned = true;
+            }
+
+            model.Users = await _userFacade.FilterUsers(filter);
+
             return View(model);
         }
 

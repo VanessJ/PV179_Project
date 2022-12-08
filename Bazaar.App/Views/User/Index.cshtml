@@ -4,7 +4,10 @@
 
 
 <div class="w-a">
-    <form class="search" asp-action="Index">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         <table class="main_div">
             <tr>
                 <td><label class="control-label">Username: </label></td>
@@ -13,26 +16,18 @@
                 <td></td>
             </tr>
             <tr>
-                <td><input class="form-control my-1" placeholder="Search"> <!--asp-for="LikeUserName"--></td>
+                <td>@Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })</td>
                 <td> 
-                    <select class="form-control" id="sel1" name="sellist1">
-                        <option>None</option>
-                        <option>User</option>
-                        <option>Admin</option>
-                    </select>
+                    @Html.DropDownListFor(x => x.Role, new SelectList(new string[]{"Admin", "Role"}), "None", new { @class = "form-control" })
                 </td>
                 <td>
-                    <select class="form-control" id="sel1" name="sellist1">
-                        <option>None</option>
-                        <option>Not-Banned</option>
-                        <option>Banned</option>
-                    </select>
+                    @Html.DropDownListFor(x => x.Banned, new SelectList(new object[]{new {Val = true, Name = "Banned"}, new {Val = false, Name = "Not Banned"}}, "Val", "Name"), "None", new { @class = "form-control" })
                 </td>
                 <td><button class="btn btn-secondary my-1" type="submit">Search</button></td>
             </tr>
         </table>
-    </form>
-</div>
+    }
+ </div>
 
 <table class="table table-striped">
     <thead>
