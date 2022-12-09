@@ -129,7 +129,7 @@ namespace Bazzar.Bl.Tests
             var adServiceMockInstance = adServiceMock.Object;
 
             IAdFacade adFacade = new AdFacade(adServiceMockInstance, tagServiceMockInstance, imageServiceMockInstance, reactionServiceMockInstance, unitOfWorkInstance);
-            var filteredAds = await adFacade.FilterAds(new AdFilterDto() { OnlyOffer = true });
+            var filteredAds = await adFacade.FilterAds( new AdFilterDto() { OnlyOffer = true } );
             Assert.Equal(3, filteredAds.Count());
             Assert.Equal("Predam psa", filteredAds.First().Title);
         }

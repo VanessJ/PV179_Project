@@ -39,12 +39,12 @@ namespace Bazaar.BL.QueryObjects.Ads
 
             if (filterDto.MaxPrice > 0)
             {
-                query.Filter(a => a.Price < filterDto.MaxPrice);
+                query.Filter(a => a.Price <= filterDto.MaxPrice);
             }
 
             if (filterDto.MinPrice > 0)
             {
-                query.Filter(a => a.Price > filterDto.MinPrice);
+                query.Filter(a => a.Price >= filterDto.MinPrice);
             }
 
             if (filterDto.OnlyValid)
@@ -56,6 +56,7 @@ namespace Bazaar.BL.QueryObjects.Ads
             {
                 query.Filter(a => a.IsOffer);
             }
+
             if (filterDto.OnlyDemand)
             {
                 query.Filter(a => !a.IsOffer);

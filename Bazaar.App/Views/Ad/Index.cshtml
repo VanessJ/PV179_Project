@@ -44,11 +44,15 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Min</label>
-                            <input min="0" lang="en" asp-for="MinPrice" class="form-control" placeholder="$0" type="number">
+                            @Html.AntiForgeryToken()
+                            @Html.TextBoxFor(x => x.MinPrice, new {@class = "form-control"})
+                            <span asp-validation-for="MinPrice" class="text-danger"></span>
                         </div>
                         <div class="form-group text-right col-md-6">
                             <label>Max</label>
-                            <input min="0" asp-for="MaxPrice" class="form-control" placeholder="$1,0000" type="number">
+                            @Html.AntiForgeryToken()
+                            @Html.TextBoxFor(x => x.MaxPrice, new {@class = "form-control"})
+                            <span asp-validation-for="MaxPrice" class="text-danger"></span>
                         </div>
                     </div> <!-- form-row.// -->
                 </div><!-- card-body.// -->
@@ -61,20 +65,25 @@
             </header>
             <div class="filter-content collapse show" id="collapse_4" style="">
                 <div class="card-body">
-                    <table>
-                        <tr>
-                            <td><label>@Html.RadioButtonFor(i => i.Ads, true) Both</label></td>
-                        </tr>
-                        <tr>
-                            <td><label>@Html.RadioButtonFor(i => i.Ads, true) Offer</label></td>
-                        </tr>
-                        <tr>
-                            <td><label>@Html.RadioButtonFor(i => i.Ads, false) Demand</label></td>
-                        </tr>
-                    </table>
+                    <input type="radio" name="TypeOfAd" value="Both" checked="checked" asp-for="TypeOfAd"/> Both<br />
+                    <input type="radio" name="TypeOfAd" value="Offer" asp-for="TypeOfAd"/> Offer<br />
+                    <input type="radio" name="TypeOfAd" value="Demand" asp-for="TypeOfAd"/> Demand<br />
                 </div><!-- card-body.// -->
             </div>
         </article> <!-- filter-group .// -->
+        <!--<article class="filter-group">
+            <header class="card-header">
+                <i class="icon-control fa fa-chevron-down"></i>
+                <h6 class="title">Order by </h6>
+            </header>
+            <div class="filter-content collapse show" id="collapse_4" style="">
+                < <div class="card-body">
+                    <input type="radio" name="TypeOfOrder" value="A-Z" checked="checked" asp-for="TypeOfOrder"/> A-Z<br />
+                    <input type="radio" name="TypeOfOrder" value="Lowest price" asp-for="TypeOfOrder"/> Lowest price<br />
+                    <input type="radio" name="TypeOfOrder" value="Highest price" asp-for="TypeOfOrder"/> Highest price<br />
+                </div> card-body.// 
+            </div>
+        </article>  -->
         <article class="filter-group">
             <header class="card-header">
                 <i class="icon-control fa fa-chevron-down"></i>
@@ -83,8 +92,11 @@
             <div class="filter-content collapse show" id="collapse_2" style="">
                 <div class="card-body">
                     <label class="custom-control custom-checkbox">
-                        <input type="checkbox" checked="" class="custom-control-input">
-                        <div class="custom-control-label">Mercedes</div>
+                        @foreach(var tag in Model.Tags)
+                        {
+                            <input type="checkbox" checked="" class="custom-control-input">
+                            <div class="custom-control-label">@tag.TagName</div>
+                        }
                     </label>
                 </div> <!-- card-body.// -->
             </div>
@@ -109,7 +121,13 @@
 
                             <div class="media-body w-760">
                                 <h6 class="media-title font-weight-semibold">
-                                    <a asp-action="Details" asp-route-id="@ad.Id" data-abc="true">@ad.Title</a>
+                                    <a asp-action="Details" asp-route-id="@ad.Id" data-abc="true">
+                                        @if (ad.IsPremium)
+                                        {
+                                            <span class="star">&#11088;</span>
+                                        }
+                                        @ad.Title
+                                    </a>
                                 </h6>
 
                                 <ul class="list-inline mb-3 mb-lg-2 tag-font">

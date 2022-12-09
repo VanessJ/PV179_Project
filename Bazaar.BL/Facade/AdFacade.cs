@@ -1,5 +1,6 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.AdTag;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
@@ -59,9 +60,16 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task<int> GetHigherPrice()
+        {
+            var ads = await _adService.ExecuteQueryAsync(new AdFilterDto() { OderCriteria = "Price".Some(), OrderAscending = false.Some() });
+
+            return ads == null || ads.Count() == 0 ? 0 : ads.First().Price;
+        }
         public async Task<IEnumerable<AdListDto>> FilterAds(AdFilterDto filterDto)
         {
             var ads = await _adService.ExecuteQueryAsync(filterDto);
+
             return ads;
         }
 
@@ -71,6 +79,10 @@ namespace Bazaar.BL.Facade
             if (ad == null)
             {
                 throw new EntityNotFoundException();
+            }
+            if (ad.AdTags == null)
+            {
+                ad.AdTags = new List<AdTagDto>();
             }
             return ad;
         }
