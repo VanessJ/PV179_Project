@@ -47,7 +47,6 @@ namespace Bazaar.App.Controllers
                 MinPrice = model.MinPrice,
                 MaxPrice = model.MaxPrice,
             };
-
             switch (model.TypeOfAd)
             {
                 case "Demand":
@@ -62,8 +61,9 @@ namespace Bazaar.App.Controllers
 
             model = new AdIndexViewModel()
             {
-                
-                Ads = await _adFacade.FilterAds(filterDto)
+                Tags = await _adFacade.GetAllTags(),
+                Ads = await _adFacade.FilterAds(filterDto),
+                MaxPrice = await _adFacade.GetHigherPrice()
             };
             return View(model);
         }
