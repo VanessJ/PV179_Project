@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Services.CRUDServices;
 
@@ -11,6 +12,5 @@ namespace Bazaar.BL.Services.Ads
         Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 
         Task<IEnumerable<AdListDto>> ExecuteQueryAsync(AdFilterDto filterDto);
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bazaar.App.Models;
 using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
@@ -20,12 +21,45 @@ namespace Bazaar.App.Controllers
             _adFacade = adFacade;
             _mapper = mapper;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            var filterDto = new AdFilterDto() { OderCriteria = "IsPremium".Some(), OrderAscending = false.Some() };
+
+            var model = new AdIndexViewModel()
+            {
+                Tags = await _adFacade.GetAllTags(),
+                Ads = await _adFacade.FilterAds(filterDto),
+                MaxPrice = await _adFacade.GetHigherPrice()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Index(AdIndexViewModel model)
         {
-            var filterDto = new AdFilterDto();
-            filterDto.LikeTitleName = OptionExtensions.SomeNotNull(model.LikeTitleName!);
-            filterDto.MinPrice = model.MinPrice;
-            filterDto.MaxPrice = model.MaxPrice;
+            var filterDto = new AdFilterDto()
+            {
+                OderCriteria = "IsPremium".Some(),
+                OrderAscending = false.Some(),
+                LikeTitleName = OptionExtensions.SomeNotNull(model.LikeTitleName!),
+                MinPrice = model.MinPrice,
+                MaxPrice = model.MaxPrice,
+            };
+
+            switch (model.TypeOfAd)
+            {
+                case "Demand":
+                    filterDto.OnlyDemand = true;
+                    break;
+                case "Offer":
+                    filterDto.OnlyOffer = true;
+                    break;
+            }
+
+            var orderFilterDto = new AdFilterDto() { OderCriteria = "Price".Some(), OrderAscending = false.Some() };
+
             model = new AdIndexViewModel()
             {
                 

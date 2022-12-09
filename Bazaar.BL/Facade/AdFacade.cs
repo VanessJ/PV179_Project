@@ -1,5 +1,6 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.AdTag;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
@@ -34,7 +35,7 @@ namespace Bazaar.BL.Facade
         {
             adCreateDto.UserId = userId;
 
-            if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
+            if (adCreateDto.AdTags == null)
             {
                 adCreateDto.AdTags = new List<AdTagDto>();
             }
@@ -44,7 +45,7 @@ namespace Bazaar.BL.Facade
                 adCreateDto.AdTags.Add(new AdTagDto(){TagId = tagId});
             }
 
-            if (adCreateDto.Images == null && imageCreateDtos.Count() != 0)
+            if (adCreateDto.Images == null)
             {
                 adCreateDto.Images = new List<ImageCreateDto>();
             }
@@ -59,9 +60,16 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task<int> GetHigherPrice()
+        {
+            var ads = await _adService.ExecuteQueryAsync(new AdFilterDto() { OderCriteria = "Price".Some(), OrderAscending = false.Some() });
+
+            return ads == null || ads.Count() == 0 ? 0 : ads.First().Price;
+        }
         public async Task<IEnumerable<AdListDto>> FilterAds(AdFilterDto filterDto)
         {
             var ads = await _adService.ExecuteQueryAsync(filterDto);
+
             return ads;
         }
 

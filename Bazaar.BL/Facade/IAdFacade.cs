@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
@@ -16,6 +17,8 @@ namespace Bazaar.BL.Facade
         Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id);
 
         Task<IEnumerable<AdListDto>> GetOwnerAds(Guid id);
+
+        Task<int> GetHigherPrice();
 
         Task SetAsInvalid(Guid id);
 

@@ -1,6 +1,7 @@
 using AutoMapper;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Base;
 using Bazaar.DAL.Data;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
@@ -203,7 +204,6 @@ namespace Bazzar.Bl.Tests
                     Title = "Predam psa",
                     Description = "Je velmi zlata, zbavte ma jej, prosim",
                     IsOffer = true,
-                    IsPremium = false,
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
@@ -221,7 +221,6 @@ namespace Bazzar.Bl.Tests
                     Title = "Predam macku",
                     Description = "Je velmi zlata, mam ich moc vela, dalsiu nechcem!",
                     IsOffer = true,
-                    IsPremium = true,
                     IsValid = true,
                     Price = 100,
                     UserId = userId1,
@@ -239,7 +238,6 @@ namespace Bazzar.Bl.Tests
                     Title = "Predam strom",
                     Description = "je to velmi pekny strom!",
                     IsOffer = true,
-                    IsPremium = false,
                     IsValid = true,
                     Price = 900,
                     UserId = userId1,
@@ -257,7 +255,6 @@ namespace Bazzar.Bl.Tests
                     Title = "HRABLE NA PREDAJ, VOLAJ IHNED!!!",
                     Description = "Multifunkcne hrable na solarny pohon!",
                     IsOffer = true,
-                    IsPremium = true,
                     IsValid = true,
                     Price = 111,
                     UserId = userId2,
@@ -275,7 +272,6 @@ namespace Bazzar.Bl.Tests
                     Title = "Predam svoju svokru!",
                     Description = "Kto chce mat doma svokru..",
                     IsOffer = true,
-                    IsPremium = false,
                     IsValid = true,
                     Price = 0,
                     UserId = userId2,
@@ -301,7 +297,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "UserName".Some()};
+            var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "UserName".Some() };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(2, result.Count());
@@ -320,7 +316,7 @@ namespace Bazzar.Bl.Tests
 
             var mapper = new Mapper(config);
             var userQueryObject = new UserQueryObject(mapper, query);
-            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1".Some(), OderCriteria = "Username".Some() };
+            var user_filter_dto = new UserFilterDto { ContainsUserName = "TestUser1".Some(), OderCriteria = "UserName".Some() };
             var result = await userQueryObject.ExecuteQueryAsync(user_filter_dto);
 
             Assert.Equal(1, result.Count());

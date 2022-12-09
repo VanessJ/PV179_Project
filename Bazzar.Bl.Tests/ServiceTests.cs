@@ -18,6 +18,7 @@ using Optional;
 using Bazaar.BL.Services.Ads;
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.App.Config;
+using Bazaar.BL.Dtos.Base;
 
 namespace Bazzar.Bl.Tests
 {
@@ -226,7 +227,6 @@ namespace Bazzar.Bl.Tests
             IQuery<User> query = new EFQuery<User>(context);
             IUserQueryObject userQueryObject= new UserQueryObject(mapper, query);
             var tagService = new UserService(uow, mapper, userQueryObject);
-
             var user_filter_dto = new UserFilterDto { LikeUserName = "TestUser".Some(), OderCriteria = "UserName".Some() };
             var ads = await tagService.ExecuteQueryAsync(user_filter_dto);
 
