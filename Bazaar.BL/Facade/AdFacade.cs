@@ -35,9 +35,14 @@ namespace Bazaar.BL.Facade
         {
             adCreateDto.UserId = userId;
 
-            if (adCreateDto.AdTags == null)
+            if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
             {
                 adCreateDto.AdTags = new List<AdTagDto>();
+            }
+
+            if (adCreateDto.Images == null && imageCreateDtos.Count() != 0)
+            {
+                adCreateDto.Images = new List<ImageCreateDto>();
             }
 
             foreach (var tagId in tagIdS)
@@ -45,14 +50,9 @@ namespace Bazaar.BL.Facade
                 adCreateDto.AdTags.Add(new AdTagDto(){TagId = tagId});
             }
 
-            if (adCreateDto.Images == null)
-            {
-                adCreateDto.Images = new List<ImageCreateDto>();
-            }
-
             foreach (var imageCreateDto in imageCreateDtos)
             {
-                await _imageService.CreateAsync<ImageCreateDto>(imageCreateDto);
+
                 adCreateDto.Images.Add(imageCreateDto);
             }
             
@@ -75,10 +75,14 @@ namespace Bazaar.BL.Facade
 
         public async Task<AdDetailDto> AdDetail(Guid id)
         {
-            var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags), "AdTags.Tag");
+            var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags), "AdTags.Tag", nameof(Ad.Images));
             if (ad == null)
             {
                 throw new EntityNotFoundException();
+            }
+            if (ad.AdTags == null)
+            {
+                ad.AdTags = new List<AdTagDto>();
             }
             return ad;
         }

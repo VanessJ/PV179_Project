@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Bazaar.Infrastructure\Bazaar.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>
