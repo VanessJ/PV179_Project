@@ -50,6 +50,7 @@ namespace Bazaar.App.Controllers
                 LikeTitleName = OptionExtensions.SomeNotNull(model.LikeTitleName!),
                 MinPrice = model.MinPrice,
                 MaxPrice = model.MaxPrice,
+                TagIds = model.TagIds.Some()
             };
             switch (model.TypeOfAd)
             {
@@ -61,13 +62,13 @@ namespace Bazaar.App.Controllers
                     break;
             }
 
-            var orderFilterDto = new AdFilterDto() { OderCriteria = "Price".Some(), OrderAscending = false.Some() };
-
             model = new AdIndexViewModel()
             {
                 Tags = await _adFacade.GetAllTags(),
                 Ads = await _adFacade.FilterAds(filterDto),
-                MaxPrice = await _adFacade.GetHigherPrice()
+                MaxPrice = await _adFacade.GetHigherPrice(),
+                LikeTitleName = model.LikeTitleName,
+                TagIds = model.TagIds
             };
             return View(model);
         }

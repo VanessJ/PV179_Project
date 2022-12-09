@@ -32,7 +32,7 @@ namespace Bazaar.BL.QueryObjects.Ads
                 query.Filter(a => a.UserId == filterDto.UserId.ValueOrDefault());
             }
 
-            if (filterDto.TagIds.HasValue)
+            if (filterDto.TagIds.HasValue && filterDto.TagIds.ValueOrDefault().Count() != 0)
             {
                 query.Filter(a => a.AdTags.Any(tag => filterDto.TagIds.ValueOrDefault().Contains(tag.TagId)));
             }

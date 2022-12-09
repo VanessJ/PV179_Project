@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Bazaar.App.Models.Ad;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Tag;
-using Microsoft.Identity.Client;
 
 namespace Bazaar.App.Models
 {
@@ -18,7 +16,7 @@ namespace Bazaar.App.Models
 
         [Range(0, int.MaxValue, ErrorMessage = "Price must be a positive number")]
         public int MinPrice { get; set; }
-        public IEnumerable<Guid>? TagIds { get; set; }
+        public IEnumerable<Guid>? TagIds { get; set; } = new List<Guid>();
         public string? TypeOfAd { get; set; }
         public IEnumerable<AdListDto>? Ads { get; set; }
         public IEnumerable<TagDto>? Tags { get; set; }

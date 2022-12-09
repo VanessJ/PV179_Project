@@ -3,6 +3,8 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 <!------ Include the above in your HEAD tag ---------->
 
 <link rel="stylesheet" href="https://fontawesome.com/v4.7.0/assets/font-awesome/css/font-awesome.css">
@@ -89,13 +91,16 @@
             </header>
             <div class="filter-content collapse show" id="collapse_2" style="">
                 <div class="card-body">
-                    <label class="custom-control custom-checkbox">
-                        @foreach(var tag in Model.Tags)
+                    <table>
+                        @foreach (var tag in Model.Tags)
                         {
-                            <input type="checkbox" id="@tag.Id" class="custom-control-input" value="@tag.Id">
-                            <div class="custom-control-label">@tag.TagName</div>
+                            <tr>
+                                <td>
+                                    <input name="TagIds" type="checkbox" id="@tag.Id" value="@tag.Id"/><span> @tag.TagName</span>
+                                </td>
+                            </tr>
                         }
-                    </label>
+                    </table>
                 </div> <!-- card-body.// -->
             </div>
         </article> <!-- filter-group .// -->
