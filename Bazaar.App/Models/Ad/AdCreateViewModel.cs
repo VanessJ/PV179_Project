@@ -19,16 +19,14 @@ namespace Bazaar.App.Models
         public bool IsValid { get; set; } = true;
 
         public bool IsOffer { get; set; }
-        
+
         [Range(0, int.MaxValue, ErrorMessage = "Price must be a positive number")]
         public int Price { get; set; }
         public Guid UserId { get; set; }
+        public IEnumerable<Guid>? TagIds { get; set; } = new List<Guid>();
 
-        public List<Guid> ImageIds { get; set; } = new List<Guid>();
-
-        public IEnumerable<Guid> TagIds{ get; set; }
-
-        public List<TagDto> AllTags { get; set; }
+        public List<TagDto>? AllTags { get; set; }
+        public IEnumerable<IFormFile>? Files { get; set; }
 
     }
 }
