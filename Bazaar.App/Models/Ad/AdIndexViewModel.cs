@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Bazaar.App.Models.Ad;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Tag;
 using Microsoft.Identity.Client;
