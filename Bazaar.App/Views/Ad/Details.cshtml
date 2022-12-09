@@ -5,6 +5,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 @model AdDetailViewModel
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">@Model.Title</h1>
@@ -46,10 +47,10 @@
 
 <div>
     <div>
-        <p class="mb-4" style="font-size: 20px;">@Model.Description</p>
+        <p class="mb-4" style="font-size: 25px;">@Model.Description</p>
     </div>
 
-    <ul class="list-inline mb-3 mb-lg-2 tag-font" style="font-size: 15px;">
+    <ul class="list-inline mb-3 mb-lg-2 tag-font" style="font-size: 20px;">
         @foreach (var tag in Model.AdTags)
         {
             <li class="list-inline-item">#@tag.Tag.TagName</li>
@@ -57,49 +58,33 @@
     </ul>
 </div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th> Description</th>
-            <th> Price</th>  
-            <th> Type</th>
-            <th> Creator </th>
-
-        </tr>
-    </thead>
-    <tbody>
- 
-            <tr>
-                <td class="align-middle">
-                    @Model.Description
-                </td>
-                <td class="align-middle">
-                    @Model.Price €
-                </td>
-
-                <td class="align-middle">
-                    @if (Model.IsOffer)
-                    {
-                        <div>Offer</div>
-                    }
-                    @if (!Model.IsOffer)
-                    {
-                        <div>Demand</div>
-                    }
-                </td>
-
-                <td class="align-middle">
-                    @Model.Creator.UserName
-                </td>
-            </tr>
-    </tbody>
+<table style="width:35%; font-size: 20px;">
+    <tr>
+        <td> <b> From user: </b></td>
+        <td>@Html.ActionLink(@Model.Creator.UserName, "Details", "User", new { Id = @Model.Creator.Id }, null)</td>
+    </tr>
+    <tr>
+        <td> <b> Price: </b></td>
+        <td>@Model.Price €</td>
+    </tr>
+    <tr>
+        <td> <b> Type: </b></td>
+        <td>
+            @if (Model.IsOffer)
+            {
+                <div>Offer</div>
+            }
+            @if (!Model.IsOffer)
+            {
+                <div>Demand</div>
+            }
+        </td>
+    </tr>
 </table>
 
- @foreach (var tag in Model.AdTags)
- {
-     @tag.Tag.TagName
- }
-
-
+<br />
+<div>
+<a asp-action="Index">Back to List</a>
+</div>
 
 
