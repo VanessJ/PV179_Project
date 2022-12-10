@@ -27,8 +27,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie();
+builder.Services.AddAuthentication();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Register services for dependency injection
