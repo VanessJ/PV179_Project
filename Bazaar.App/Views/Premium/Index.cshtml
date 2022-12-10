@@ -1,0 +1,6 @@
+﻿@using System.Security.Claims;
+<h4>Buy premium</h4>
+@using (Html.BeginForm("Buy", "Premium", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <input class="btn btn-primary my-1" type="submit" value="Buy" />
+}

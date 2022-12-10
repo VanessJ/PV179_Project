@@ -17,5 +17,6 @@ namespace Bazaar.BL.Facade
         Task<IEnumerable<ReviewDto>> GetReviewsOfUser(Guid id);
         Task WriteReviewOfUser(ReviewCreateDto reviewDto);
         Task WriteReactionToAd(ReactionCreateDto reactionCreateDto);
+        Task SetAsPremium(Guid id);
     }
 }
