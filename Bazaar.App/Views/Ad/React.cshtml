@@ -1,0 +1,26 @@
+﻿@model ReactionCreateViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.UserId, Model.UserId)
+    @Html.HiddenFor(m => m.AdId, Model.AdId)
+    @Html.AntiForgeryToken()
+    <div>
+        <h2> <b>Are you interested in this ad? </b> </h2>
+        <br />
+        <h3> <b>Let the autor know! </b> </h3>
+        <br />
+        <h4> Write your message for the author </h4>
+    </div>
+    <br/>
+    <div class="mb-3">
+        <textarea asp-for="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        @Html.ValidationMessageFor(x => x.Message, null, new { @class = "text-danger" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <br />
+    <div>
+        <a class="btn btn-secondary my-1" href="@Url.Action("Details", new { Id = Model.AdId })">Show ad</a>
+    </div>
+}

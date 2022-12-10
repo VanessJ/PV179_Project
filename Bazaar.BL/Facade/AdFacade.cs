@@ -73,6 +73,13 @@ namespace Bazaar.BL.Facade
             return ads;
         }
 
+        public async Task AddReaction(ReactionCreateDto reactionCreateDto)
+        {
+            var ads = await _reactionService.CreateAsync(reactionCreateDto);
+            await _unitOfWork.CommitAsync();
+        }
+
+
         public async Task<AdDetailDto> AdDetail(Guid id)
         {
             var ad = await _adService.GetByIdAsync<AdDetailDto>(id, nameof(Ad.Creator), nameof(Ad.Reactions), nameof(Ad.AdTags), "AdTags.Tag", nameof(Ad.Images));
@@ -109,7 +116,13 @@ namespace Bazaar.BL.Facade
         public async Task<IEnumerable<ReactionDto>> GetAdReactions(Guid id)
         {
             var reactions = await _adService.GetAdReactions(id);
-            return reactions;
+            var reactionsWithIncludes = new List<ReactionDto>();
+            foreach (var reaction in reactions)
+            {
+                var reactionWithIncludes = await _reactionService.GetByIdAsync<ReactionDto>(reaction.Id, nameof(Reaction.User));
+                reactionsWithIncludes.Add(reactionWithIncludes);
+            }
+            return reactionsWithIncludes;
         }
 
         public async Task<IEnumerable<AdListDto>> GetOwnerAds(Guid id)
@@ -125,6 +138,12 @@ namespace Bazaar.BL.Facade
         public async Task SetAsInvalid(Guid id)
         {
             await _adService.SetAdAsInvalid(id);
+        }
+
+        public async Task DeclineAdReaction(Guid reactionId)
+        {
+            await _reactionService.DeclineReaction(reactionId);
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task AcceptAdReaction(Guid reactionId, Guid adId)

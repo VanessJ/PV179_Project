@@ -28,6 +28,7 @@ namespace Bazaar.App.Config
 
             CreateMap<Reaction, ReactionCreateDto>().ReverseMap();
             CreateMap<Reaction, ReactionDto>().ReverseMap();
+            CreateMap<Reaction, ReactionUpdateDto>().ReverseMap();
 
             CreateMap<Review, ReviewCreateDto>().ReverseMap();
             CreateMap<Review, ReviewDto>().ReverseMap();

@@ -1,8 +1,13 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Bazaar.BL.Dtos.Reaction
 {
-    public class ReactionDto
+    public class ReactionUpdateDto
     {
         public Guid Id { get; set; }
         public string? Message { get; set; }
@@ -10,9 +15,6 @@ namespace Bazaar.BL.Dtos.Reaction
         public Guid UserId { get; set; }
 
         public Guid AdId { get; set; }
-        public UserDto User { get; set; } = null!;
-
-        public AdDto Ad { get; set; } = null!;
 
         public bool Accepted { get; set; }
 

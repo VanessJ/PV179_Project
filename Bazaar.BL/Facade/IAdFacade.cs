@@ -10,6 +10,7 @@ namespace Bazaar.BL.Facade
     {
         Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto);
 
+        Task AddReaction(ReactionCreateDto reactionCreateDto);
         Task<IEnumerable<AdListDto>> FilterAds(AdFilterDto filterDto);
 
         Task<AdDetailDto> AdDetail(Guid id);
@@ -22,6 +23,7 @@ namespace Bazaar.BL.Facade
 
         Task SetAsInvalid(Guid id);
 
+        Task DeclineAdReaction(Guid reactionId);
         Task AcceptAdReaction(Guid reactionId, Guid adId);
 
         Task DeleteAd(Guid id);

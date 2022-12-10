@@ -1,6 +1,7 @@
 ﻿using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos;
+using Bazaar.BL.Dtos.Reaction;
 
 namespace Bazaar.App.Models
 {
@@ -21,8 +22,8 @@ namespace Bazaar.App.Models
 
         public IEnumerable<ImageDto> Images { get; set; }
 
-        public IEnumerable<AdTagDto> AdTags { get; set; }
+        public IEnumerable<AdTagDto> AdTags { get; set; } 
 
-        public List<string> PlaceholderLinks { get; set; } = new List<string>();
+        public IEnumerable<ReactionDto> Reactions { get; set; }
     }
 }

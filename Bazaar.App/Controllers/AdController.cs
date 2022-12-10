@@ -3,12 +3,15 @@ using Bazaar.App.Models;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
+using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Optional;
+using System.Security.Authentication;
+using System.Security.Claims;
 
 namespace Bazaar.App.Controllers
 {
@@ -75,6 +78,16 @@ namespace Bazaar.App.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
+
+            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (idStr == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            Guid currentUserId = new Guid(idStr);
+
             var dto = await _adFacade.AdDetail(id);
             if (dto == null)
             {
@@ -82,10 +95,98 @@ namespace Bazaar.App.Controllers
             }
 
             var model = _mapper.Map<AdDetailViewModel>(dto);
+            if (true)
+            {
+                model.Reactions = await _adFacade.GetAdReactions(id);
+            }
             return View(model);
         }
 
-        public async Task<IActionResult> Add()
+        public async Task<ActionResult> React(Guid id)
+        {
+            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (idStr == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            Guid currentUserId = new Guid(idStr);
+
+            var ad = await _adFacade.AdDetail(id);
+            if (ad.Creator.Id == currentUserId)
+            {
+                return BadRequest();
+            }
+
+            var model = new ReactionCreateViewModel()
+            {
+                UserId = currentUserId,
+                AdId = id
+            };
+            return View(model);
+        }
+
+
+        public async Task<ActionResult> RejectReaction(Guid adId, Guid reactionId)
+        {
+            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (idStr == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            Guid currentUserId = new Guid(idStr);
+
+            var ad = await _adFacade.AdDetail(adId);
+            if (ad.Creator.Id == currentUserId)
+            {
+                return BadRequest();
+            }
+
+            await _adFacade.DeclineAdReaction(reactionId);
+
+            return RedirectToAction("Details", new { id = adId });
+        }
+
+        public async Task<ActionResult> AcceptReaction(Guid adId, Guid reactionId)
+        {
+            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (idStr == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            Guid currentUserId = new Guid(idStr);
+
+            var ad = await _adFacade.AdDetail(adId);
+            if (ad.Creator.Id == currentUserId)
+            {
+                return BadRequest();
+            }
+
+            await _adFacade.AcceptAdReaction(reactionId, adId);
+
+            return RedirectToAction("Details", new { id = adId });
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> React(ReactionCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            { 
+                return View(model);
+            }
+
+            var dto = _mapper.Map<ReactionCreateDto>(model);
+            await _adFacade.AddReaction(dto);
+            return RedirectToAction(nameof(Index));
+        }
+
+            public async Task<IActionResult> Add()
         {
             var model = new AdCreateViewModel();
             var tags = await _adFacade.GetAllTags();
@@ -110,7 +211,7 @@ namespace Bazaar.App.Controllers
             
             await _adFacade.AddNewAdAsync(new Guid("decb7217-30ba-4b6e-bfeb-b17ccf228633"), imgDtos, model.TagIds, dto);
             return RedirectToAction(nameof(Index));
-        }
+        } 
 
         public ICollection<ImageCreateDto> UploadImages(IEnumerable<IFormFile> files)
         {

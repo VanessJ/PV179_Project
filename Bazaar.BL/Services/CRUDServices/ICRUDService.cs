@@ -4,7 +4,7 @@
     {
         public Task<Tdto?> GetByIdAsync<Tdto>(Guid id, params string[] includes);
 
-        public Task<IEnumerable<Tdto>> GetAllAsync<Tdto>();
+        public Task<IEnumerable<Tdto>> GetAllAsync<Tdto>(params string[] includes);
 
         public Task<Guid> CreateAsync<Tdto>(Tdto dto);
         public Task UpdateAsync<Tdto>(Tdto dto);
