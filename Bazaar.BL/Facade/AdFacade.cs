@@ -8,6 +8,7 @@ using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Images;
 using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Tags;
+using Bazaar.BL.Services.Users;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
@@ -20,20 +21,28 @@ namespace Bazaar.BL.Facade
         private readonly IAdService _adService;
         private readonly ITagService _tagService;
         private readonly IImageService _imageService;
+        private readonly IUserService _userService;
         private readonly IReactionService _reactionService;
         private readonly IUnitOfWork _unitOfWork;
-        public AdFacade(IAdService adService, ITagService tagService, IImageService imageService,IReactionService reactionService, IUnitOfWork unitOfWork)
+        public AdFacade(IAdService adService, ITagService tagService, IImageService imageService,IReactionService reactionService, IUnitOfWork unitOfWork, IUserService userService)
         {
             _adService = adService;
             _tagService = tagService;
             _imageService = imageService;
             _reactionService = reactionService;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto)
         {
             adCreateDto.UserId = userId;
+
+            if (await _userService.IsPremium(userId))
+            {
+                adCreateDto.IsPremium = true;
+            }
+            
 
             if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
             {

@@ -342,24 +342,24 @@ namespace Bazzar.Bl.Tests
             Assert.Equal("Predam svoju svokru!", result.First().Title);
         }
 
-    //    [Fact]
-    //    public async Task GetAdsByTags_ReturnsCorrectAdDtos()
-    //    {
-    //        using var _bazaarDbContext = new BazaarDBContext(_options);
-    //        var query = new EFQuery<Ad>(_bazaarDbContext);
+        [Fact]
+        public async Task GetAdsByTags_ReturnsCorrectAdDtos()
+        {
+            using var _bazaarDbContext = new BazaarDBContext(_options);
+            var query = new EFQuery<Ad>(_bazaarDbContext);
 
-    //        var config = new MapperConfiguration(cfg => {
-    //            cfg.CreateMap<Ad, AdListDto>().ReverseMap();
-    //        });
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Ad, AdListDto>().ReverseMap();
+            });
 
-    //        var mapper = new Mapper(config);
-    //        var adQueryObject = new AdQueryObject(mapper, query);
-    //        var tagNames = new List<Guid>() { tagId2, tagId3, tagId5 };
-    //        var ad_filter_dto = new AdFilterDto() { TagIds = tagNames.Some(), OderCriteria = "Title".Some() };
-    //        var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
+            var mapper = new Mapper(config);
+            var adQueryObject = new AdQueryObject(mapper, query);
+            var tagNames = new List<Guid>() { tagId2, tagId3, tagId5 };
+            var ad_filter_dto = new AdFilterDto() { TagIds = ((IEnumerable<Guid>)tagNames).Some(), OderCriteria = "Title".Some() };
+            var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
-    //        Assert.Equal(3, result.Count());
-    //        Assert.Equal("Predam macku", result.First().Title);
-    //    }
+            Assert.Equal(3, result.Count());
+            Assert.Equal("Predam macku", result.First().Title);
+        }
     }
 }

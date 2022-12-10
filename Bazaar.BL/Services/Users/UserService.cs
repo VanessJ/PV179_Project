@@ -19,7 +19,17 @@ namespace Bazaar.BL.Services
             _userQueryObject = userQueryObject;
         }
 
+        public async Task<bool> IsPremium(Guid id)
+        {
+            var user = await _repository.GetByIdAsync(id);
 
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+
+            return user.HasPremium;
+        }
 
         public async Task<IEnumerable<UserListDto>> ExecuteQueryAsync(UserFilterDto filterDto)
         {
@@ -50,6 +60,17 @@ namespace Bazaar.BL.Services
         {
             var users = await ExecuteQueryAsync(new UserFilterDto { ContainsUserName = username.Some() });
             return (users == null);
+        }
+
+        public async Task SetAsPremium(Guid id)
+        {
+            var user = await GetByIdAsync<UserEditDto>(id);
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+            user.HasPremium = true;
+            await UpdateAsync<UserEditDto>(user);
         }
     }
 }

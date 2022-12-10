@@ -208,12 +208,19 @@ namespace Bazaar.App.Controllers
             }
             var dto = _mapper.Map<AdCreateDto>(model);
             var imgDtos = UploadImages(model.Files);
-            
-            await _adFacade.AddNewAdAsync(new Guid("decb7217-30ba-4b6e-bfeb-b17ccf228633"), imgDtos, model.TagIds, dto);
+
+            string? id = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (id == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            await _adFacade.AddNewAdAsync(new Guid(id), imgDtos, model.TagIds, dto);
             return RedirectToAction(nameof(Index));
         } 
 
-        public ICollection<ImageCreateDto> UploadImages(IEnumerable<IFormFile> files)
+        private ICollection<ImageCreateDto> UploadImages(IEnumerable<IFormFile> files)
         {
             ICollection<ImageCreateDto> imageDtos = new List<ImageCreateDto>();
             

@@ -35,6 +35,12 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task SetAsPremium(Guid id)
+        {
+            await _userService.SetAsPremium(id);
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task RegisterUser(UserCreateDto createDto)
         {
             var user = await _userService.CreateAsync<UserCreateDto>(createDto);

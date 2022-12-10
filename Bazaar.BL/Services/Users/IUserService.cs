@@ -14,5 +14,8 @@ namespace Bazaar.BL.Services.Users
 
         Task<bool> IsUsernameTaken(string username);
 
+        Task SetAsPremium(Guid id);
+
+        Task<bool> IsPremium(Guid id);
     }
 }

@@ -10,5 +10,6 @@ namespace Bazaar.BL.Dtos.User
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
+        public bool? HasPremium { get; set; } = null!;
     }
 }
