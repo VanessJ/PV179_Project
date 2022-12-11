@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazaar.DAL.Migrations
 {
     [DbContext(typeof(BazaarDBContext))]
-    [Migration("20221211010259_AdTagWithId")]
-    partial class AdTagWithId
+    [Migration("20221211012312_TagDeleteCascade")]
+    partial class TagDeleteCascade
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,14 +65,14 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"),
+                            Id = new Guid("785e74ea-9ec0-4ba8-a520-4591f4522577"),
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
                             IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99")
+                            UserId = new Guid("ed794a69-c3a5-40f0-9fd8-f05461602b6a")
                         });
                 });
 
@@ -121,8 +121,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4474e71b-5a99-454f-9e60-f0f8bcfc1da5"),
-                            AdId = new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"),
+                            Id = new Guid("af79af6e-7877-4581-b990-5e6c17fbf349"),
+                            AdId = new Guid("785e74ea-9ec0-4ba8-a520-4591f4522577"),
                             Title = "Milovana macka",
                             Url = "\\obrazokmacky.jpg"
                         });
@@ -139,15 +139,15 @@ namespace Bazaar.DAL.Migrations
                     b.Property<bool>("Accepted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Rejected")
+                        .HasColumnType("bit");
 
                     b.HasKey("AdId", "UserId");
 
@@ -158,12 +158,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"),
-                            UserId = new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"),
+                            AdId = new Guid("785e74ea-9ec0-4ba8-a520-4591f4522577"),
+                            UserId = new Guid("7bbb5053-de28-4902-9104-7b3bd73ecfa5"),
                             Accepted = true,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Id = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Message = "Mam zaujem o vasu prekrasnu macku"
+                            Message = "Mam zaujem o vasu prekrasnu macku",
+                            Rejected = false
                         });
                 });
 
@@ -196,11 +196,11 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ReviewerId = new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"),
-                            ReviewedId = new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"),
+                            ReviewerId = new Guid("7bbb5053-de28-4902-9104-7b3bd73ecfa5"),
+                            ReviewedId = new Guid("ed794a69-c3a5-40f0-9fd8-f05461602b6a"),
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Descritption = "Krasna macka, 10/10 spokojnost",
-                            Id = new Guid("8b07f0d7-d2da-47f0-8e21-5b47b196d9a6"),
+                            Id = new Guid("2bb11e8b-ee9d-41d1-8bca-25f6402da05f"),
                             Score = 5
                         });
                 });
@@ -223,12 +223,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("461cbf46-6bb5-4323-8a68-0d419a7cec2f"),
+                            Id = new Guid("fef91a94-758f-4ab0-a76b-615c758413d3"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("61a3ee89-1903-48e3-be0f-1edfd843677f"),
+                            Id = new Guid("7abd38d2-756f-4a59-b734-f0282437952d"),
                             TagName = "Sell"
                         });
                 });
@@ -275,7 +275,7 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"),
+                            Id = new Guid("ed794a69-c3a5-40f0-9fd8-f05461602b6a"),
                             Banned = false,
                             Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
@@ -287,7 +287,7 @@ namespace Bazaar.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"),
+                            Id = new Guid("7bbb5053-de28-4902-9104-7b3bd73ecfa5"),
                             Banned = false,
                             Email = "ferko@gmailol.com",
                             FirstName = "Ferko",

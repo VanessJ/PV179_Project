@@ -24,7 +24,7 @@ namespace Bazaar.BL.Facade
         private readonly IUserService _userService;
         private readonly IReactionService _reactionService;
         private readonly IUnitOfWork _unitOfWork;
-        public AdFacade(IAdService adService, ITagService tagService, IImageService imageService,IReactionService reactionService, IUnitOfWork unitOfWork, IUserService userService)
+        public AdFacade(IAdService adService, ITagService tagService, IImageService imageService, IReactionService reactionService, IUnitOfWork unitOfWork, IUserService userService)
         {
             _adService = adService;
             _tagService = tagService;
@@ -38,11 +38,13 @@ namespace Bazaar.BL.Facade
         {
             adCreateDto.UserId = userId;
 
-            if (await _userService.IsPremium(userId))
-            {
-                adCreateDto.IsPremium = true;
-            }
-            
+            //var isPremium = await _userService.IsPremium(userId);
+
+            //if (isPremium)
+            //{
+            //    adCreateDto.IsPremium = true;
+            //}
+
 
             if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
             {
@@ -56,7 +58,7 @@ namespace Bazaar.BL.Facade
 
             foreach (var tagId in tagIdS)
             {
-                adCreateDto.AdTags.Add(new AdTagDto(){TagId = tagId});
+                adCreateDto.AdTags.Add(new AdTagDto() { TagId = tagId });
             }
 
             foreach (var imageCreateDto in imageCreateDtos)
@@ -64,7 +66,7 @@ namespace Bazaar.BL.Facade
 
                 adCreateDto.Images.Add(imageCreateDto);
             }
-            
+
             await _adService.CreateAsync<AdCreateDto>(adCreateDto);
             await _unitOfWork.CommitAsync();
         }
@@ -114,7 +116,7 @@ namespace Bazaar.BL.Facade
             var tag = await _tagService.GetByIdAsync<TagDto>(tagId);
             return tag;
         }
-        
+
         public async Task<IEnumerable<TagListDto>> FilterTags(TagFilterDto filterDto)
         {
             var tags = await _tagService.ExecuteQueryAsync(filterDto);

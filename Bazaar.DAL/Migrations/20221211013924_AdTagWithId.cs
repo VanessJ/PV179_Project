@@ -16,42 +16,42 @@ namespace Bazaar.DAL.Migrations
             migrationBuilder.DeleteData(
                 table: "Image",
                 keyColumn: "Id",
-                keyValue: new Guid("6c5fea72-fa28-4606-a63e-5fca868827f6"));
+                keyValue: new Guid("501105f9-b194-4560-9f0c-1adb8b472c6c"));
 
             migrationBuilder.DeleteData(
                 table: "Reaction",
                 keyColumns: new[] { "AdId", "UserId" },
-                keyValues: new object[] { new Guid("923a23b7-7f28-41a9-82dd-c74885d3bb82"), new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e") });
+                keyValues: new object[] { new Guid("ba8a90b8-c1dc-4cdf-ab85-5ce594062c80"), new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7") });
 
             migrationBuilder.DeleteData(
                 table: "Review",
                 keyColumns: new[] { "ReviewedId", "ReviewerId" },
-                keyValues: new object[] { new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756"), new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e") });
+                keyValues: new object[] { new Guid("391a1b1e-ce2d-43c4-a6b1-85ebdc5b79aa"), new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7") });
 
             migrationBuilder.DeleteData(
                 table: "Tag",
                 keyColumn: "Id",
-                keyValue: new Guid("01c073ad-83e8-429b-9306-9ae46485f300"));
+                keyValue: new Guid("056c611a-6dba-4a80-ac00-ec76ba264a31"));
 
             migrationBuilder.DeleteData(
                 table: "Tag",
                 keyColumn: "Id",
-                keyValue: new Guid("fb9284dd-d0da-439a-a9a0-e3be07860f55"));
+                keyValue: new Guid("9b8e06e0-77da-419c-acb2-076f6c48715f"));
 
             migrationBuilder.DeleteData(
                 table: "Ad",
                 keyColumn: "Id",
-                keyValue: new Guid("923a23b7-7f28-41a9-82dd-c74885d3bb82"));
+                keyValue: new Guid("ba8a90b8-c1dc-4cdf-ab85-5ce594062c80"));
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e"));
+                keyValue: new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7"));
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756"));
+                keyValue: new Guid("391a1b1e-ce2d-43c4-a6b1-85ebdc5b79aa"));
 
             migrationBuilder.AddColumn<Guid>(
                 name: "Id",
@@ -65,8 +65,8 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "TagName" },
                 values: new object[,]
                 {
-                    { new Guid("461cbf46-6bb5-4323-8a68-0d419a7cec2f"), "Animals" },
-                    { new Guid("61a3ee89-1903-48e3-be0f-1edfd843677f"), "Sell" }
+                    { new Guid("76670945-f5a5-4121-8c4d-433c18d6b45b"), "Sell" },
+                    { new Guid("e266b184-bf2c-4e65-98e4-d9eab52d5462"), "Animals" }
                 });
 
             migrationBuilder.InsertData(
@@ -74,29 +74,29 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "Banned", "Email", "FirstName", "HasPremium", "LastName", "Level", "PhoneNumber", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" },
-                    { new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" }
+                    { new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" },
+                    { new Guid("f52f09a3-450e-459d-a798-90bd988840f7"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Ad",
                 columns: new[] { "Id", "Description", "IsOffer", "IsPremium", "IsValid", "Price", "Title", "UserId" },
-                values: new object[] { new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99") });
+                values: new object[] { new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203") });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewedId", "ReviewerId", "Created", "Descritption", "Id", "Score" },
-                values: new object[] { new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"), new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Krasna macka, 10/10 spokojnost", new Guid("8b07f0d7-d2da-47f0-8e21-5b47b196d9a6"), 5 });
+                values: new object[] { new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"), new Guid("f52f09a3-450e-459d-a798-90bd988840f7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Krasna macka, 10/10 spokojnost", new Guid("a18c4f6a-e395-4b0e-8c07-56a05de0dab7"), 5 });
 
             migrationBuilder.InsertData(
                 table: "Image",
                 columns: new[] { "Id", "AdId", "Title", "Url" },
-                values: new object[] { new Guid("4474e71b-5a99-454f-9e60-f0f8bcfc1da5"), new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"), "Milovana macka", "\\obrazokmacky.jpg" });
+                values: new object[] { new Guid("92174323-a2f4-4e1b-99c6-eb3040a91a5f"), new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"), "Milovana macka", "\\obrazokmacky.jpg" });
 
             migrationBuilder.InsertData(
                 table: "Reaction",
-                columns: new[] { "AdId", "UserId", "Accepted", "Created", "Id", "Message" },
-                values: new object[] { new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"), new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"), true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku" });
+                columns: new[] { "AdId", "UserId", "Accepted", "Id", "Message", "Rejected" },
+                values: new object[] { new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"), new Guid("f52f09a3-450e-459d-a798-90bd988840f7"), true, new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku", false });
         }
 
         /// <inheritdoc />
@@ -105,42 +105,42 @@ namespace Bazaar.DAL.Migrations
             migrationBuilder.DeleteData(
                 table: "Image",
                 keyColumn: "Id",
-                keyValue: new Guid("4474e71b-5a99-454f-9e60-f0f8bcfc1da5"));
+                keyValue: new Guid("92174323-a2f4-4e1b-99c6-eb3040a91a5f"));
 
             migrationBuilder.DeleteData(
                 table: "Reaction",
                 keyColumns: new[] { "AdId", "UserId" },
-                keyValues: new object[] { new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"), new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02") });
+                keyValues: new object[] { new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"), new Guid("f52f09a3-450e-459d-a798-90bd988840f7") });
 
             migrationBuilder.DeleteData(
                 table: "Review",
                 keyColumns: new[] { "ReviewedId", "ReviewerId" },
-                keyValues: new object[] { new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"), new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02") });
+                keyValues: new object[] { new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"), new Guid("f52f09a3-450e-459d-a798-90bd988840f7") });
 
             migrationBuilder.DeleteData(
                 table: "Tag",
                 keyColumn: "Id",
-                keyValue: new Guid("461cbf46-6bb5-4323-8a68-0d419a7cec2f"));
+                keyValue: new Guid("76670945-f5a5-4121-8c4d-433c18d6b45b"));
 
             migrationBuilder.DeleteData(
                 table: "Tag",
                 keyColumn: "Id",
-                keyValue: new Guid("61a3ee89-1903-48e3-be0f-1edfd843677f"));
+                keyValue: new Guid("e266b184-bf2c-4e65-98e4-d9eab52d5462"));
 
             migrationBuilder.DeleteData(
                 table: "Ad",
                 keyColumn: "Id",
-                keyValue: new Guid("d104944e-dd4d-437e-b2db-03a0d342ded0"));
+                keyValue: new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"));
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: new Guid("7cfd4254-abfc-4ecb-b8e4-60ec60481a02"));
+                keyValue: new Guid("f52f09a3-450e-459d-a798-90bd988840f7"));
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: new Guid("72bef2ca-9df1-4fa4-80fa-f766dc56ec99"));
+                keyValue: new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"));
 
             migrationBuilder.DropColumn(
                 name: "Id",
@@ -151,8 +151,8 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "TagName" },
                 values: new object[,]
                 {
-                    { new Guid("01c073ad-83e8-429b-9306-9ae46485f300"), "Sell" },
-                    { new Guid("fb9284dd-d0da-439a-a9a0-e3be07860f55"), "Animals" }
+                    { new Guid("056c611a-6dba-4a80-ac00-ec76ba264a31"), "Animals" },
+                    { new Guid("9b8e06e0-77da-419c-acb2-076f6c48715f"), "Sell" }
                 });
 
             migrationBuilder.InsertData(
@@ -160,29 +160,29 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "Banned", "Email", "FirstName", "HasPremium", "LastName", "Level", "PhoneNumber", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" },
-                    { new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" }
+                    { new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" },
+                    { new Guid("391a1b1e-ce2d-43c4-a6b1-85ebdc5b79aa"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Ad",
                 columns: new[] { "Id", "Description", "IsOffer", "IsPremium", "IsValid", "Price", "Title", "UserId" },
-                values: new object[] { new Guid("923a23b7-7f28-41a9-82dd-c74885d3bb82"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756") });
+                values: new object[] { new Guid("ba8a90b8-c1dc-4cdf-ab85-5ce594062c80"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("391a1b1e-ce2d-43c4-a6b1-85ebdc5b79aa") });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewedId", "ReviewerId", "Created", "Descritption", "Id", "Score" },
-                values: new object[] { new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756"), new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Krasna macka, 10/10 spokojnost", new Guid("6816ae50-b396-4d2b-9cd0-b71495c04164"), 5 });
+                values: new object[] { new Guid("391a1b1e-ce2d-43c4-a6b1-85ebdc5b79aa"), new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Krasna macka, 10/10 spokojnost", new Guid("9aa51540-7d1f-48d2-a510-c675ecab605a"), 5 });
 
             migrationBuilder.InsertData(
                 table: "Image",
                 columns: new[] { "Id", "AdId", "Title", "Url" },
-                values: new object[] { new Guid("6c5fea72-fa28-4606-a63e-5fca868827f6"), new Guid("923a23b7-7f28-41a9-82dd-c74885d3bb82"), "Milovana macka", "\\obrazokmacky.jpg" });
+                values: new object[] { new Guid("501105f9-b194-4560-9f0c-1adb8b472c6c"), new Guid("ba8a90b8-c1dc-4cdf-ab85-5ce594062c80"), "Milovana macka", "\\obrazokmacky.jpg" });
 
             migrationBuilder.InsertData(
                 table: "Reaction",
-                columns: new[] { "AdId", "UserId", "Accepted", "Created", "Id", "Message" },
-                values: new object[] { new Guid("923a23b7-7f28-41a9-82dd-c74885d3bb82"), new Guid("f58e5449-9bdc-4ed9-bfec-fdb75232b21e"), true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku" });
+                columns: new[] { "AdId", "UserId", "Accepted", "Id", "Message", "Rejected" },
+                values: new object[] { new Guid("ba8a90b8-c1dc-4cdf-ab85-5ce594062c80"), new Guid("12638220-3fe3-4bb3-80ed-658d9a9009d7"), true, new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku", false });
         }
     }
 }

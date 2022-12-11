@@ -62,14 +62,14 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6505480b-ec94-48ef-88e5-c85f19027411"),
+                            Id = new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"),
                             Description = "Je velmi zlata, zbavte ma jej, prosim",
                             IsOffer = true,
                             IsPremium = false,
                             IsValid = true,
                             Price = 50,
                             Title = "Predam macku",
-                            UserId = new Guid("fe5f5529-8962-4b7d-9c59-59d1234d51ab")
+                            UserId = new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203")
                         });
                 });
 
@@ -118,8 +118,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("617db75e-465f-4117-992f-8e41b9939ff9"),
-                            AdId = new Guid("6505480b-ec94-48ef-88e5-c85f19027411"),
+                            Id = new Guid("92174323-a2f4-4e1b-99c6-eb3040a91a5f"),
+                            AdId = new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"),
                             Title = "Milovana macka",
                             Url = "\\obrazokmacky.jpg"
                         });
@@ -155,8 +155,8 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            AdId = new Guid("6505480b-ec94-48ef-88e5-c85f19027411"),
-                            UserId = new Guid("c81bf26a-4ddf-4440-91c9-3d19f7c0fe07"),
+                            AdId = new Guid("ee7feffa-1d3a-4124-9cb7-073ffae1b258"),
+                            UserId = new Guid("f52f09a3-450e-459d-a798-90bd988840f7"),
                             Accepted = true,
                             Id = new Guid("00000000-0000-0000-0000-000000000000"),
                             Message = "Mam zaujem o vasu prekrasnu macku",
@@ -193,11 +193,11 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ReviewerId = new Guid("c81bf26a-4ddf-4440-91c9-3d19f7c0fe07"),
-                            ReviewedId = new Guid("fe5f5529-8962-4b7d-9c59-59d1234d51ab"),
+                            ReviewerId = new Guid("f52f09a3-450e-459d-a798-90bd988840f7"),
+                            ReviewedId = new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"),
                             Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Descritption = "Krasna macka, 10/10 spokojnost",
-                            Id = new Guid("707a7639-e30e-41e2-9151-150ab5e30a50"),
+                            Id = new Guid("a18c4f6a-e395-4b0e-8c07-56a05de0dab7"),
                             Score = 5
                         });
                 });
@@ -220,12 +220,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a5eae206-0d44-4cc8-a68a-1de60d7e1bbd"),
+                            Id = new Guid("e266b184-bf2c-4e65-98e4-d9eab52d5462"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("d0e774dc-24b2-4fa1-9b3c-5f65a92624e1"),
+                            Id = new Guid("76670945-f5a5-4121-8c4d-433c18d6b45b"),
                             TagName = "Sell"
                         });
                 });
@@ -272,7 +272,7 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fe5f5529-8962-4b7d-9c59-59d1234d51ab"),
+                            Id = new Guid("6e5b3916-ef43-4ad7-bacb-b98464a7c203"),
                             Banned = false,
                             Email = "jozko@gmailol.com",
                             FirstName = "Jozko",
@@ -284,7 +284,7 @@ namespace Bazaar.DAL.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c81bf26a-4ddf-4440-91c9-3d19f7c0fe07"),
+                            Id = new Guid("f52f09a3-450e-459d-a798-90bd988840f7"),
                             Banned = false,
                             Email = "ferko@gmailol.com",
                             FirstName = "Ferko",

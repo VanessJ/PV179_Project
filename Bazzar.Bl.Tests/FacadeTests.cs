@@ -123,12 +123,13 @@ namespace Bazzar.Bl.Tests
             var tagServiceMockInstance = new Mock<ITagService>(MockBehavior.Loose).Object;
             var reactionServiceMockInstance = new Mock<IReactionService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
+            var userServiceMockInstance = new Mock<IUserService>(MockBehavior.Loose).Object;
 
             var adServiceMock = new Mock<IAdService>(MockBehavior.Loose);
             adServiceMock.Setup(x => x.ExecuteQueryAsync(It.IsAny<AdFilterDto>())).ReturnsAsync(adList);
             var adServiceMockInstance = adServiceMock.Object;
 
-            IAdFacade adFacade = new AdFacade(adServiceMockInstance, tagServiceMockInstance, imageServiceMockInstance, reactionServiceMockInstance, unitOfWorkInstance);
+            IAdFacade adFacade = new AdFacade(adServiceMockInstance, tagServiceMockInstance, imageServiceMockInstance, reactionServiceMockInstance, unitOfWorkInstance, userServiceMockInstance);
             var filteredAds = await adFacade.FilterAds( new AdFilterDto() { OnlyOffer = true } );
             Assert.Equal(3, filteredAds.Count());
             Assert.Equal("Predam psa", filteredAds.First().Title);
