@@ -78,7 +78,9 @@ namespace Bazaar.DAL.Data
                 .HasForeignKey(pt => pt.AdId);
 
             modelBuilder.Entity<Reaction>()
-            .HasOne<User>(r => r.User);
+            .HasOne<User>(r => r.User)
+            .WithMany(u => u.Reactions)
+            .HasForeignKey(u => u.UserId);
 
             modelBuilder.Entity<Reaction>()
             .HasOne<Ad>(r => r.Ad)
@@ -95,6 +97,10 @@ namespace Bazaar.DAL.Data
             .HasOne<User>(r => r.Reviewed)
             .WithMany(u => u.ReviewedIn)
             .HasForeignKey(r => r.ReviewedId);
+
+
+            modelBuilder.Entity<Review>()
+            .HasOne<Ad>(r => r.Ad);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

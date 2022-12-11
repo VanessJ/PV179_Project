@@ -1,4 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Review;
 
 namespace Bazaar.BL.Dtos
@@ -9,6 +10,8 @@ namespace Bazaar.BL.Dtos
         public string UserName { get; set; } = null!;
 
         public ICollection<AdDto> Ads { get; set; }
+
+        public IEnumerable<ReactionDto> Reactions { get; set; }
 
         public IEnumerable<ReviewDto> ReviewerIn { get; set; }
         public IEnumerable<ReviewDto> ReviewedIn { get; set; }

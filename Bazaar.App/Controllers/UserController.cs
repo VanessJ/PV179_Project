@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Bazaar.App.Models;
+using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using Optional;
+using System.Security.Authentication;
+using System.Security.Claims;
 
 namespace Bazaar.App.Controllers
 {
@@ -66,7 +69,22 @@ namespace Bazaar.App.Controllers
 
             userDto.Ads = userAdsDto;
 
+            var reviewsDetails = new List<ReviewDto>();
+            var reviews = await _userFacade.GetReviewsOfUser(id);
+            if (reviews != null)
+            {
+                foreach (var r in reviews)
+                {
+                    var detail = await _userFacade.ReviewDetail(r.Id);
+                    if (detail != null)
+                    {
+                        reviewsDetails.Add(detail);
+                    }
+                }
+
+            }
             var model = _mapper.Map<UserDetailViewModel>(userDto);
+            model.Reviews = reviewsDetails;
             return View(model);
         }
 
@@ -105,6 +123,51 @@ namespace Bazaar.App.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> AddReview(Guid adId)
+        {
+            var ad = await _adFacade.AdDetail(adId);
+            if (ad == null)
+            {
+                return NotFound($"Unable to load ad '{adId}'.");
+            }
+
+            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (idStr == null)
+            {
+                throw new AuthenticationException();
+            }
+
+            Guid currentUserId = new Guid(idStr);
+
+            var model = new ReviewCreateViewModel
+            {
+                AdId = adId,
+                ReviewerId = currentUserId,
+                ReviewedId = ad.Creator.Id
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReview(ReviewCreateViewModel model)
+        {
+            var review = model;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var dto = _mapper.Map<ReviewCreateDto>(model);
+            await _userFacade.WriteReviewOfUser(dto);
+
+            return RedirectToAction("Details", new { id = model.ReviewedId });
+        }
+
 
     }
 }

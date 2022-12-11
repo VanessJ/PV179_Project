@@ -91,6 +91,36 @@
     </div>
 </div>
 
+@if(Model.Reactions != null){
+    <h4 class="text-align-center">My reactions</h4>
+
+    @foreach(var reaction in Model.Reactions){
+        <div class="card">
+            <h5 class="card-header">
+                <a asp-controller="Ad" asp-action="Details" asp-route-id="@reaction.AdId">@reaction.Ad.Title</a>
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title">@reaction.Message</h5>
+                @if (reaction.Accepted){
+                    <span class="badge badge-success">Accepted</span>
+                    <p class="card-text"> <b>Status: </b>Accepted</p>
+
+                    <a class="btn btn-success" asp-controller="User" asp-action="AddReview" asp-route-adId="@reaction.AdId">Write review of user</a>
+                }
+                @if (reaction.Rejected){
+                    <span class="badge badge-danger">Declined</span>
+                    <p class="card-text"><b>Status: </b>Declined</p>
+                }
+
+                @if (!reaction.Rejected && !reaction.Accepted){
+                    <span class="badge badge-secondary">Pending</span>
+                    <p class="card-text"> <b>Status: </b>Pending</p>
+                }
+            </div>
+        </div>
+    }
+}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

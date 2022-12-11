@@ -29,6 +29,7 @@ namespace Bazaar.App.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
+
         public async Task<IActionResult> Index()
         {
             var filterDto = new AdFilterDto() { OderCriteria = "IsPremium".Some(), OrderAscending = false.Some() };
@@ -140,10 +141,6 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
-            if (ad.Creator.Id == currentUserId)
-            {
-                return BadRequest();
-            }
 
             await _adFacade.DeclineAdReaction(reactionId);
 
@@ -162,10 +159,6 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
-            if (ad.Creator.Id == currentUserId)
-            {
-                return BadRequest();
-            }
 
             await _adFacade.AcceptAdReaction(reactionId, adId);
 

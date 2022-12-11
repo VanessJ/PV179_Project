@@ -105,6 +105,17 @@ namespace Bazaar.BL.Facade
             return ad;
         }
 
+        public async Task<ReactionDto> ReactionDetail(Guid id)
+        {
+            var reaction = await _reactionService.GetByIdAsync<ReactionDto>(id, nameof(Reaction.Ad), "Ad.Creator");
+            if (reaction == null)
+            {
+                throw new EntityNotFoundException();
+            }
+            return reaction;
+
+        }
+
         public async Task<IEnumerable<TagDto>> GetAllTags()
         {
             var tags = await _tagService.GetAllAsync<TagDto>();

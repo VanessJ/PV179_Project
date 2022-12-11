@@ -3,11 +3,15 @@
 #nullable disable
 
 using Bazaar.BL.Dtos.Ad;
+using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
+using Bazaar.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Authentication;
+using System.Security.Claims;
 
 namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
 {
@@ -33,6 +37,8 @@ namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public string PhoneNumber { get; set; }
         public IEnumerable<AdListDto> Ads { get; set; }
+
+        public IEnumerable<ReactionDto> Reactions { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -70,7 +76,23 @@ namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
             LastName = userDto.LastName;
             UserName = userDto.UserName;
             Ads = userDto.Ads;
+            var reactions = userDto.Reactions;
+            var detailReactions = new List<ReactionDto>();
+
+            if (reactions != null)
+            {
+                foreach (var r in reactions)
+                {
+                    var detail = await _adFacade.ReactionDetail(r.Id);
+                    if (detail != null)
+                    {
+                        detailReactions.Add(detail);
+                    }
+                }
+            }
+            Reactions = detailReactions;
         }
+
 
         public async Task<IActionResult> OnGetAsync()
         {

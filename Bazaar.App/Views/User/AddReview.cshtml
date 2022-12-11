@@ -1,0 +1,28 @@
+﻿@model ReviewCreateViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.ReviewedId, Model.ReviewedId)
+    @Html.HiddenFor(m => m.ReviewerId, Model.ReviewerId)
+    @Html.HiddenFor(m => m.AdId, Model.AdId)
+    @Html.AntiForgeryToken()
+    <div>
+        <h2> <b>Leave your review! </b> </h2>
+    </div>
+    <br />
+    <div class="mb-3">
+        <textarea asp-for="Descritption" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        @Html.ValidationMessageFor(x => x.Descritption, null, new { @class = "text-danger" })
+    </div>
+    <div class="mb-3">
+        <label class="control-label"> Enter your rating (value from 0 to 5)</label>
+        <input asp-for="Score" class="form-control" type="number" min="1" max="5"/>
+        <span asp-validation-for="Score" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <br />
+}
+
+
+

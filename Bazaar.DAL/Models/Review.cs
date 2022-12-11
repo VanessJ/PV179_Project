@@ -21,7 +21,10 @@ namespace Bazaar.DAL.Models
 
         public string? Descritption { get; set; } 
 
-        public DateTime Created { get; set; }
+        public virtual Ad Ad { get; set; }
+
+        [ForeignKey(nameof(Ad))]
+        public Guid AdId { get; set; }
 
 
 

@@ -6,6 +6,7 @@
 
         public Guid ReviewedId { get; set; }
 
+        public Guid AdId { get; set; }
         public int Score { get; set; }
 
         public string? Descritption { get; set; }

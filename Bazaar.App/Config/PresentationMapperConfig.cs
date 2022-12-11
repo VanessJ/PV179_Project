@@ -2,6 +2,7 @@
 using Bazaar.App.Models;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Dtos.User;
 
@@ -17,6 +18,8 @@ namespace Bazaar.App.Config
             CreateMap<AdDetailDto, AdDetailViewModel>().ReverseMap();
             CreateMap<AdCreateDto, AdCreateViewModel>().ReverseMap();
             CreateMap<ReactionCreateDto, ReactionCreateViewModel>().ReverseMap();
+            CreateMap<ReviewCreateDto, ReviewCreateViewModel>().ReverseMap();
+            //CreateMap<ReviewDto, ReviewCreateViewModel>().ReverseMap();
         }
     }
 }

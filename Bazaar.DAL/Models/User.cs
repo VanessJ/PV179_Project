@@ -26,6 +26,8 @@ namespace Bazaar.DAL.Models
 
         public virtual ICollection<Ad> Ads { get; set; }
 
+        public virtual ICollection<Reaction> Reactions{ get; set; }
+
         public virtual ICollection<Review> ReviewerIn { get; set; }
         public virtual ICollection<Review> ReviewedIn { get; set; }
 

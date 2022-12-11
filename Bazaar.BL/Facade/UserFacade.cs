@@ -5,6 +5,7 @@ using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Users;
 using Bazaar.DAL.Models;
+using Bazaar.Infrastructure.Repository;
 using Bazaar.Infrastructure.UnitOfWork;
 
 namespace Bazaar.BL.Facade
@@ -65,7 +66,7 @@ namespace Bazaar.BL.Facade
 
         public async Task<UserProfileDetailDto> GetUserProfileDetail(Guid id)
         {
-            var user = await _userService.GetByIdAsync<UserProfileDetailDto>(id);
+            var user = await _userService.GetByIdAsync<UserProfileDetailDto>(id, nameof(User.Reactions));
             if (user == null)
             {
                 throw new ArgumentException();
@@ -75,7 +76,7 @@ namespace Bazaar.BL.Facade
 
         public async Task<UserDetailDto> GetUserDetail(Guid id)
         {
-            var user = await _userService.GetByIdAsync<UserDetailDto>(id);
+            var user = await _userService.GetByIdAsync<UserDetailDto>(id, nameof(User.Reactions));
             if (user == null)
             {
                 throw new ArgumentException();
@@ -97,6 +98,17 @@ namespace Bazaar.BL.Facade
         {
             await _reviewService.CreateAsync<ReviewCreateDto>(reviewDto);
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<ReviewDto> ReviewDetail(Guid id)
+        {
+            var review = await _reviewService.GetByIdAsync<ReviewDto>(id, nameof(Review.Reviewer), nameof(Review.Ad));
+            if (review == null)
+            {
+                throw new EntityNotFoundException();
+            }
+            return review;
+
         }
 
         public async Task WriteReactionToAd(ReactionCreateDto reactionCreateDto)

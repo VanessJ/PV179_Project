@@ -109,6 +109,7 @@ namespace Bazaar.DAL.Data
                     ReviewerId = userId2,
                     ReviewedId = userId1,
                     Score = 5,
+                    AdId = adId,
                     Descritption = "Krasna macka, 10/10 spokojnost"
                 }
             );
