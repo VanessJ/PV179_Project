@@ -14,7 +14,7 @@ Aplikace bude poskytovat následující funkcionalitu:
 
 Dále správci mohou:
 - Spravovat tagy :heavy_check_mark:
-- Mazat nabídky/poptávky
+- Mazat nabídky/poptávky :heavy_check_mark:
 - Banovat uživatele :heavy_check_mark:
 
 ## Team members
