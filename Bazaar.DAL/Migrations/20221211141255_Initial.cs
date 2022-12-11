@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -29,13 +30,14 @@ namespace Bazaar.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
+                    Banned = table.Column<bool>(type: "bit", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HasPremium = table.Column<bool>(type: "bit", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,6 +76,7 @@ namespace Bazaar.DAL.Migrations
                     ReviewedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: false),
                     Descritption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -97,24 +100,25 @@ namespace Bazaar.DAL.Migrations
                 name: "AdTag",
                 columns: table => new
                 {
-                    AdsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TagsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdTag", x => new { x.AdsId, x.TagsId });
+                    table.PrimaryKey("PK_AdTag", x => new { x.TagId, x.AdId });
                     table.ForeignKey(
-                        name: "FK_AdTag_Ad_AdsId",
-                        column: x => x.AdsId,
+                        name: "FK_AdTag_Ad_AdId",
+                        column: x => x.AdId,
                         principalTable: "Ad",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AdTag_Tag_TagsId",
-                        column: x => x.TagsId,
+                        name: "FK_AdTag_Tag_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tag",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,6 +149,7 @@ namespace Bazaar.DAL.Migrations
                     AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Accepted = table.Column<bool>(type: "bit", nullable: false),
+                    Rejected = table.Column<bool>(type: "bit", nullable: false),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -169,38 +174,38 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "TagName" },
                 values: new object[,]
                 {
-                    { new Guid("8852f5af-2f9c-42b5-ada3-b290cadfaf5d"), "Animals" },
-                    { new Guid("b6adf270-55b5-4501-8a58-8306eb92c935"), "Sell" }
+                    { new Guid("279ff8d3-4feb-49a9-924f-544f09a2ffd2"), "Animals" },
+                    { new Guid("d6320963-aa7d-4e5e-9fb4-8db152a1e892"), "Sell" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "Email", "FirstName", "LastName", "Level", "PasswordHash", "PhoneNumber", "UserName" },
+                columns: new[] { "Id", "Banned", "Email", "FirstName", "HasPremium", "LastName", "Level", "PhoneNumber", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("038ee4a5-2c93-4373-b275-489057e6932b"), "jozko@gmailol.com", "Jozko", "Mrkvicka", 0, "tajneheslo", "0000000", "TestUser" },
-                    { new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"), "ferko@gmailol.com", "Ferko", "Priezviskovy", 0, "supertajneheslo", "2020040444", "Feri" }
+                    { new Guid("1368fbc4-2eb7-4cb4-9546-0119baca9d96"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" },
+                    { new Guid("7cf3f8be-1318-40a2-acbb-d82f0b4730dc"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Ad",
                 columns: new[] { "Id", "Description", "IsOffer", "IsPremium", "IsValid", "Price", "Title", "UserId" },
-                values: new object[] { new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("038ee4a5-2c93-4373-b275-489057e6932b") });
+                values: new object[] { new Guid("e4938d02-2c5d-489f-b31b-8cefadc71ffc"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("7cf3f8be-1318-40a2-acbb-d82f0b4730dc") });
 
             migrationBuilder.InsertData(
                 table: "Review",
-                columns: new[] { "ReviewedId", "ReviewerId", "Descritption", "Id", "Score" },
-                values: new object[] { new Guid("038ee4a5-2c93-4373-b275-489057e6932b"), new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"), "Krasna macka, 10/10 spokojnost", new Guid("a58e961a-e4a8-43c9-b0d4-89360c2594a3"), 5 });
+                columns: new[] { "ReviewedId", "ReviewerId", "Created", "Descritption", "Id", "Score" },
+                values: new object[] { new Guid("7cf3f8be-1318-40a2-acbb-d82f0b4730dc"), new Guid("1368fbc4-2eb7-4cb4-9546-0119baca9d96"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Krasna macka, 10/10 spokojnost", new Guid("0ac72d8a-f1f0-4fb7-aaa6-736c2b19c399"), 5 });
 
             migrationBuilder.InsertData(
                 table: "Image",
                 columns: new[] { "Id", "AdId", "Title", "Url" },
-                values: new object[] { new Guid("ddc73cb3-7b82-4398-8dc9-f554bdb9e462"), new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"), "Milovana macka", "\\obrazokmacky.jpg" });
+                values: new object[] { new Guid("92f14fc4-bd0d-4930-bf77-fa022a852fbc"), new Guid("e4938d02-2c5d-489f-b31b-8cefadc71ffc"), "Milovana macka", "\\obrazokmacky.jpg" });
 
             migrationBuilder.InsertData(
                 table: "Reaction",
-                columns: new[] { "AdId", "UserId", "Accepted", "Id", "Message" },
-                values: new object[] { new Guid("5a9c4354-9bc0-4d96-8a69-748094eb28a2"), new Guid("aa76b08b-f3cf-4ba6-afd7-9b68cecb3a90"), true, new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku" });
+                columns: new[] { "AdId", "UserId", "Accepted", "Id", "Message", "Rejected" },
+                values: new object[] { new Guid("e4938d02-2c5d-489f-b31b-8cefadc71ffc"), new Guid("1368fbc4-2eb7-4cb4-9546-0119baca9d96"), true, new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku", false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ad_UserId",
@@ -208,9 +213,9 @@ namespace Bazaar.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AdTag_TagsId",
+                name: "IX_AdTag_AdId",
                 table: "AdTag",
-                column: "TagsId");
+                column: "AdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Image_AdId",

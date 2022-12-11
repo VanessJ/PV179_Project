@@ -18,7 +18,7 @@ namespace Bazzar.Bl.Tests
         private readonly Guid tagId2 = Guid.NewGuid();
         private readonly Guid tagId3 = Guid.NewGuid();
         private readonly Guid tagId5 = Guid.NewGuid();
-        private DbContextOptions<BazaarDBContext> _options;
+        private readonly DbContextOptions<BazaarDBContext> _options;
 
         public QueryObjectTests()
         {

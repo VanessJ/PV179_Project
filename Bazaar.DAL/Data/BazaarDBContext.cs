@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Bazaar.DAL.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Bazaar.DAL.Data
 {
-    public class BazaarDBContext : DbContext
+    public class BazaarDBContext : IdentityDbContext
     {
         public DbSet<User> User { get; set; }
         public DbSet<Ad> Ad { get; set; }

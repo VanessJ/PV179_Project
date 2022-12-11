@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace Bazaar.App.Data.Migrations
+namespace Bazaar.DAL.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
