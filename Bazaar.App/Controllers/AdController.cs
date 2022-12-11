@@ -7,9 +7,12 @@ using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
+using Bazaar.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Optional;
+using System.Data;
 using System.Security.Authentication;
 using System.Security.Claims;
 
@@ -103,6 +106,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<ActionResult> React(Guid id)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -128,7 +132,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         public async Task<ActionResult> RejectReaction(Guid adId, Guid reactionId)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -141,12 +145,17 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
+            if (ad.Creator.Id != currentUserId)
+            {
+                return BadRequest();
+            }
 
             await _adFacade.DeclineAdReaction(reactionId);
 
             return RedirectToAction("Details", new { id = adId });
         }
 
+        [Authorize]
         public async Task<ActionResult> AcceptReaction(Guid adId, Guid reactionId)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -159,13 +168,17 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
+            if (ad.Creator.Id != currentUserId)
+            {
+                return BadRequest();
+            }
 
             await _adFacade.AcceptAdReaction(reactionId, adId);
 
             return RedirectToAction("Details", new { id = adId });
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> React(ReactionCreateViewModel model)
         {
@@ -188,6 +201,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(AdCreateViewModel model)
         {
@@ -211,8 +225,9 @@ namespace Bazaar.App.Controllers
 
             await _adFacade.AddNewAdAsync(new Guid(id), imgDtos, model.TagIds, dto);
             return RedirectToAction(nameof(Index));
-        } 
+        }
 
+        [Authorize]
         private ICollection<ImageCreateDto> UploadImages(IEnumerable<IFormFile> files)
         {
             ICollection<ImageCreateDto> imageDtos = new List<ImageCreateDto>();
@@ -229,7 +244,7 @@ namespace Bazaar.App.Controllers
                         using (var filestream = new FileStream(filePath, FileMode.Create))
                         {
                             img.CopyTo(filestream);
-                            var imgDto = new ImageCreateDto { Url = filePath, Title = ""};
+                            var imgDto = new ImageCreateDto { Url = uniqueFileName, Title = ""};
                             imageDtos.Add(imgDto);
                         }
                     }
@@ -237,6 +252,14 @@ namespace Bazaar.App.Controllers
             }
 
             return imageDtos;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await _adFacade.DeleteAsync(id);
+
+            return RedirectToAction("Index");
         }
 
 

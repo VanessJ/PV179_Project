@@ -34,16 +34,22 @@ namespace Bazaar.BL.Facade
             _userService = userService;
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            await _adService.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto)
         {
             adCreateDto.UserId = userId;
 
-            //var isPremium = await _userService.IsPremium(userId);
+            var isPremium = await _userService.IsPremium(userId);
 
-            //if (isPremium)
-            //{
-            //    adCreateDto.IsPremium = true;
-            //}
+            if (isPremium)
+            {
+                adCreateDto.IsPremium = true;
+            }
 
 
             if (adCreateDto.AdTags == null && tagIdS.Count() != 0)
@@ -170,8 +176,9 @@ namespace Bazaar.BL.Facade
 
         public async Task AcceptAdReaction(Guid reactionId, Guid adId)
         {
-            await _reactionService.AcceptReaction(reactionId);
             await _adService.SetAdAsInvalid(adId);
+            await _unitOfWork.CommitAsync();
+            await _reactionService.AcceptReaction(reactionId);
             await _unitOfWork.CommitAsync();
         }
 

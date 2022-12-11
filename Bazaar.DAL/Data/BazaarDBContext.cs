@@ -50,7 +50,7 @@ namespace Bazaar.DAL.Data
         {
             //one to many
             modelBuilder.Entity<User>().HasMany(u => u.Ads).WithOne(a => a.Creator).HasForeignKey(a => a.UserId);
-            modelBuilder.Entity<Ad>().HasMany(a => a.Images).WithOne(i => i.Ad).HasForeignKey(a => a.AdId);
+            modelBuilder.Entity<Ad>().HasMany(a => a.Images).WithOne(i => i.Ad).HasForeignKey(a => a.AdId).OnDelete(DeleteBehavior.Cascade);
 
             //composite keys
 

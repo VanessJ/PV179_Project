@@ -18,5 +18,7 @@ namespace Bazaar.BL.Services.Users
 
         Task<bool> IsPremium(Guid id);
         Task EditDetails(UserEditDetailDto dto);
+
+        Task<bool> IsBanned(string email);
     }
 }
