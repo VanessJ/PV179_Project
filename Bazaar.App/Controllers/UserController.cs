@@ -132,7 +132,7 @@ namespace Bazaar.App.Controllers
         }
 
 
-        public async Task<IActionResult> AddReview(Guid adId, Guid reactionId)
+        public async Task<IActionResult> AddReview(Guid reactionId, Guid adId)
         {
             var ad = await _adFacade.AdDetail(adId);
             if (ad == null)
