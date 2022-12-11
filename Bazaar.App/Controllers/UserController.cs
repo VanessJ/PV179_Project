@@ -13,7 +13,6 @@ using System.Security.Claims;
 
 namespace Bazaar.App.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private IAdminFacade _adminFacade;
@@ -28,11 +27,13 @@ namespace Bazaar.App.Controllers
             _adFacade = adFacade;
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(new UserIndexViewModel() { Users = await _userFacade.GetAllUsers() });
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(UserIndexViewModel model)
@@ -90,6 +91,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Ban(Guid id)
@@ -99,6 +101,7 @@ namespace Bazaar.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Unban(Guid id)
@@ -108,6 +111,7 @@ namespace Bazaar.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upgrade(Guid id)
@@ -117,6 +121,7 @@ namespace Bazaar.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Downgrade(Guid id)
