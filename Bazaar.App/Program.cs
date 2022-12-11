@@ -33,7 +33,7 @@ var app = builder.Build();
 //create admin account
 using (var scope = app.Services.CreateScope())
 {
-    //CreateAdmin(scope.ServiceProvider, builder.Configuration).Wait();
+    CreateAdmin(scope.ServiceProvider, builder.Configuration).Wait();
 }
 
 // Configure the HTTP request pipeline.
