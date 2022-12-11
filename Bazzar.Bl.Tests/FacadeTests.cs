@@ -10,6 +10,8 @@ using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace Bazzar.Bl.Tests
@@ -158,7 +160,8 @@ namespace Bazzar.Bl.Tests
             var tagServiceMockInstance = new Mock<ITagService>(MockBehavior.Loose).Object;
             var adServiceInstance = new Mock<IAdService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
-            var userManagerInstance = new Mock<UserManager<IdentityUser>>(MockBehavior.Loose).Object;
+            var userManagerInstance = new Mock<UserManager<IdentityUser>>(
+                MockBehavior.Loose, new Mock<IUserStore<IdentityUser>>().Object, null, new Mock<IPasswordHasher<IdentityUser>>().Object, null, null, null, null, null, null).Object;
 
             var userService = new Mock<IUserService>(MockBehavior.Loose);
             
