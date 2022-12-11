@@ -89,6 +89,9 @@ namespace Bazaar.DAL.Data
 
 
             modelBuilder.Entity<Review>()
+            .HasKey(r => r.Id);
+
+            modelBuilder.Entity<Review>()
             .HasOne<User>(r => r.Reviewer)
             .WithMany(u => u.ReviewerIn)
             .HasForeignKey(r => r.ReviewerId);

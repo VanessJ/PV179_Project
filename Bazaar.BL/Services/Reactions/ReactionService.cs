@@ -34,5 +34,16 @@ namespace Bazaar.BL.Services.Reactions
             reaction.Accepted = true;
             await UpdateAsync<ReactionUpdateDto>(reaction);
         }
+
+        public async Task SetReactionAsReviewed(Guid id)
+        {
+            var reaction = await GetByIdAsync<ReactionUpdateDto>(id);
+            if (reaction == null)
+            {
+                throw new ArgumentException();
+            }
+            reaction.Reviewed = true;
+            await UpdateAsync<ReactionUpdateDto>(reaction);
+        }
     }
 }

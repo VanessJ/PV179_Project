@@ -11,6 +11,8 @@ namespace Bazaar.App.Models
 
         public Guid ReviewedId { get; set; }
 
+        public Guid ReactionId { get; set; }
+
         [Required]
         [Range(1, 5)]
         public int Score { get; set; }

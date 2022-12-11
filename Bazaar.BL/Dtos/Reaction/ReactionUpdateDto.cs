@@ -19,5 +19,7 @@ namespace Bazaar.BL.Dtos.Reaction
         public bool Accepted { get; set; }
 
         public bool Rejected { get; set; }
+
+        public bool Reviewed { get; set; }
     }
 }

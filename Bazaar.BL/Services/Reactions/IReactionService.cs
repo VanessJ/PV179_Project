@@ -4,8 +4,10 @@ namespace Bazaar.BL.Services.Reactions
 {
     public interface IReactionService : ICRUDService
     {
-        public Task AcceptReaction(Guid id);
+        Task AcceptReaction(Guid id);
 
         Task DeclineReaction(Guid id);
+
+        Task SetReactionAsReviewed(Guid id);
     }
 }

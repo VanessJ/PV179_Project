@@ -20,5 +20,6 @@ namespace Bazaar.DAL.Models
 
         public bool Rejected { get; set; }
 
+        public bool Reviewed { get; set; }
     }
 }

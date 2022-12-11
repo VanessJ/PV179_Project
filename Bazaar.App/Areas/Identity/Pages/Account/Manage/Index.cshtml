@@ -105,7 +105,12 @@
                     <span class="badge badge-success">Accepted</span>
                     <p class="card-text"> <b>Status: </b>Accepted</p>
 
-                    <a class="btn btn-success" asp-controller="User" asp-action="AddReview" asp-route-adId="@reaction.AdId">Write review of user</a>
+                    @if (!reaction.Reviewed)
+                    {
+                        <a class="btn btn-success" asp-controller="User" asp-action="AddReview" asp-route-reactonId="@reaction.Id" asp-route-adId="@reaction.AdId">Write review of user</a>
+                    }
+
+                   
                 }
                 @if (reaction.Rejected){
                     <span class="badge badge-danger">Declined</span>

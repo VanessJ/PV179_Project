@@ -2,6 +2,7 @@
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.User;
+using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Users;
 using Bazaar.DAL.Models;
@@ -14,14 +15,16 @@ namespace Bazaar.BL.Facade
     {
         private readonly IUserService _userService;
         private readonly IReviewService _reviewService;
+        private readonly IReactionService _reactionService;
         private readonly IUnitOfWork _unitOfWork;
 
 
-        public UserFacade(IUserService userUserService, IReviewService reviewService, IUnitOfWork unitOfWork)
+        public UserFacade(IUserService userUserService, IReviewService reviewService, IReactionService reactionService, IUnitOfWork unitOfWork)
         {
             _userService = userUserService;
             _reviewService = reviewService;
             _unitOfWork = unitOfWork;
+            _reactionService = reactionService;
         }
 
         public async Task<IEnumerable<UserListDto>> FilterUsers(UserFilterDto filterDto)
@@ -97,9 +100,15 @@ namespace Bazaar.BL.Facade
         public async Task WriteReviewOfUser(ReviewCreateDto reviewDto)
         {
             await _reviewService.CreateAsync<ReviewCreateDto>(reviewDto);
+            await _reactionService.SetReactionAsReviewed(reviewDto.ReactionId);
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task SetReactionAsReviewed(Guid id)
+        {
+            await _reactionService.SetReactionAsReviewed(id);
+            await _unitOfWork.CommitAsync();
+        }
         public async Task<ReviewDto> ReviewDetail(Guid id)
         {
             var review = await _reviewService.GetByIdAsync<ReviewDto>(id, nameof(Review.Reviewer), nameof(Review.Ad));
