@@ -100,6 +100,7 @@ namespace Bazaar.BL.Facade
         public async Task WriteReviewOfUser(ReviewCreateDto reviewDto)
         {
             await _reviewService.CreateAsync<ReviewCreateDto>(reviewDto);
+            await _unitOfWork.CommitAsync();
             await _reactionService.SetReactionAsReviewed(reviewDto.ReactionId);
             await _unitOfWork.CommitAsync();
         }
