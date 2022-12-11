@@ -34,6 +34,12 @@ namespace Bazaar.BL.Facade
             _userService = userService;
         }
 
+        public async Task DeleteAsync(Guid id)
+        {
+            await _adService.DeleteAsync(id);
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task AddNewAdAsync(Guid userId, IEnumerable<ImageCreateDto> imageCreateDtos, IEnumerable<Guid> tagIdS, AdCreateDto adCreateDto)
         {
             adCreateDto.UserId = userId;
@@ -159,8 +165,9 @@ namespace Bazaar.BL.Facade
 
         public async Task AcceptAdReaction(Guid reactionId, Guid adId)
         {
-            await _reactionService.AcceptReaction(reactionId);
             await _adService.SetAdAsInvalid(adId);
+            await _unitOfWork.CommitAsync();
+            await _reactionService.AcceptReaction(reactionId);
             await _unitOfWork.CommitAsync();
         }
 

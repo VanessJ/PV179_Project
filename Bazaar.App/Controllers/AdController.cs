@@ -7,6 +7,7 @@ using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
+using Bazaar.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -143,7 +144,7 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
-            if (ad.Creator.Id == currentUserId)
+            if (ad.Creator.Id != currentUserId)
             {
                 return BadRequest();
             }
@@ -166,7 +167,7 @@ namespace Bazaar.App.Controllers
             Guid currentUserId = new Guid(idStr);
 
             var ad = await _adFacade.AdDetail(adId);
-            if (ad.Creator.Id == currentUserId)
+            if (ad.Creator.Id != currentUserId)
             {
                 return BadRequest();
             }
@@ -250,6 +251,14 @@ namespace Bazaar.App.Controllers
             }
 
             return imageDtos;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            await _adFacade.DeleteAsync(id);
+
+            return RedirectToAction("Index");
         }
 
 
