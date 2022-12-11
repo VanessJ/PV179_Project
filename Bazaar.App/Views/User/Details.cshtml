@@ -57,13 +57,13 @@
                 <div class="media align-items-center align-items-lg-start text-left text-lg-left flex-column flex-lg-row">
                     <div class="mr-2 mb-3 mb-lg-0">
 
-                        <img src="https://i.imgur.com/5Aqgz7o.jpg" width="150" height="150" alt="">
+                                <img src="@("/images/" + (ad.Images.Count() > 0 ? ad.Images.First().Url : ""))" width="150" height="150" alt="No images uploaded">
 
                     </div>
 
                     <div class="media-body w-760">
                         <h6 class="media-title font-weight-semibold">
-                                <a asp-action="Details" asp-route-id="@ad.Id" data-abc="true">@ad.Title</a>
+                                <a asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id" data-abc="true">@ad.Title</a>
                                 @if (!ad.IsValid)
                                 {
                                     <span class="text-ban"> - EXPIRED</span>

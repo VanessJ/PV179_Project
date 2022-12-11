@@ -5,11 +5,13 @@ using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Optional;
 
 namespace Bazaar.App.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TagController : Controller
     {
         private readonly IAdminFacade _adminFacade;

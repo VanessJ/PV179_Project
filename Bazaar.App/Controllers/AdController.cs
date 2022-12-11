@@ -7,9 +7,11 @@ using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
 using Bazaar.BL.Services.Tags;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Optional;
+using System.Data;
 using System.Security.Authentication;
 using System.Security.Claims;
 
@@ -102,6 +104,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<ActionResult> React(Guid id)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -236,7 +239,7 @@ namespace Bazaar.App.Controllers
                         using (var filestream = new FileStream(filePath, FileMode.Create))
                         {
                             img.CopyTo(filestream);
-                            var imgDto = new ImageCreateDto { Url = filePath, Title = ""};
+                            var imgDto = new ImageCreateDto { Url = uniqueFileName, Title = ""};
                             imageDtos.Add(imgDto);
                         }
                     }

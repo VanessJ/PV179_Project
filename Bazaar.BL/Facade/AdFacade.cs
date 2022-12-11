@@ -38,12 +38,12 @@ namespace Bazaar.BL.Facade
         {
             adCreateDto.UserId = userId;
 
-            //var isPremium = await _userService.IsPremium(userId);
+            var isPremium = await _userService.IsPremium(userId);
 
-            //if (isPremium)
-            //{
-            //    adCreateDto.IsPremium = true;
-            //}
+            if (isPremium)
+            {
+                adCreateDto.IsPremium = true;
+            }
 
 
             if (adCreateDto.AdTags == null && tagIdS.Count() != 0)

@@ -33,7 +33,7 @@
                     @foreach (var item in Model.Images)
                     {
                         <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
-                            <img class="img-fluid" src="@item.Url" >
+                            <img class="img-fluid" src="@("/images/" + item.Url)" >
                         </div>
                         first = false;
                     }

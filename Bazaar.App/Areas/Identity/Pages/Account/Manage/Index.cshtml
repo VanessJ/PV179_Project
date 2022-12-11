@@ -52,7 +52,7 @@
 
                     <div class="media-body w-760">
                         <h6 class="media-title font-weight-semibold">
-                            <a asp-action="Details" asp-route-id="@ad.Id" data-abc="true">@ad.Title</a>
+                            <a asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id" data-abc="true">@ad.Title</a>
                             @if (!ad.IsValid)
                             {
                                 <span class="text-ban"> - EXPIRED</span>

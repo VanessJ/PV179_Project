@@ -41,7 +41,7 @@ namespace Bazaar.BL.Services.Ads
 
         public async Task<IEnumerable<AdListDto>> ExecuteQueryAsync(AdFilterDto filterDto)
         {
-            return await _adQueryObject.ExecuteQueryAsync(filterDto, nameof(Ad.Creator), nameof(Ad.AdTags), "AdTags.Tag");
+            return await _adQueryObject.ExecuteQueryAsync(filterDto, nameof(Ad.Creator), nameof(Ad.AdTags), nameof(Ad.Images), "AdTags.Tag");
         }
     }
 }
