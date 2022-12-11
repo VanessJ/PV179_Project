@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.DAL.Models
 {
-    public class AdTag
+    public class AdTag : BaseEntity
     {
         public Guid TagId { get; set; }
         

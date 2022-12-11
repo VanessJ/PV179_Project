@@ -67,10 +67,6 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<AdTag>()
                 .HasKey(t => new { t.TagId, t.AdId });
 
-            modelBuilder.Entity<AdTag>()
-                .HasOne(pt => pt.Tag)
-                .WithMany(p => p.AdTags)
-                .HasForeignKey(pt => pt.TagId);
 
             modelBuilder.Entity<AdTag>()
                 .HasOne(pt => pt.Ad)
@@ -101,6 +97,12 @@ namespace Bazaar.DAL.Data
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            modelBuilder.Entity<AdTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(p => p.AdTags)
+                .HasForeignKey(pt => pt.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);

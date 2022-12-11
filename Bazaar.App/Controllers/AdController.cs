@@ -108,7 +108,7 @@ namespace Bazaar.App.Controllers
             var dto = _mapper.Map<AdCreateDto>(model);
             var imgDtos = UploadImages(model.Files);
             
-            await _adFacade.AddNewAdAsync(new Guid("decb7217-30ba-4b6e-bfeb-b17ccf228633"), imgDtos, model.TagIds, dto);
+            await _adFacade.AddNewAdAsync(new Guid("e5493a8e-7356-45d6-9191-e7ab47a54756"), imgDtos, model.TagIds, dto);
             return RedirectToAction(nameof(Index));
         }
 
