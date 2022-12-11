@@ -8,7 +8,7 @@ Aplikace bude poskytovat následující funkcionalitu:
 - Prohlížení nabídek a poptávek, včetně vyhledávání :heavy_check_mark:
 - Vytvoření nového inzerátu nabídky, která obsahuje libovolný počet tagů a fotografií :heavy_check_mark:
 - Projevení zájmu o nabídku, ke které se nabízející musí vyjádřit :heavy_check_mark:
-- Zadání hodnocení k uživateli na základě interakce nabízející-zájemce
+- Zadání hodnocení k uživateli na základě interakce nabízející-zájemce :heavy_check_mark:
 - Vytvoření poptávky :heavy_check_mark:
 - Nákup (implementace platby není součástí projektu) prioritního místa v seznamu :heavy_check_mark:
 
