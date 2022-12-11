@@ -46,6 +46,18 @@ namespace Bazaar.BL.Services
             return user.ReviewedIn;
         }
 
+        public async Task<bool> IsBanned(string email)
+        {
+            var users = await _userQueryObject.ExecuteQueryAsync(new UserFilterDto { Email = email.Some() });
+
+            if ( users.Any() && users.First().Banned )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<IEnumerable<ReviewDto>> GetReviewsWrittenByUser(Guid id)
         {
             var user = await GetByIdAsync<UserDto>(id, nameof(User.ReviewerIn));

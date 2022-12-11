@@ -27,7 +27,7 @@ namespace Bazaar.BL.QueryObjects.Users
                 query.Filter(u => u.Banned);
             }
 
-            if (!filter_dto.OnlyNotBanned)
+            if (filter_dto.OnlyNotBanned)
             {
                 query.Filter(u => !u.Banned);
             }
@@ -35,6 +35,11 @@ namespace Bazaar.BL.QueryObjects.Users
             if (filter_dto.Level.HasValue)
             {
                 query.Filter(u => u.Level.Equals(filter_dto.Level.ValueOrDefault()));
+            }
+
+            if (filter_dto.Email.HasValue)
+            {
+                query.Filter(u => u.Email.Equals(filter_dto.Email.ValueOrDefault()));
             }
 
             return query;
