@@ -130,7 +130,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         public async Task<ActionResult> RejectReaction(Guid adId, Guid reactionId)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -153,6 +153,7 @@ namespace Bazaar.App.Controllers
             return RedirectToAction("Details", new { id = adId });
         }
 
+        [Authorize]
         public async Task<ActionResult> AcceptReaction(Guid adId, Guid reactionId)
         {
             string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -175,7 +176,7 @@ namespace Bazaar.App.Controllers
             return RedirectToAction("Details", new { id = adId });
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> React(ReactionCreateViewModel model)
         {
@@ -198,6 +199,7 @@ namespace Bazaar.App.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Add(AdCreateViewModel model)
         {
@@ -221,8 +223,9 @@ namespace Bazaar.App.Controllers
 
             await _adFacade.AddNewAdAsync(new Guid(id), imgDtos, model.TagIds, dto);
             return RedirectToAction(nameof(Index));
-        } 
+        }
 
+        [Authorize]
         private ICollection<ImageCreateDto> UploadImages(IEnumerable<IFormFile> files)
         {
             ICollection<ImageCreateDto> imageDtos = new List<ImageCreateDto>();
