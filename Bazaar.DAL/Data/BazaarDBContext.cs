@@ -50,7 +50,6 @@ namespace Bazaar.DAL.Data
             //one to many
             modelBuilder.Entity<User>().HasMany(u => u.Ads).WithOne(a => a.Creator).HasForeignKey(a => a.UserId);
             modelBuilder.Entity<Ad>().HasMany(a => a.Images).WithOne(i => i.Ad).HasForeignKey(a => a.AdId);
-            
 
             //composite keys
 
@@ -67,12 +66,15 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<AdTag>()
                 .HasKey(t => new { t.TagId, t.AdId });
 
+            modelBuilder.Entity<AdTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(p => p.AdTags)
+                .HasForeignKey(pt => pt.TagId);
 
             modelBuilder.Entity<AdTag>()
                 .HasOne(pt => pt.Ad)
                 .WithMany(t => t.AdTags)
                 .HasForeignKey(pt => pt.AdId);
-
 
             modelBuilder.Entity<Reaction>()
             .HasOne<User>(r => r.User);
@@ -101,6 +103,12 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<AdTag>()
                 .HasOne(pt => pt.Tag)
                 .WithMany(p => p.AdTags)
+                .HasForeignKey(pt => pt.TagId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Tag>()
+                .HasMany(p => p.AdTags)
+                .WithOne(pt => pt.Tag)
                 .HasForeignKey(pt => pt.TagId)
                 .OnDelete(DeleteBehavior.Cascade);
 

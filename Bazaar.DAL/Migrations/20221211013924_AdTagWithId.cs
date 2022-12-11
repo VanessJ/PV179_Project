@@ -57,8 +57,7 @@ namespace Bazaar.DAL.Migrations
                 name: "Id",
                 table: "AdTag",
                 type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                nullable: false);
 
             migrationBuilder.InsertData(
                 table: "Tag",
