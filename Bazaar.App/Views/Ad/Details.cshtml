@@ -6,6 +6,14 @@
 
 @model AdDetailViewModel
 
+@if(!Model.IsValid){
+    <span class="badge badge-success" style="font-size: 25px;">This ad has been sucesfully closed. Please contact the other user for finalization of the transaction.</span>
+ 
+<br />
+<br />
+}
+
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">@Model.Title</h1>
@@ -66,7 +74,7 @@
     <tr>
         <td> <b> Price: </b></td>
         <td>@Model.Price €</td>
-    </tr>
+    </tr
     <tr>
         <td> <b> Type: </b></td>
         <td>
@@ -84,7 +92,72 @@
 
 <br />
 <div>
-<a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary my-1" href="@Url.Action("Index")">Back to list</a>
 </div>
+<br />
+
+
+@if (Model.IsValid){
+
+    <h3> <b>Interested? </b> </h3>
+    <div>
+        <a class="btn btn-outline-primary mt-2" asp-action="React" asp-route-id="@Model.Id">React</a>
+    </div>
+
+    <br />
+}
+
+
+
+
+@if (Model.Reactions != null && Model.IsValid)
+{
+    @foreach (var reaction in Model.Reactions)
+    {
+        <div class="card">
+            <h5 class="card-header">
+                <a asp-controller="User" asp-action="Details" asp-route-id="@reaction.User.Id">@reaction.User.UserName</a>
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">@reaction.Message</p>
+                @if (!reaction.Rejected)
+                {
+                    <a asp-action="AcceptReaction" asp-route-adId="@Model.Id" asp-route-reactionId="@reaction.Id" class="btn btn-success">Accept</a>
+                    <a asp-action="RejectReaction" asp-route-adId="@Model.Id" asp-route-reactionId="@reaction.Id" class="btn btn-danger">Decline</a>
+                }
+                @if (reaction.Rejected)
+                {
+                    <span class="badge badge-danger">Declined</span>
+                }
+            </div>
+        </div>
+    }
+
+}
+
+@if (Model.Reactions != null && !Model.IsValid)
+{
+    @foreach (var reaction in Model.Reactions)
+    {
+        @if (reaction.Accepted)
+        {
+            
+        <div class="card">
+            <h5 class="card-header">
+                <a asp-controller="User" asp-action="Details" asp-route-id="@reaction.User.Id">@reaction.User.UserName</a>
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text">@reaction.Message</p>
+                <span class="badge badge-success">Accepted</span>
+                
+            </div>
+        </div>
+        }
+    }
+
+}
+
 
 

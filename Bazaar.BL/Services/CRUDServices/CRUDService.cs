@@ -26,9 +26,9 @@ namespace Bazaar.BL.Services.CRUDServices
             return _mapper.Map<Tdto?>(entity);
         }
 
-        public async Task<IEnumerable<Tdto>> GetAllAsync<Tdto>()
+        public async Task<IEnumerable<Tdto>> GetAllAsync<Tdto>(params string[] includes)
         {
-            IEnumerable<TEntity> entity = await _repository.GetAsync();
+            IEnumerable<TEntity> entity = await _repository.GetAsync(includes);
 
             return _mapper.Map<IEnumerable<Tdto>>(entity);
         }

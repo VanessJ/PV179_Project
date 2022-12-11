@@ -355,7 +355,7 @@ namespace Bazzar.Bl.Tests
             var mapper = new Mapper(config);
             var adQueryObject = new AdQueryObject(mapper, query);
             var tagNames = new List<Guid>() { tagId2, tagId3, tagId5 };
-            var ad_filter_dto = new AdFilterDto() { TagIds = tagNames.Some(), OderCriteria = "Title".Some() };
+            var ad_filter_dto = new AdFilterDto() { TagIds = ((IEnumerable<Guid>)tagNames).Some(), OderCriteria = "Title".Some() };
             var result = await adQueryObject.ExecuteQueryAsync(ad_filter_dto);
 
             Assert.Equal(3, result.Count());

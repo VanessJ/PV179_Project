@@ -4,6 +4,7 @@ using Bazaar.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazaar.DAL.Migrations
 {
     [DbContext(typeof(BazaarDBContext))]
-    partial class BazaarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20221210191512_ReactionColumnAdd")]
+    partial class ReactionColumnAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +82,6 @@ namespace Bazaar.DAL.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TagId", "AdId");
@@ -318,7 +318,7 @@ namespace Bazaar.DAL.Migrations
                     b.HasOne("Bazaar.DAL.Models.Tag", "Tag")
                         .WithMany("AdTags")
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Ad");
