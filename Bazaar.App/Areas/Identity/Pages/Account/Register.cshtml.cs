@@ -128,6 +128,7 @@ namespace Bazaar.App.Areas.Identity.Pages.Account
                     await _userFacade.RegisterUser(new UserCreateDto()
                     {
                         Email = user.Email,
+                        UserName = user.Email,
                         Id = new Guid(user.Id),
                     });
 
