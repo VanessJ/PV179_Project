@@ -72,5 +72,20 @@ namespace Bazaar.BL.Services
             user.HasPremium = true;
             await UpdateAsync<UserEditDto>(user);
         }
+
+        public async Task EditDetails(UserEditDetailDto dto)
+        {
+            var user = await GetByIdAsync<UserEditDto>(dto.Id);
+            if (user == null)
+            {
+                throw new ArgumentException();
+            }
+            user.UserName = dto.UserName;
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
+            user.PhoneNumber = dto.PhoneNumber;
+
+            await UpdateAsync<UserEditDto>(user);
+        }
     }
 }

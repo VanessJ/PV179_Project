@@ -130,6 +130,10 @@
                                             <span class="star">&#11088;</span>
                                         }
                                         @ad.Title
+                                        @if (!ad.IsValid)
+                                        {
+                                            <span class="text-ban"> - EXPIRED</span>
+                                        }    
                                     </a>
                                 </h6>
 

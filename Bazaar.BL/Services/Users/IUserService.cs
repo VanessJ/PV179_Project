@@ -17,5 +17,6 @@ namespace Bazaar.BL.Services.Users
         Task SetAsPremium(Guid id);
 
         Task<bool> IsPremium(Guid id);
+        Task EditDetails(UserEditDetailDto dto);
     }
 }

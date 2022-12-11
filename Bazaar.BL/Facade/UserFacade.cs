@@ -35,6 +35,12 @@ namespace Bazaar.BL.Facade
             await _unitOfWork.CommitAsync();
         }
 
+        public async Task EditUserDetails(UserEditDetailDto editDto)
+        {
+            await _userService.EditDetails(editDto);
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task SetAsPremium(Guid id)
         {
             await _userService.SetAsPremium(id);

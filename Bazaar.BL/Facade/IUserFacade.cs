@@ -18,5 +18,6 @@ namespace Bazaar.BL.Facade
         Task WriteReviewOfUser(ReviewCreateDto reviewDto);
         Task WriteReactionToAd(ReactionCreateDto reactionCreateDto);
         Task SetAsPremium(Guid id);
+        Task EditUserDetails(UserEditDetailDto editDto);
     }
 }
