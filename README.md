@@ -21,3 +21,11 @@ Dále správci mohou:
 - 485517
 - 527369
 - 493268
+
+## Link
+- https://bazaarapp20221212171427.azurewebsites.net
+
+## Preinstalled users
+- admin@example.com pwd: adminadmin    - admin user
+- marek@example.com pwd: marekmarek
+- ferko@example.com pwd: ferkoferko
