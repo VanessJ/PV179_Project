@@ -1,6 +1,8 @@
 using Bazaar.App.Config;
+using Bazaar.BL.Facade;
 using Microsoft.AspNetCore.Identity;
 using Bazaar.DAL.Data;
+using Bazaar.Infrastructure.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +33,7 @@ Dependencies.RegisterDependencyInjection(builder.Services);
 var app = builder.Build();
 
 //create admin account
-using (var scope = app.Services.CreateScope())
+await using (var scope = app.Services.CreateAsyncScope())
 {
     CreateAdmin(scope.ServiceProvider, builder.Configuration).Wait();
 }
@@ -71,6 +73,8 @@ async Task CreateAdmin(IServiceProvider serviceProvider, IConfiguration configur
 {
     var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var adminFacade = serviceProvider.GetRequiredService<IAdminFacade>();
+
     var roleName = "Admin";
 
     var roleExist = await RoleManager.RoleExistsAsync(roleName);
@@ -83,6 +87,6 @@ async Task CreateAdmin(IServiceProvider serviceProvider, IConfiguration configur
 
     if (user != null)
     {
-        await UserManager.AddToRoleAsync(user, roleName);
+        await adminFacade.UpgradeUser(new Guid(user.Id));
     }
 }
