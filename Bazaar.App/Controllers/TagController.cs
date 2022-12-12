@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Bazaar.App.Models;
-using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Facade;
-using Bazaar.BL.Services.Tags;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Optional;

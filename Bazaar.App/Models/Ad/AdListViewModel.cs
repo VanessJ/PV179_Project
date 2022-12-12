@@ -1,5 +1,4 @@
-﻿using Bazaar.BL.Dtos.AdTag;
-using Bazaar.BL.Dtos.Image;
+﻿using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos;
 
 namespace Bazaar.App.Models

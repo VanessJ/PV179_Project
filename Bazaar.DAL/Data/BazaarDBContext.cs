@@ -30,19 +30,6 @@ namespace Bazaar.DAL.Data
         {
             _configurationBuilder = configurationBuilder;
         }
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                /*IConfiguration config = _configurationBuilder
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                */
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database=BazaarDB;Trusted_Connection=True;");
-                base.OnConfiguring(optionsBuilder);
-            }
-        }
 
         // https://docs.microsoft.com/en-us/ef/core/modeling/
         

@@ -6,12 +6,9 @@ using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
-using Bazaar.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Security.Authentication;
-using System.Security.Claims;
 
 namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
 {

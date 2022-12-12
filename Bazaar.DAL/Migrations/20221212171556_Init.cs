@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bazaar.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -210,26 +209,26 @@ namespace Bazaar.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AdTag",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TagId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AdTag", x => new { x.TagId, x.AdId });
+                    table.PrimaryKey("PK_AdTag", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AdTag_Ad_AdId",
                         column: x => x.AdId,
                         principalTable: "Ad",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AdTag_Tag_TagId",
                         column: x => x.TagId,
@@ -255,69 +254,67 @@ namespace Bazaar.DAL.Migrations
                         column: x => x.AdId,
                         principalTable: "Ad",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Reaction",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Accepted = table.Column<bool>(type: "bit", nullable: false),
                     Rejected = table.Column<bool>(type: "bit", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Reviewed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reaction", x => new { x.AdId, x.UserId });
+                    table.PrimaryKey("PK_Reaction", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Reaction_Ad_AdId",
                         column: x => x.AdId,
                         principalTable: "Ad",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reaction_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReviewerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReviewedId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: false),
                     Descritption = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    AdId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Review", x => new { x.ReviewerId, x.ReviewedId });
+                    table.PrimaryKey("PK_Review", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Review_Ad_AdId",
                         column: x => x.AdId,
                         principalTable: "Ad",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Review_User_ReviewedId",
                         column: x => x.ReviewedId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Review_User_ReviewerId",
                         column: x => x.ReviewerId,
                         principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -325,38 +322,9 @@ namespace Bazaar.DAL.Migrations
                 columns: new[] { "Id", "TagName" },
                 values: new object[,]
                 {
-                    { new Guid("c481ebd9-43cf-4156-9183-afe08f62a9c3"), "Sell" },
-                    { new Guid("d69dee90-1fcd-4e8d-a30f-e3edc2c936e4"), "Animals" }
+                    { new Guid("0bdaa03c-7cb3-4283-8628-e9bf0435efe6"), "Sell" },
+                    { new Guid("9d06cf21-c7a1-4863-a720-3148276e9222"), "Animals" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "User",
-                columns: new[] { "Id", "Banned", "Email", "FirstName", "HasPremium", "LastName", "Level", "PhoneNumber", "UserName" },
-                values: new object[,]
-                {
-                    { new Guid("3cb12878-eebd-42a4-ba57-15f5ce59d14e"), false, "ferko@gmailol.com", "Ferko", false, "Priezviskovy", 0, "2020040444", "Feri" },
-                    { new Guid("5b995000-09d8-403c-997b-5aad20df1222"), false, "jozko@gmailol.com", "Jozko", false, "Mrkvicka", 0, "0000000", "TestUser" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Ad",
-                columns: new[] { "Id", "Description", "IsOffer", "IsPremium", "IsValid", "Price", "Title", "UserId" },
-                values: new object[] { new Guid("3ff87307-e7c6-411a-a880-2034815d960a"), "Je velmi zlata, zbavte ma jej, prosim", true, false, true, 50, "Predam macku", new Guid("5b995000-09d8-403c-997b-5aad20df1222") });
-
-            migrationBuilder.InsertData(
-                table: "Image",
-                columns: new[] { "Id", "AdId", "Title", "Url" },
-                values: new object[] { new Guid("f5db8017-d702-4565-82d3-04c834cede46"), new Guid("3ff87307-e7c6-411a-a880-2034815d960a"), "Milovana macka", "\\obrazokmacky.jpg" });
-
-            migrationBuilder.InsertData(
-                table: "Reaction",
-                columns: new[] { "AdId", "UserId", "Accepted", "Id", "Message", "Rejected" },
-                values: new object[] { new Guid("3ff87307-e7c6-411a-a880-2034815d960a"), new Guid("3cb12878-eebd-42a4-ba57-15f5ce59d14e"), true, new Guid("00000000-0000-0000-0000-000000000000"), "Mam zaujem o vasu prekrasnu macku", false });
-
-            migrationBuilder.InsertData(
-                table: "Review",
-                columns: new[] { "ReviewedId", "ReviewerId", "AdId", "Descritption", "Id", "Score" },
-                values: new object[] { new Guid("5b995000-09d8-403c-997b-5aad20df1222"), new Guid("3cb12878-eebd-42a4-ba57-15f5ce59d14e"), new Guid("3ff87307-e7c6-411a-a880-2034815d960a"), "Krasna macka, 10/10 spokojnost", new Guid("0bb5f1b2-51c3-4631-92b6-f787ca9f1faf"), 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ad_UserId",
@@ -367,6 +335,11 @@ namespace Bazaar.DAL.Migrations
                 name: "IX_AdTag_AdId",
                 table: "AdTag",
                 column: "AdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdTag_TagId",
+                table: "AdTag",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -413,6 +386,11 @@ namespace Bazaar.DAL.Migrations
                 column: "AdId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reaction_AdId",
+                table: "Reaction",
+                column: "AdId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reaction_UserId",
                 table: "Reaction",
                 column: "UserId");
@@ -426,6 +404,11 @@ namespace Bazaar.DAL.Migrations
                 name: "IX_Review_ReviewedId",
                 table: "Review",
                 column: "ReviewedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Review_ReviewerId",
+                table: "Review",
+                column: "ReviewerId");
         }
 
         /// <inheritdoc />

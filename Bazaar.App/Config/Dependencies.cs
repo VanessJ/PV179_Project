@@ -9,7 +9,6 @@ using Bazaar.BL.Services.Reactions;
 using Bazaar.BL.Services.Reviews;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
-using Bazaar.DAL.Data;
 using Bazaar.Infrastructure.EFCore.Query;
 using Bazaar.Infrastructure.EFCore.Repository;
 using Bazaar.Infrastructure.EFCore.UnitOfWork;
@@ -23,8 +22,6 @@ namespace Bazaar.App.Config
     {
         public static void RegisterDependencyInjection(IServiceCollection services)
         {
-            services.AddDbContext<BazaarDBContext>();
-            //builder.Services.AddTransient<DbContext>(x => x.GetRequiredService<BazaarDBContext>());
             services.AddTransient<IConfigurationBuilder, ConfigurationBuilder>();
 
             services.AddAutoMapper(typeof(BusinessMapperConfig), typeof(PresentationMapperConfig));

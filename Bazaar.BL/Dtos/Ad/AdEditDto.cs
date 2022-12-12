@@ -1,7 +1,4 @@
-﻿using Bazaar.BL.Dtos.AdTag;
-using Bazaar.BL.Dtos.Image;
-
-namespace Bazaar.BL.Dtos.Ad
+﻿namespace Bazaar.BL.Dtos.Ad
 {
     public class AdEditDto
     {

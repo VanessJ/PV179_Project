@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bazaar.DAL.Migrations
 {
     [DbContext(typeof(BazaarDBContext))]
-    [Migration("20221212121307_addSeed")]
-    partial class addSeed
+    [Migration("20221212171556_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,19 +61,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ad");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            Description = "Je velmi zlata, zbavte ma jej, prosim",
-                            IsOffer = true,
-                            IsPremium = false,
-                            IsValid = true,
-                            Price = 50,
-                            Title = "Predam macku",
-                            UserId = new Guid("0fbbcd36-84b4-4b0f-83b5-f986a0416cea")
-                        });
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.AdTag", b =>
@@ -95,20 +82,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("AdTag");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("165a3399-c8b4-4ec2-8949-2cede028bee1"),
-                            AdId = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            TagId = new Guid("008f6b73-8392-4b46-a4db-b37524c66a4d")
-                        },
-                        new
-                        {
-                            Id = new Guid("07374bdb-c894-4247-b86b-0b4c52512fcd"),
-                            AdId = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            TagId = new Guid("4287170d-f618-4165-8055-58e9f6a54e54")
-                        });
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Image", b =>
@@ -134,15 +107,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("AdId");
 
                     b.ToTable("Image");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1337ad14-de10-4b39-b0a1-d1287d16d7d9"),
-                            AdId = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            Title = "Milovana macka",
-                            Url = "\\obrazokmacky.jpg"
-                        });
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Reaction", b =>
@@ -177,18 +141,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reaction");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("cbe04aaf-f674-4663-8a83-13688c739efc"),
-                            Accepted = true,
-                            AdId = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            Message = "Mam zaujem o vasu prekrasnu macku",
-                            Rejected = false,
-                            Reviewed = false,
-                            UserId = new Guid("2257012a-a0cf-4425-93ff-82810feec09a")
-                        });
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Review", b =>
@@ -221,17 +173,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasIndex("ReviewerId");
 
                     b.ToTable("Review");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("804ba4d7-8772-4ef2-8b09-5112e0978ec2"),
-                            AdId = new Guid("7d28780b-3739-4c60-8cb1-ca2eddd48256"),
-                            Descritption = "Krasna macka, 10/10 spokojnost",
-                            ReviewedId = new Guid("0fbbcd36-84b4-4b0f-83b5-f986a0416cea"),
-                            ReviewerId = new Guid("2257012a-a0cf-4425-93ff-82810feec09a"),
-                            Score = 5
-                        });
                 });
 
             modelBuilder.Entity("Bazaar.DAL.Models.Tag", b =>
@@ -252,12 +193,12 @@ namespace Bazaar.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("008f6b73-8392-4b46-a4db-b37524c66a4d"),
+                            Id = new Guid("9d06cf21-c7a1-4863-a720-3148276e9222"),
                             TagName = "Animals"
                         },
                         new
                         {
-                            Id = new Guid("4287170d-f618-4165-8055-58e9f6a54e54"),
+                            Id = new Guid("0bdaa03c-7cb3-4283-8628-e9bf0435efe6"),
                             TagName = "Sell"
                         });
                 });
@@ -300,32 +241,6 @@ namespace Bazaar.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0fbbcd36-84b4-4b0f-83b5-f986a0416cea"),
-                            Banned = false,
-                            Email = "jozko@example.com",
-                            FirstName = "Jozko",
-                            HasPremium = false,
-                            LastName = "Mrkvicka",
-                            Level = 0,
-                            PhoneNumber = "0000000",
-                            UserName = "TestUser"
-                        },
-                        new
-                        {
-                            Id = new Guid("2257012a-a0cf-4425-93ff-82810feec09a"),
-                            Banned = false,
-                            Email = "ferko@example.com",
-                            FirstName = "Ferko",
-                            HasPremium = false,
-                            LastName = "Priezviskovy",
-                            Level = 0,
-                            PhoneNumber = "2020040444",
-                            UserName = "Feri"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

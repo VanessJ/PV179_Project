@@ -1,7 +1,6 @@
 using AutoMapper;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos.Base;
 using Bazaar.DAL.Data;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.EFCore.Query;
