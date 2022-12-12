@@ -107,13 +107,14 @@ namespace Bazzar.Bl.Tests
         {
             var ReviewServiceInstance = new Mock<IReviewService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
+            var reactionService = new Mock<IReactionService>(MockBehavior.Loose).Object;
 
             var userService = new Mock<IUserService>(MockBehavior.Loose);
             userService.Setup(x => x.IsUsernameTaken(It.IsAny<string>())).ReturnsAsync(true);
             userService.Setup(x => x.CreateAsync(It.IsAny<UserCreateDto>())).ReturnsAsync(Guid.NewGuid());
             var userServiceInstance = userService.Object;
 
-            IUserFacade userFacade = new UserFacade(userServiceInstance, ReviewServiceInstance, unitOfWorkInstance);
+            IUserFacade userFacade = new UserFacade(userServiceInstance, ReviewServiceInstance, reactionService, unitOfWorkInstance);
             Assert.ThrowsAsync<ArgumentException>(() => userFacade.RegisterUser(new UserCreateDto { }));
 
         }
@@ -142,12 +143,13 @@ namespace Bazzar.Bl.Tests
         {
             var reviewServiceInstance = new Mock<IReviewService>(MockBehavior.Loose).Object;
             var unitOfWorkInstance = new Mock<IUnitOfWork>(MockBehavior.Loose).Object;
+            var reactionServiceMockInstance = new Mock<IReactionService>(MockBehavior.Loose).Object;
 
             var userService = new Mock<IUserService>(MockBehavior.Loose);
-            userService.Setup(x => x.GetByIdAsync<UserProfileDetailDto>(It.IsAny<Guid>())).ReturnsAsync(userDetail);
+            userService.Setup(x => x.GetByIdAsync<UserProfileDetailDto>(It.IsAny<Guid>(), It.IsAny<string>())).ReturnsAsync(userDetail);
             var userServiceInstance = userService.Object;
 
-            IUserFacade userFacade = new UserFacade(userServiceInstance, reviewServiceInstance, unitOfWorkInstance);
+            IUserFacade userFacade = new UserFacade(userServiceInstance, reviewServiceInstance, reactionServiceMockInstance, unitOfWorkInstance);
             var detail = await userFacade.GetUserProfileDetail(userId);
             Assert.Equal("Ferko", detail.UserName);
             Assert.Equal("Velky", detail.LastName);

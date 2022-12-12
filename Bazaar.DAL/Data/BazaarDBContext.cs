@@ -49,43 +49,20 @@ namespace Bazaar.DAL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //one to many
-            modelBuilder.Entity<User>().HasMany(u => u.Ads).WithOne(a => a.Creator).HasForeignKey(a => a.UserId);
-            modelBuilder.Entity<Ad>().HasMany(a => a.Images).WithOne(i => i.Ad).HasForeignKey(a => a.AdId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Ads)
+                .WithOne(a => a.Creator)
+                .HasForeignKey(a => a.UserId);
 
-            //composite keys
 
             modelBuilder.Entity<Reaction>()
-           .HasKey(r => new { r.AdId, r.UserId });
-
-            modelBuilder.Entity<Review>()
-                .HasKey(r => new { r.ReviewerId, r.ReviewedId });
-
-
-            modelBuilder.Entity<Reaction>().HasKey(r => new { r.AdId, r.UserId });
-
-            //many to many
-            modelBuilder.Entity<AdTag>()
-                .HasKey(t => new { t.TagId, t.AdId });
-
-            modelBuilder.Entity<AdTag>()
-                .HasOne(pt => pt.Tag)
-                .WithMany(p => p.AdTags)
-                .HasForeignKey(pt => pt.TagId);
-
-            modelBuilder.Entity<AdTag>()
-                .HasOne(pt => pt.Ad)
-                .WithMany(t => t.AdTags)
-                .HasForeignKey(pt => pt.AdId);
+           .HasKey(r => r.Id);
 
             modelBuilder.Entity<Reaction>()
             .HasOne<User>(r => r.User)
             .WithMany(u => u.Reactions)
-            .HasForeignKey(u => u.UserId);
-
-            modelBuilder.Entity<Reaction>()
-            .HasOne<Ad>(r => r.Ad)
-            .WithMany(a => a.Reactions)
-            .HasForeignKey(r => r.AdId);
+            .HasForeignKey(u => u.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
 
 
             modelBuilder.Entity<Review>()
@@ -94,33 +71,53 @@ namespace Bazaar.DAL.Data
             modelBuilder.Entity<Review>()
             .HasOne<User>(r => r.Reviewer)
             .WithMany(u => u.ReviewerIn)
-            .HasForeignKey(r => r.ReviewerId);
+            .HasForeignKey(r => r.ReviewerId)
+            .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Review>()
             .HasOne<User>(r => r.Reviewed)
             .WithMany(u => u.ReviewedIn)
-            .HasForeignKey(r => r.ReviewedId);
+            .HasForeignKey(r => r.ReviewedId)
+            .OnDelete(DeleteBehavior.NoAction);
 
-
-            modelBuilder.Entity<Review>()
-            .HasOne<Ad>(r => r.Ad);
-
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            }
 
             modelBuilder.Entity<AdTag>()
-                .HasOne(pt => pt.Tag)
-                .WithMany(p => p.AdTags)
-                .HasForeignKey(pt => pt.TagId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasKey(t => t.Id);
 
             modelBuilder.Entity<Tag>()
-                .HasMany(p => p.AdTags)
-                .WithOne(pt => pt.Tag)
-                .HasForeignKey(pt => pt.TagId)
+                .HasMany(a => a.AdTags)
+                .WithOne(i => i.Tag)
+                .HasForeignKey(a => a.TagId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Ad>()
+                .HasMany(a => a.AdTags)
+                .WithOne(i => i.Ad)
+                .HasForeignKey(a => a.AdId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Ad>()
+                .HasMany(a => a.Images)
+                .WithOne(i => i.Ad)
+                .HasForeignKey(a => a.AdId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Ad>()
+                .HasMany(a => a.Reactions)
+                .WithOne(i => i.Ad)
+                .HasForeignKey(a => a.AdId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Ad>()
+                .HasMany<Review>()
+                .WithOne(i => i.Ad)
+                .HasForeignKey(a => a.AdId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+         
 
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);

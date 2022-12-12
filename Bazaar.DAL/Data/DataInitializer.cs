@@ -15,6 +15,7 @@ namespace Bazaar.DAL.Data
             var tagId1 = Guid.NewGuid();
             var tagId2 = Guid.NewGuid();
             var reviewId = Guid.NewGuid();
+            var reactionId = Guid.NewGuid();
             modelBuilder.Entity<User>().HasData
            (
                new User
@@ -23,7 +24,7 @@ namespace Bazaar.DAL.Data
                    UserName = "TestUser",
                    FirstName = "Jozko",
                    LastName = "Mrkvicka",
-                   Email = "jozko@gmailol.com",
+                   Email = "jozko@example.com",
                    PhoneNumber = "0000000",
                }
            );
@@ -36,7 +37,7 @@ namespace Bazaar.DAL.Data
                    UserName = "Feri",
                    FirstName = "Ferko",
                    LastName = "Priezviskovy",
-                   Email = "ferko@gmailol.com",
+                   Email = "ferko@example.com",
                    PhoneNumber = "2020040444",
 
                }
@@ -88,11 +89,32 @@ namespace Bazaar.DAL.Data
                 }
             );
 
+            modelBuilder.Entity<AdTag>().HasData
+            (
+                new AdTag
+                {
+                    Id = Guid.NewGuid(),
+                    AdId = adId,
+                    TagId = tagId1,
+                }
+            );
+
+            modelBuilder.Entity<AdTag>().HasData
+            (
+                new AdTag
+                {
+                    Id = Guid.NewGuid(),
+                    AdId = adId,
+                    TagId = tagId2,
+                }
+            );
+
 
             modelBuilder.Entity<Reaction>().HasData
             (
                 new Reaction
                 {
+                    Id = reactionId,
                     AdId = adId,
                     UserId = userId2,
                     Accepted = true,
