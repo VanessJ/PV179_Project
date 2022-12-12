@@ -35,12 +35,11 @@ namespace Bazaar.DAL.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                /*IConfiguration config = _configurationBuilder
+                IConfiguration config = _configurationBuilder
                     .AddJsonFile("appsettings.json")
                     .Build();
                 
-                optionsBuilder.UseSqlServer(config.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));*/
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Integrated Security=True;MultipleActiveResultSets=True;Database=BazaarDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(config.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
                 base.OnConfiguring(optionsBuilder);
             }
         }
