@@ -30,19 +30,6 @@ namespace Bazaar.DAL.Data
         {
             _configurationBuilder = configurationBuilder;
         }
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                IConfiguration config = _configurationBuilder
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                
-                optionsBuilder.UseSqlServer(config.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"));
-                base.OnConfiguring(optionsBuilder);
-            }
-        }
 
         // https://docs.microsoft.com/en-us/ef/core/modeling/
         

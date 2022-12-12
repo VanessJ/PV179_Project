@@ -2,10 +2,15 @@ using Bazaar.App.Config;
 using Bazaar.BL.Facade;
 using Microsoft.AspNetCore.Identity;
 using Bazaar.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<BazaarDBContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTION")));
+
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
