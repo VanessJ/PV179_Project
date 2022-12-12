@@ -26,17 +26,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Tags", "Index", "Tag", null, new {@class = "nav-link text-dark"})
-                        </li>
-                        <li class="nav-item">
                             @Html.ActionLink("Ads", "Index", "Ad", null, new {@class = "nav-link text-dark"})
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Users", "Index", "User", null, new {@class = "nav-link text-dark"})
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Buy premium", "Index", "Premium", null, new {@class = "nav-link text-dark"})
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Tags", "Index", "Tag", null, new {@class = "nav-link text-dark"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Users", "Index", "User", null, new {@class = "nav-link text-dark"})
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
