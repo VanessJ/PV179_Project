@@ -18,7 +18,6 @@ using Optional;
 using Bazaar.BL.Services.Ads;
 using Bazaar.BL.QueryObjects.Ads;
 using Bazaar.App.Config;
-using Bazaar.BL.Dtos.Base;
 
 namespace Bazzar.Bl.Tests
 {

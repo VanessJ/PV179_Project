@@ -2,7 +2,6 @@ using Bazaar.App.Config;
 using Bazaar.BL.Facade;
 using Microsoft.AspNetCore.Identity;
 using Bazaar.DAL.Data;
-using Bazaar.Infrastructure.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 

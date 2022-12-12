@@ -1,6 +1,5 @@
 ﻿using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.AdTag;
-using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Image;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Dtos.Tag;

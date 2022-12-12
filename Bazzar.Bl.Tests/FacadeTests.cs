@@ -10,8 +10,6 @@ using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Moq;
 
 namespace Bazzar.Bl.Tests

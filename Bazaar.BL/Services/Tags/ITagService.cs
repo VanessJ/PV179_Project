@@ -1,5 +1,4 @@
-﻿using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos.AdTag;
+﻿using Bazaar.BL.Dtos.AdTag;
 using Bazaar.BL.Dtos.Tag;
 using Bazaar.BL.Services.CRUDServices;
 

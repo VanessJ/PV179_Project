@@ -1,5 +1,4 @@
 ﻿using Bazaar.BL.Dtos.Base;
-using Bazaar.BL.Dtos.Tag;
 using Bazaar.DAL.Models;
 using Bazaar.Infrastructure.Query;
 

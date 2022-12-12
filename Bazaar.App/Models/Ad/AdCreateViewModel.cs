@@ -1,7 +1,4 @@
-﻿using Bazaar.BL.Dtos.AdTag;
-using Bazaar.BL.Dtos.Image;
-using Bazaar.BL.Dtos;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Bazaar.BL.Dtos.Tag;
 
 namespace Bazaar.App.Models

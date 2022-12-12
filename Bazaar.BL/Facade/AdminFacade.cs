@@ -5,7 +5,6 @@ using Bazaar.BL.Services.Ads;
 using Bazaar.BL.Services.Tags;
 using Bazaar.BL.Services.Users;
 using Bazaar.Infrastructure.UnitOfWork;
-using Optional;
 using Microsoft.AspNetCore.Identity;
 
 namespace Bazaar.BL.Facade

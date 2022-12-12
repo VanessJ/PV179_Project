@@ -1,5 +1,4 @@
 ﻿using Bazaar.BL.Dtos.Ad;
-using Bazaar.BL.Dtos.Base;
 using Bazaar.BL.Dtos.Reaction;
 using Bazaar.BL.Services.CRUDServices;
 
