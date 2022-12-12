@@ -1,4 +1,5 @@
-﻿@model UserDetailViewModel
+﻿@using System.Security.Claims
+@model UserDetailViewModel
 
 <div class="d-flex justify-content-between">
     <h4>User Profile</h4>
@@ -91,8 +92,11 @@
                             <h6 class="text-success">Demand</h6>
                         }
                         
-                            <a class="btn btn-primary mt-3" asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id">Details</a>
+                        <a class="btn btn-primary mt-3" asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id">Details</a>
+                        @if (@ad.IsValid && @ad.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
+                        {
                             <a class="btn btn-outline-primary mt-2" asp-controller="Ad" asp-action="React" asp-route-id="@ad.Id">React</a>
+                        }
                     </div>
                 </div>
             </div>

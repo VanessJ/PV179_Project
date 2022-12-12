@@ -104,7 +104,7 @@
 <br />
 
 
-@if (Model.IsValid){
+@if (Model.IsValid && Model.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "")){
 
     <h3> <b>Interested? </b> </h3>
     <div>
