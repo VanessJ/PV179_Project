@@ -9,7 +9,8 @@ namespace Bazaar.App.Models
 
         [Required]
         public string Title { get; set; } = null!;
-        public string? Description { get; set; } = new string("");
+        [Required]
+        public string Description { get; set; }
 
         public bool IsPremium { get; set; } = false;
 
