@@ -166,8 +166,7 @@
                                     <tr>
                                         <td><a class="btn btn-primary mt-3" asp-action="Details" asp-route-id="@ad.Id">Details</a></td>
                                     </tr>
-
-                                    @if ( @ad.IsValid && @ad.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
+                                    @if ((User?.Identity?.IsAuthenticated ?? false) &&  @ad.IsValid && @ad.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
                                     {
                                         <tr>
                                             <td><a class="btn btn-outline-primary mt-2" asp-action="React" asp-route-id="@ad.Id">React</a></td>

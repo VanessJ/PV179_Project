@@ -104,7 +104,7 @@
 <br />
 
 
-@if (Model.IsValid && Model.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "")){
+@if ((User?.Identity?.IsAuthenticated ?? false) && Model.IsValid && Model.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "")){
 
     <h3> <b>Interested? </b> </h3>
     <div>
@@ -128,7 +128,7 @@
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text">@reaction.Message</p>
-                @if (!reaction.Rejected && Model.Creator.Id == new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
+                @if ((User?.Identity?.IsAuthenticated ?? false) && !reaction.Rejected && Model.Creator.Id == new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
                 {
                     <a asp-action="AcceptReaction" asp-route-adId="@Model.Id" asp-route-reactionId="@reaction.Id" class="btn btn-success">Accept</a>
                     <a asp-action="RejectReaction" asp-route-adId="@Model.Id" asp-route-reactionId="@reaction.Id" class="btn btn-danger">Decline</a>

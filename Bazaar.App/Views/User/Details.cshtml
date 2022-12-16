@@ -93,7 +93,7 @@
                         }
                         
                         <a class="btn btn-primary mt-3" asp-controller="Ad" asp-action="Details" asp-route-id="@ad.Id">Details</a>
-                        @if (@ad.IsValid && @ad.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
+                            @if ((User?.Identity?.IsAuthenticated ?? false) && @ad.IsValid && @ad.Creator.Id != new Guid(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? ""))
                         {
                             <a class="btn btn-outline-primary mt-2" asp-controller="Ad" asp-action="React" asp-route-id="@ad.Id">React</a>
                         }
