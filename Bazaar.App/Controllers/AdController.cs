@@ -76,16 +76,6 @@ namespace Bazaar.App.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-
-            string? idStr = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            if (idStr == null)
-            {
-                throw new AuthenticationException();
-            }
-
-            Guid currentUserId = new Guid(idStr);
-
             var dto = await _adFacade.AdDetail(id);
             if (dto == null)
             {
