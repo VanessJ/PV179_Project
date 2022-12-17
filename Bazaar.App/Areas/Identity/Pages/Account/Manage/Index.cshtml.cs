@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
+using Bazaar.App.Models;
 using Bazaar.BL.Dtos.Ad;
 using Bazaar.BL.Dtos.Reaction;
+using Bazaar.BL.Dtos.Review;
 using Bazaar.BL.Dtos.User;
 using Bazaar.BL.Facade;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +38,8 @@ namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
         public IEnumerable<AdListDto> Ads { get; set; }
 
         public IEnumerable<ReactionDto> Reactions { get; set; }
+
+        public IEnumerable<ReviewDto> Reviews { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -88,6 +92,22 @@ namespace Bazaar.App.Areas.Identity.Pages.Account.Manage
                 }
             }
             Reactions = detailReactions;
+
+            var reviewsDetails = new List<ReviewDto>();
+            var reviews = await _userFacade.GetReviewsOfUser(id);
+            if (reviews != null)
+            {
+                foreach (var r in reviews)
+                {
+                    var detail = await _userFacade.ReviewDetail(r.Id);
+                    if (detail != null)
+                    {
+                        reviewsDetails.Add(detail);
+                    }
+                }
+
+            }
+            Reviews = reviewsDetails;
         }
 
 

@@ -126,6 +126,28 @@
     }
 }
 
+<div>
+    @if (Model.Reviews != null)
+    {
+        @foreach (var r in Model.Reviews)
+        {
+            <h4 class="text-align-center">My reviews</h4>
+            <div class="card">
+                <h5 class="card-header">
+                    <a asp-controller="Ad" asp-action="Details" asp-route-id="@r.AdId">@r.Ad.Title</a>
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">@r.Descritption</p>
+                    <p class="card-text"> <b>Score: </b> @r.Score</p>
+                    <p class="card-text">From user: @Html.ActionLink(r.Reviewer.UserName, "Details", "User", new { Id = r.ReviewerId}, null)</p>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
